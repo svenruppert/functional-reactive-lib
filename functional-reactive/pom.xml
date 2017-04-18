@@ -5,8 +5,8 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.rapidpm</groupId>
-    <artifactId>functional-reactive</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <artifactId>rapidpm-functional-reactive</artifactId>
+    <version>0.0.1</version>
 
 
     <inceptionYear>2017</inceptionYear>
