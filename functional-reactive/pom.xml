@@ -16,7 +16,7 @@
     </organization>
 
     <url>https://github.com/RapidPM/rapidpm-dependencies</url>
-    <name>RapidPM Dependencies</name>
+    <name>RapidPM Functional Reactive Lib</name>
     <description>Functional Reactive with Core Java</description>
     <scm>
         <url>https://github.com/functional-reactive/functional-reactive-lib</url>
@@ -60,11 +60,6 @@
     </properties>
 
     <dependencies>
-        <dependency>
-            <groupId>com.google.code.findbugs</groupId>
-            <artifactId>jsr305</artifactId>
-            <version>3.0.2</version>
-        </dependency>
 
         <dependency>
             <groupId>junit</groupId>
@@ -95,32 +90,6 @@
             <groupId>org.pitest</groupId>
             <artifactId>pitest</artifactId>
             <version>1.2.0</version>
-            <scope>test</scope>
-        </dependency>
-
-        <!--Microbenchmarking-->
-        <dependency>
-            <groupId>org.openjdk.jmh</groupId>
-            <artifactId>jmh-core</artifactId>
-            <version>${jmh.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.openjdk.jmh</groupId>
-            <artifactId>jmh-core-benchmarks</artifactId>
-            <version>${jmh.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.openjdk.jmh</groupId>
-            <artifactId>jmh-generator-annprocess</artifactId>
-            <version>${jmh.version}</version>
-            <!--<scope>provided</scope>-->
-        </dependency>
-        <dependency>
-            <groupId>org.openjdk.jmh</groupId>
-            <artifactId>jmh-generator-reflection</artifactId>
-            <version>${jmh.version}</version>
             <scope>test</scope>
         </dependency>
 
