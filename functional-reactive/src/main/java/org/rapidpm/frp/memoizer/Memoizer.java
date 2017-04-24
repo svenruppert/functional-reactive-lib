@@ -1,11 +1,12 @@
 package org.rapidpm.frp.memoizer;
 
 import java.util.Map;
-import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 import java.util.function.Supplier;
+
+import org.rapidpm.frp.functions.TriFunction;
 
 /**
  * Copyright (C) 2010 RapidPM
@@ -37,16 +38,6 @@ public class Memoizer<T, U> {
     final BiFunction<T1, T2, Supplier<R>> biFuncSupplier = (x, y) -> () -> biFunc.apply(x, y);
     final Function<T1, Function<T2, R>> transformed = Memoizer.memoize(x -> Memoizer.memoize(y -> biFuncSupplier.apply(x, y).get()));
     return (x, y) -> transformed.apply(x).apply(y);
-  }
-
-  @FunctionalInterface
-  public interface TriFunction<T1, T2, T3, R> {
-    R apply(T1 t1, T2 t2, T3 t3);
-
-    default <V> TriFunction<T1, T2, T3, V> andThen(Function<? super R, ? extends V> after) {
-      Objects.requireNonNull(after);
-      return (T1 t1, T2 t2, T3 t3) -> after.apply(apply(t1, t2, t3));
-    }
   }
 
   public static <T1, T2, T3, R> TriFunction<T1, T2, T3, R> memoize(final TriFunction<T1, T2, T3, R> threeFunc) {

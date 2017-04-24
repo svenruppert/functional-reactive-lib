@@ -1,6 +1,8 @@
 package org.rapidpm.frp.model;
 
+import java.util.Objects;
 import java.util.function.Consumer;
+import java.util.function.Supplier;
 
 /**
  * Copyright (C) 2017 RapidPM - Sven Ruppert
@@ -27,25 +29,67 @@ public interface Result<T> {
     return new Result.Success<>(value);
   }
 
-  class Success<T> implements Result<T> {
+  T get();
 
-    private final T value;
+  T getOrElse(Supplier<T> supplier);
 
-    public Success(final T value) {
+  Boolean isPresent();
+
+  void ifPresent(Consumer<T> consumer);
+
+  abstract class AbstractResult<T> implements Result<T> {
+    protected final T value;
+
+    public AbstractResult(T value) {
       this.value = value;
+    }
+
+    @Override
+    public void ifPresent(Consumer<T> consumer) {
+      Objects.requireNonNull(consumer);
+      if (value != null) consumer.accept(value);
+    }
+
+    public Boolean isPresent() {
+      return (value != null) ? Boolean.TRUE : Boolean.FALSE;
+    }
+
+    public Boolean isAbsent() {
+      return (value == null) ? Boolean.TRUE : Boolean.FALSE;
+    }
+
+    @Override
+    public T get() {
+      return value;
+    }
+
+    @Override
+    public T getOrElse(Supplier<T> supplier) {
+      Objects.requireNonNull(supplier);
+      return (value != null) ? value : supplier.get();
+    }
+
+  }
+
+  class Success<T> extends AbstractResult<T> {
+
+    public Success(T value) {
+      super(value);
     }
 
     @Override
     public void bind(final Consumer<T> success, final Consumer<String> failure) {
       success.accept(value);
     }
+
   }
 
-  class Failure<T> implements Result<T> {
+  class Failure<T> extends AbstractResult<T> {
 
     private final String errorMessage;
 
     public Failure(final String errorMessage) {
+      super(null);
       this.errorMessage = errorMessage;
     }
 
