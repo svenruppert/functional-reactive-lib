@@ -23,6 +23,7 @@ public interface Transformations {
               public T next() {
                 return e.nextElement();
               }
+
               public boolean hasNext() {
                 return e.hasMoreElements();
               }
@@ -31,20 +32,23 @@ public interface Transformations {
 
 
   //Function Casts
+  static <T> Predicate<T> not(Predicate<T> p) {
+    return t -> ! p.test(t);
+  }
 
-  static <T> Predicate<T> as(Predicate<T> predicate){
+  static <T> Predicate<T> asPredicate(Predicate<T> predicate) {
     return predicate;
   }
 
-  static <T> Consumer<T> as(Consumer<T> consumer){
+  static <T> Consumer<T> asConsumer(Consumer<T> consumer) {
     return consumer;
   }
 
-  static <T> Supplier<T> as(Supplier<T> supplier){
+  static <T> Supplier<T> asSupplier(Supplier<T> supplier) {
     return supplier;
   }
 
-  static <T, R> Function<T, R> as(Function<T, R> function){
+  static <T, R> Function<T, R> asFunc(Function<T, R> function) {
     return function;
   }
 

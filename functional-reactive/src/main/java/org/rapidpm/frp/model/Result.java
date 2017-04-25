@@ -34,6 +34,7 @@ public interface Result<T> {
   T getOrElse(Supplier<T> supplier);
 
   Boolean isPresent();
+  Boolean isAbsent();
 
   void ifPresent(Consumer<T> consumer);
 
