@@ -3,7 +3,7 @@ package org.rapidpm.frp.matcher;
 import java.util.function.Supplier;
 
 import org.rapidpm.frp.model.Result;
-import org.rapidpm.frp.model.Tuple;
+import org.rapidpm.frp.model.Pair;
 
 /**
  * Copyright (C) 2017 RapidPM - Sven Ruppert
@@ -19,7 +19,7 @@ import org.rapidpm.frp.model.Tuple;
  * <p>
  * Created by Sven Ruppert - RapidPM - Team on 16.03.17.
  */
-public class Case<T> extends Tuple<Supplier<Boolean>, Supplier<Result<T>>> {
+public class Case<T> extends Pair<Supplier<Boolean>, Supplier<Result<T>>> {
 
   public Case(final Supplier<Boolean> booleanSupplier, final Supplier<Result<T>> resultSupplier) {
     super(booleanSupplier, resultSupplier);
