@@ -15,7 +15,7 @@
         <url>http://www.functional-reactive.org</url>
     </organization>
 
-    <url>https://github.com/RapidPM/rapidpm-dependencies</url>
+    <url>https://github.com/functional-reactive/functional-reactive-lib</url>
     <name>RapidPM Functional Reactive Lib</name>
     <description>Functional Reactive with Core Java</description>
     <scm>
