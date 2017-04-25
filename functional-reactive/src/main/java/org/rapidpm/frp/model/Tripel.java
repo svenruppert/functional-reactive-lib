@@ -37,4 +37,36 @@ public class Tripel<T1, T2, T3> {
     return t2;
   }
 
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (! (o instanceof Tripel)) return false;
+
+    Tripel<?, ?, ?> tripel = (Tripel<?, ?, ?>) o;
+
+    if (t1 != null ? ! t1.equals(tripel.t1) : tripel.t1 != null) return false;
+    if (t2 != null ? ! t2.equals(tripel.t2) : tripel.t2 != null) return false;
+    return t3 != null ? t3.equals(tripel.t3) : tripel.t3 == null;
+  }
+
+  @Override
+  public int hashCode() {
+    int result = t1 != null ? t1.hashCode() : 0;
+    result = 31 * result + (t2 != null ? t2.hashCode() : 0);
+    result = 31 * result + (t3 != null ? t3.hashCode() : 0);
+    return result;
+  }
+
+  @Override
+  public String toString() {
+    return "Tripel{" +
+        "t1=" + t1 +
+        ", t2=" + t2 +
+        ", t3=" + t3 +
+        '}';
+  }
+
+  public static <T1, T2, T3> Tripel<T1, T2, T3> next(final T1 t1, final T2 t2, final T3 t3) {
+    return new Tripel<>(t1, t2, t3);
+  }
 }

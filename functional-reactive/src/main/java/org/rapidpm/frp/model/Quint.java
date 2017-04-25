@@ -50,4 +50,43 @@ public class Quint<T1, T2, T3, T4, T5> {
     return t2;
   }
 
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (! (o instanceof Quint)) return false;
+
+    Quint<?, ?, ?, ?, ?> quint = (Quint<?, ?, ?, ?, ?>) o;
+
+    if (t1 != null ? ! t1.equals(quint.t1) : quint.t1 != null) return false;
+    if (t2 != null ? ! t2.equals(quint.t2) : quint.t2 != null) return false;
+    if (t3 != null ? ! t3.equals(quint.t3) : quint.t3 != null) return false;
+    if (t4 != null ? ! t4.equals(quint.t4) : quint.t4 != null) return false;
+    return t5 != null ? t5.equals(quint.t5) : quint.t5 == null;
+  }
+
+  @Override
+  public int hashCode() {
+    int result = t1 != null ? t1.hashCode() : 0;
+    result = 31 * result + (t2 != null ? t2.hashCode() : 0);
+    result = 31 * result + (t3 != null ? t3.hashCode() : 0);
+    result = 31 * result + (t4 != null ? t4.hashCode() : 0);
+    result = 31 * result + (t5 != null ? t5.hashCode() : 0);
+    return result;
+  }
+
+  @Override
+  public String toString() {
+    return "Quint{" +
+        "t1=" + t1 +
+        ", t2=" + t2 +
+        ", t3=" + t3 +
+        ", t4=" + t4 +
+        ", t5=" + t5 +
+        '}';
+  }
+
+  public static <T1, T2, T3, T4, T5> Quint<T1, T2, T3, T4,T5> next(final T1 t1, final T2 t2, final T3 t3, final T4 t4, final T5 t5) {
+    return new Quint<>(t1, t2, t3, t4, t5);
+  }
 }
