@@ -1,6 +1,7 @@
 package org.rapidpm.frp.model;
 
 import java.util.Objects;
+import java.util.Optional;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
@@ -37,6 +38,17 @@ public interface Result<T> {
   Boolean isAbsent();
 
   void ifPresent(Consumer<T> consumer);
+
+  default Optional<T> toOptional() {
+    return Optional.ofNullable(get());
+  }
+
+  static <T> Result<T> fromOptional(Optional<T> optional){
+    Objects.requireNonNull(optional);
+    return optional
+        .map(Result::success)
+        .orElseGet(() -> Result.failure("optional was empty"));
+  }
 
   abstract class AbstractResult<T> implements Result<T> {
     protected final T value;
