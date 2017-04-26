@@ -10,5 +10,14 @@ import org.rapidpm.frp.model.Result;
 @FunctionalInterface
 public interface CheckedFunction<T, R> extends Function<T, Result<R>> {
   @Override
-  Result<R> apply(T t);
+  default Result<R> apply(T t) {
+    try {
+      return Result.success(applyWithException(t));
+    } catch (Exception e) {
+      return Result.failure(e.getMessage());
+    }
+  }
+
+  R applyWithException(T t) throws Exception;
+
 }

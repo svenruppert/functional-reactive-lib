@@ -16,6 +16,11 @@ import java.util.stream.StreamSupport;
  */
 public interface Transformations {
 
+
+  public static <T, U, V> Function<Function<U, V>, Function<Function<T, U>, Function<T, V>>> higherCompose() {
+    return (Function<U, V> f) -> (Function<T, U> g) -> (T x) -> f.apply(g.apply(x));
+  }
+
   static <T> Function<Enumeration<T>, Stream<T>> enumToStream() {
     return (e) ->
         StreamSupport
