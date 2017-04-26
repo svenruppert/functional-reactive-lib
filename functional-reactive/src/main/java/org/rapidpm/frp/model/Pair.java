@@ -55,7 +55,7 @@ public class Pair<T1, T2> {
     return Objects.hash(t1, t2);
   }
 
-  public static <T1,T2> Pair<T1, T2> next(T1 a, T2 b) {
+  public static <T1, T2> Pair<T1, T2> next(T1 a, T2 b) {
     return new Pair<>(a, b);
   }
 }

@@ -35,6 +35,7 @@ public interface Result<T> {
   T getOrElse(Supplier<T> supplier);
 
   Boolean isPresent();
+
   Boolean isAbsent();
 
   void ifPresent(Consumer<T> consumer);
@@ -43,7 +44,7 @@ public interface Result<T> {
     return Optional.ofNullable(get());
   }
 
-  static <T> Result<T> fromOptional(Optional<T> optional){
+  static <T> Result<T> fromOptional(Optional<T> optional) {
     Objects.requireNonNull(optional);
     return optional
         .map(Result::success)
