@@ -26,8 +26,25 @@ import org.rapidpm.frp.functions.TriFunction;
 public class Memoizer<T, U> {
   private final Map<T, U> memoizationCache = new ConcurrentHashMap<>();
 
+  private Supplier<T> doMemoize(final Supplier<T> function) {
+    return new Supplier<T>() {
+      private T value;
+
+      @Override
+      public T get() {
+        if (value == null) value = function.get();
+        return value;
+      }
+    };
+  }
+
+
   private Function<T, U> doMemoize(final Function<T, U> function) {
     return input -> memoizationCache.computeIfAbsent(input, function);
+  }
+
+  public static <T> Supplier<T> memoize(final Supplier<T> function) {
+    return new Memoizer<T, T>().doMemoize(function);
   }
 
   public static <T, U> Function<T, U> memoize(final Function<T, U> function) {
