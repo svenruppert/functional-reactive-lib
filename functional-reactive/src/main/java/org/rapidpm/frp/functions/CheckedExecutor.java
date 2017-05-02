@@ -10,7 +10,7 @@ import org.rapidpm.frp.model.Result;
 @FunctionalInterface
 public interface CheckedExecutor extends Function<Void, Result<Void>> {
 
-  default Result<Void> execute() throws Exception {
+  default Result<Void> execute() {
      return apply(null);
   }
 

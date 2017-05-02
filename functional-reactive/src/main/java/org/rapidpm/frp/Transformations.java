@@ -17,6 +17,11 @@ import java.util.stream.StreamSupport;
 public interface Transformations {
 
 
+  static Function<Boolean, Boolean> not(){
+    return (input) -> ! input;
+  }
+
+
   public static <T, U, V> Function<Function<U, V>, Function<Function<T, U>, Function<T, V>>> higherCompose() {
     return (Function<U, V> f) -> (Function<T, U> g) -> (T x) -> f.apply(g.apply(x));
   }
