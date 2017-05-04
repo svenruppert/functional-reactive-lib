@@ -17,5 +17,5 @@ public interface CheckedPredicate<T> extends Predicate<T> {
     }
   }
 
-  boolean testWithExceptions(T t);
+  boolean testWithExceptions(T t) throws Exception;
 }
