@@ -6,7 +6,7 @@
 
     <groupId>org.rapidpm</groupId>
     <artifactId>rapidpm-functional-reactive</artifactId>
-    <version>0.0.3</version>
+    <version>0.0.4-SNAPSHOT</version>
 
 
     <inceptionYear>2017</inceptionYear>
