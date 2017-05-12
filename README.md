@@ -2,6 +2,9 @@
 
 ## 0.0.3
 * added CheckedPredicate
+* added Result.thenCombine
+* added Result.thenCombineAsync
+
 
 ## 0.0.2
 * basic Datastructures like Pair, Triple, Quad

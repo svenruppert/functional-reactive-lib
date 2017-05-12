@@ -2,7 +2,10 @@ package org.rapidpm.frp.model;
 
 import java.util.Objects;
 import java.util.Optional;
+import java.util.concurrent.CompletableFuture;
+import java.util.function.BiFunction;
 import java.util.function.Consumer;
+import java.util.function.Function;
 import java.util.function.Supplier;
 
 /**
@@ -50,6 +53,15 @@ public interface Result<T> {
         .map(Result::success)
         .orElseGet(() -> Result.failure("optional was empty"));
   }
+
+  default <V, R> Result<R> thenCombine(V value, BiFunction<T, V, Result<R>> func){
+    return func.apply(get(), value);
+  }
+
+  default <V, R> CompletableFuture<Result<R>> thenCombineAsync(V value, BiFunction<T, V, Result<R>> func){
+    return CompletableFuture.supplyAsync(()->func.apply(get(), value));
+  }
+
 
   abstract class AbstractResult<T> implements Result<T> {
     protected final T value;
