@@ -21,6 +21,7 @@ public class CheckedFunctionTest {
     Assert.assertEquals("ok", result.get());
 
   }
+
   @Test
   public void test002() throws Exception {
 
@@ -33,7 +34,6 @@ public class CheckedFunctionTest {
     Assert.assertTrue(result.isAbsent());
 
   }
-
 
 
 }

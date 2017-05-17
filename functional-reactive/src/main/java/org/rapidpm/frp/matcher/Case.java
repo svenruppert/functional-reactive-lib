@@ -2,8 +2,8 @@ package org.rapidpm.frp.matcher;
 
 import java.util.function.Supplier;
 
-import org.rapidpm.frp.model.Result;
 import org.rapidpm.frp.model.Pair;
+import org.rapidpm.frp.model.Result;
 
 /**
  * Copyright (C) 2017 RapidPM - Sven Ruppert

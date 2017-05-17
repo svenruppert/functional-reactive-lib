@@ -1,26 +1,87 @@
 package junit.org.rapidpm.frp;
 
-import static org.rapidpm.frp.StringFunctions.*;
-import static org.rapidpm.frp.StringFunctions.at;
-import static org.rapidpm.frp.StringFunctions.collapseWhitespace;
-import static org.rapidpm.frp.StringFunctions.notEmpty;
-import static org.rapidpm.frp.StringFunctions.notStartsWith;
-
-import java.util.Arrays;
-import java.util.Optional;
-import java.util.function.IntFunction;
-import java.util.stream.Stream;
-
 import static java.util.stream.Collectors.toList;
-import static org.hamcrest.CoreMatchers.*;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.hasItems;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.collection.IsArrayContainingInOrder.arrayContaining;
 import static org.hamcrest.collection.IsArrayWithSize.emptyArray;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
+import static org.rapidpm.frp.StringFunctions.append;
+import static org.rapidpm.frp.StringFunctions.appendArray;
+import static org.rapidpm.frp.StringFunctions.appendStream;
+import static org.rapidpm.frp.StringFunctions.at;
+import static org.rapidpm.frp.StringFunctions.base64Decode;
+import static org.rapidpm.frp.StringFunctions.base64Encode;
+import static org.rapidpm.frp.StringFunctions.binDecode;
+import static org.rapidpm.frp.StringFunctions.binEncode;
+import static org.rapidpm.frp.StringFunctions.capitalize;
+import static org.rapidpm.frp.StringFunctions.chars;
+import static org.rapidpm.frp.StringFunctions.collapseWhitespace;
+import static org.rapidpm.frp.StringFunctions.contains;
+import static org.rapidpm.frp.StringFunctions.containsAll;
+import static org.rapidpm.frp.StringFunctions.containsAllCaseSensitive;
+import static org.rapidpm.frp.StringFunctions.containsCaseSensitive;
+import static org.rapidpm.frp.StringFunctions.countSubStr;
+import static org.rapidpm.frp.StringFunctions.countSubStrCaseSensitive;
+import static org.rapidpm.frp.StringFunctions.decDecode;
+import static org.rapidpm.frp.StringFunctions.decEncode;
+import static org.rapidpm.frp.StringFunctions.endsWith;
+import static org.rapidpm.frp.StringFunctions.endsWithCaseSensitive;
+import static org.rapidpm.frp.StringFunctions.ensureLeft;
+import static org.rapidpm.frp.StringFunctions.ensureLeftCaseSensitive;
+import static org.rapidpm.frp.StringFunctions.ensureRight;
+import static org.rapidpm.frp.StringFunctions.ensureRightCaseSensitive;
+import static org.rapidpm.frp.StringFunctions.first;
+import static org.rapidpm.frp.StringFunctions.head;
+import static org.rapidpm.frp.StringFunctions.hexDecode;
+import static org.rapidpm.frp.StringFunctions.hexEncode;
+import static org.rapidpm.frp.StringFunctions.indexOfCoseSensitive;
+import static org.rapidpm.frp.StringFunctions.insert;
+import static org.rapidpm.frp.StringFunctions.isLowerCase;
+import static org.rapidpm.frp.StringFunctions.isString;
+import static org.rapidpm.frp.StringFunctions.isUpperCase;
+import static org.rapidpm.frp.StringFunctions.join;
+import static org.rapidpm.frp.StringFunctions.last;
+import static org.rapidpm.frp.StringFunctions.lastIndexOf;
+import static org.rapidpm.frp.StringFunctions.lastIndexOfCaseSensitive;
+import static org.rapidpm.frp.StringFunctions.leftPad;
+import static org.rapidpm.frp.StringFunctions.leftTrim;
+import static org.rapidpm.frp.StringFunctions.lowerFirst;
+import static org.rapidpm.frp.StringFunctions.notEmpty;
+import static org.rapidpm.frp.StringFunctions.notStartsWith;
+import static org.rapidpm.frp.StringFunctions.prependArray;
+import static org.rapidpm.frp.StringFunctions.removeEmptyStrings;
+import static org.rapidpm.frp.StringFunctions.removeFromLeftCaseSensitive;
+import static org.rapidpm.frp.StringFunctions.removeLeft;
+import static org.rapidpm.frp.StringFunctions.removeNonWord;
+import static org.rapidpm.frp.StringFunctions.removeRight;
+import static org.rapidpm.frp.StringFunctions.removeRightCaseSensitive;
+import static org.rapidpm.frp.StringFunctions.removeSpaces;
+import static org.rapidpm.frp.StringFunctions.repeat;
+import static org.rapidpm.frp.StringFunctions.replace;
+import static org.rapidpm.frp.StringFunctions.reverse;
+import static org.rapidpm.frp.StringFunctions.rightPad;
+import static org.rapidpm.frp.StringFunctions.rightTrim;
+import static org.rapidpm.frp.StringFunctions.shuffle;
+import static org.rapidpm.frp.StringFunctions.surround;
+import static org.rapidpm.frp.StringFunctions.toCamelCase;
+import static org.rapidpm.frp.StringFunctions.toDecamelize;
+import static org.rapidpm.frp.StringFunctions.toKebabCase;
+import static org.rapidpm.frp.StringFunctions.toSnakeCase;
+import static org.rapidpm.frp.StringFunctions.truncate;
+import static org.rapidpm.frp.StringFunctions.upperFirst;
+import static org.rapidpm.frp.StringFunctions.wordStream;
+
+import java.util.Arrays;
+import java.util.stream.Stream;
 
 import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
-import org.rapidpm.frp.StringFunctions;
 import org.rapidpm.frp.model.Result;
 
 /**
@@ -31,55 +92,53 @@ public class StringFunctionsTest {
 
   @Test
   public void collapseWhitespace001() throws Exception {
-    Assert.assertEquals("",collapseWhitespace().apply(""));
+    Assert.assertEquals("", collapseWhitespace().apply(""));
   }
 
   @Test
   public void collapseWhitespace002() throws Exception {
-    Assert.assertEquals("A",collapseWhitespace().apply("A"));
+    Assert.assertEquals("A", collapseWhitespace().apply("A"));
   }
 
   @Test
   public void collapseWhitespace002a() throws Exception {
-    Assert.assertEquals("A",collapseWhitespace().apply(" A"));
+    Assert.assertEquals("A", collapseWhitespace().apply(" A"));
   }
 
   @Test
   public void collapseWhitespace002b() throws Exception {
-    Assert.assertEquals("A",collapseWhitespace().apply("A "));
+    Assert.assertEquals("A", collapseWhitespace().apply("A "));
   }
 
   @Test
   public void collapseWhitespace002c() throws Exception {
-    Assert.assertEquals("A",collapseWhitespace().apply(" A "));
+    Assert.assertEquals("A", collapseWhitespace().apply(" A "));
   }
 
   @Test
   public void collapseWhitespace003() throws Exception {
-    Assert.assertEquals("A B",collapseWhitespace().apply("A B"));
+    Assert.assertEquals("A B", collapseWhitespace().apply("A B"));
   }
 
   @Test
   public void collapseWhitespace004() throws Exception {
-    Assert.assertEquals("A B",collapseWhitespace().apply(" A B"));
+    Assert.assertEquals("A B", collapseWhitespace().apply(" A B"));
   }
 
   @Test
   public void collapseWhitespace005() throws Exception {
-    Assert.assertEquals("A B",collapseWhitespace().apply(" A  B" ));
+    Assert.assertEquals("A B", collapseWhitespace().apply(" A  B"));
   }
 
   @Test
   public void collapseWhitespace006() throws Exception {
-    Assert.assertEquals("A B",collapseWhitespace().apply(" A  B " ));
+    Assert.assertEquals("A B", collapseWhitespace().apply(" A  B "));
   }
 
   @Test
   public void collapseWhitespace007() throws Exception {
-    Assert.assertEquals("A B",collapseWhitespace().apply(" A   B " ));
+    Assert.assertEquals("A B", collapseWhitespace().apply(" A   B "));
   }
-
-
 
 
   @Test
@@ -99,7 +158,7 @@ public class StringFunctionsTest {
 
   @Test
   public void at003() throws Exception {
-    Result<String> r = at().apply("ABCD", -5);
+    Result<String> r = at().apply("ABCD", - 5);
     Assert.assertNotNull(r);
     Assert.assertFalse(r.isPresent());
   }
@@ -118,7 +177,6 @@ public class StringFunctionsTest {
     Assert.assertTrue(r.isPresent());
     Assert.assertEquals("D", r.get());
   }
-
 
 
   @Test
@@ -176,7 +234,7 @@ public class StringFunctionsTest {
   public void append_shouldAppendStringsToEndOfValue() throws Exception {
     assertThat(appendStream().apply("f", Stream.of("o", "o", "b", "a", "r")),
         equalTo("foobar"));
-    assertThat(append().apply("foobar",""), equalTo("foobar"));
+    assertThat(append().apply("foobar", ""), equalTo("foobar"));
     assertThat(append().apply("", "foobar"), equalTo("foobar"));
   }
 
@@ -187,7 +245,7 @@ public class StringFunctionsTest {
 
   @Test
   public void appendArray_shouldAppendStringArrayToEndOfValue() throws Exception {
-    assertThat(appendArray().apply("f", new String[]{"o", "o", "b", "a", "r"}), equalTo("foobar"));
+    assertThat(appendArray().apply("f", new String[]{"o" , "o" , "b" , "a" , "r"}), equalTo("foobar"));
     assertThat(appendArray().apply("foobar", new String[]{}), equalTo("foobar"));
     assertThat(appendArray().apply("", new String[]{"foobar"}), equalTo("foobar"));
   }
@@ -201,10 +259,10 @@ public class StringFunctionsTest {
   public void at_shouldFindCharacterAtIndex() throws Exception {
     assertThat(at().apply("foobar", 1).get(), equalTo("f"));
     assertThat(at().apply("foobar", 2).get(), equalTo("o"));
-    assertThat(at().apply("foobar", -1).isAbsent(), equalTo(true));
-    assertThat(at().apply("foobar", -2).isAbsent(), equalTo(true));
+    assertThat(at().apply("foobar", - 1).isAbsent(), equalTo(true));
+    assertThat(at().apply("foobar", - 2).isAbsent(), equalTo(true));
     assertThat(at().apply("foobar", 10).get(), equalTo(Result.failure("").get()));
-    assertThat(at().apply("foobar", -10).get(), equalTo(Result.failure("").get()));
+    assertThat(at().apply("foobar", - 10).get(), equalTo(Result.failure("").get()));
   }
 
   @Test
@@ -227,15 +285,15 @@ public class StringFunctionsTest {
   @Test
   public void chars_shouldReturnAllCharactersInString() throws Exception {
     final String title = "title";
-    assertThat(chars().apply(title), equalTo(new String[]{"t", "i", "t", "l", "e"}));
+    assertThat(chars().apply(title), equalTo(new String[]{"t" , "i" , "t" , "l" , "e"}));
   }
 
   @Test
   public void collapseWhitespace_shouldReplaceConsecutiveWhitespaceWithSingleSpace() throws Exception {
     String[] fixture = {
-        "foo    bar",
-        "     foo     bar    ",
-        " foo     bar   ",
+        "foo    bar" ,
+        "     foo     bar    " ,
+        " foo     bar   " ,
         "    foo     bar "
     };
     Arrays.stream(fixture)
@@ -251,9 +309,9 @@ public class StringFunctionsTest {
   @Test
   public void containsWithCaseSensitiveFalse_shouldReturnTrueWhenStringContainsNeedle() throws Exception {
     String[] fixture = {
-        "foo bar",
-        "bar foo",
-        "foobar",
+        "foo bar" ,
+        "bar foo" ,
+        "foobar" ,
         "foo"
     };
 
@@ -263,9 +321,9 @@ public class StringFunctionsTest {
   @Test
   public void containsWithCaseSensitiveTrue_shouldReturnTrueWhenStringContainsNeedle() throws Exception {
     String[] fixture = {
-        "foo bar",
-        "bar foo",
-        "foobar",
+        "foo bar" ,
+        "bar foo" ,
+        "foobar" ,
         "foo"
     };
 
@@ -276,24 +334,24 @@ public class StringFunctionsTest {
   @Test
   public void containsAll_shouldReturnTrueOnlyWhenAllNeedlesAreContainedInValue() throws Exception {
     String[] fixture = {
-        "foo bar",
-        "bar foo",
-        "foobar",
+        "foo bar" ,
+        "bar foo" ,
+        "foobar" ,
     };
 
     Arrays.stream(fixture)
-        .forEach(el -> assertTrue(containsAll().apply(el, new String[]{"foo", "bar"})));
+        .forEach(el -> assertTrue(containsAll().apply(el, new String[]{"foo" , "bar"})));
   }
 
   @Test
   public void containsAll_shouldReturnFalseOnlyWhenAllNeedlesAreNotContainedInValue() throws Exception {
     String[] fixture = {
-        "foo bar",
-        "bar foo",
-        "foobar",
+        "foo bar" ,
+        "bar foo" ,
+        "foobar" ,
     };
     Arrays.stream(fixture)
-        .forEach(el -> assertFalse(containsAllCaseSensitive().apply(el, new String[]{"FOO", "bar"}, true)));
+        .forEach(el -> assertFalse(containsAllCaseSensitive().apply(el, new String[]{"FOO" , "bar"}, true)));
   }
 
 //  @Test
@@ -367,7 +425,7 @@ public class StringFunctionsTest {
   @Test
   public void endsWith_caseSensitive_ShouldBeTrueWhenStringEndsWithSearchStr() throws Exception {
     String[] fixture = {
-        "foo bar",
+        "foo bar" ,
         "bar"
     };
     Arrays.stream(fixture).forEach(el -> assertTrue(endsWith().apply(el, "bar")));
@@ -376,7 +434,7 @@ public class StringFunctionsTest {
   @Test
   public void endsWith_notCaseSensitive_ShouldBeTrueWhenStringEndsWithSearchStr() throws Exception {
     String[] fixture = {
-        "foo bar",
+        "foo bar" ,
         "bar"
     };
     Arrays.stream(fixture).forEach(el -> assertTrue(endsWithCaseSensitive().apply(el, "BAR", false)));
@@ -403,7 +461,7 @@ public class StringFunctionsTest {
   @Test
   public void ensureLeft_shouldEnsureValueStartsWithFoo() throws Exception {
     String[] fixture = {
-        "foobar",
+        "foobar" ,
         "bar"
     };
 
@@ -473,7 +531,7 @@ public class StringFunctionsTest {
   @Test
   public void ensureRight_shouldEnsureStringEndsWithBar() throws Exception {
     final String[] fixture = {
-        "foo", "foobar", "fooBAR"
+        "foo" , "foobar" , "fooBAR"
     };
     assertThat(Arrays.stream(fixture).map(el -> ensureRightCaseSensitive().apply(el, "bar", false)).collect(toList()), hasItems("foobar", "foobar", "fooBAR"));
     assertThat(Arrays.stream(fixture).map(el -> ensureRight().apply(el, "bar")).collect(toList()), hasItems("foobar", "foobar", "fooBARbar"));
@@ -482,7 +540,7 @@ public class StringFunctionsTest {
   @Test
   public void first_shouldReturnFirstThreeCharsOfString() throws Exception {
     final String[] fixture = {
-        "foo", "foobar"
+        "foo" , "foobar"
     };
     Arrays.stream(fixture).forEach(el ->
         assertThat(
@@ -493,7 +551,7 @@ public class StringFunctionsTest {
   @Test
   public void head_shouldReturnFirstCharOfString() throws Exception {
     final String[] fixture = {
-        "foo", "foobar"
+        "foo" , "foobar"
     };
 
     Arrays.stream(fixture)
@@ -541,7 +599,7 @@ public class StringFunctionsTest {
     assertThat(indexOfCoseSensitive().apply(value, "b", 0, true), equalTo(3));
     assertThat(indexOfCoseSensitive().apply(value, "a", 0, true), equalTo(4));
     assertThat(indexOfCoseSensitive().apply(value, "r", 0, true), equalTo(5));
-    assertThat(indexOfCoseSensitive().apply(value, "t", 0, true), equalTo(-1));
+    assertThat(indexOfCoseSensitive().apply(value, "t", 0, true), equalTo(- 1));
   }
 
   @Test
@@ -552,7 +610,7 @@ public class StringFunctionsTest {
     assertThat(indexOfCoseSensitive().apply(value, "B", 0, false), equalTo(3));
     assertThat(indexOfCoseSensitive().apply(value, "A", 0, false), equalTo(4));
     assertThat(indexOfCoseSensitive().apply(value, "R", 0, false), equalTo(5));
-    assertThat(indexOfCoseSensitive().apply(value, "T", 0, false), equalTo(-1));
+    assertThat(indexOfCoseSensitive().apply(value, "T", 0, false), equalTo(- 1));
   }
 
 //  @Test
@@ -636,7 +694,7 @@ public class StringFunctionsTest {
     assertThat(lastIndexOf().apply(value, "b"), equalTo(9));
     assertThat(lastIndexOf().apply(value, "a"), equalTo(10));
     assertThat(lastIndexOf().apply(value, "r"), equalTo(11));
-    assertThat(lastIndexOf().apply(value, "t"), equalTo(-1));
+    assertThat(lastIndexOf().apply(value, "t"), equalTo(- 1));
   }
 
   @Test
@@ -647,7 +705,7 @@ public class StringFunctionsTest {
     assertThat(lastIndexOfCaseSensitive().apply(value, "B", false), equalTo(9));
     assertThat(lastIndexOfCaseSensitive().apply(value, "A", false), equalTo(10));
     assertThat(lastIndexOfCaseSensitive().apply(value, "R", false), equalTo(11));
-    assertThat(lastIndexOfCaseSensitive().apply(value, "T", false), equalTo(-1));
+    assertThat(lastIndexOfCaseSensitive().apply(value, "T", false), equalTo(- 1));
   }
 
   @Test
@@ -666,7 +724,7 @@ public class StringFunctionsTest {
 
   @Test
   public void prependArray_shouldPrependStrings() throws Exception {
-    assertThat(prependArray().apply("r", new String[]{"f", "o", "o", "b", "a"}), equalTo("foobar"));
+    assertThat(prependArray().apply("r", new String[]{"f" , "o" , "o" , "b" , "a"}), equalTo("foobar"));
     assertThat(prependArray().apply("foobar", new String[0]), equalTo("foobar"));
     assertThat(prependArray().apply("", new String[]{"foobar"}), equalTo("foobar"));
     assertThat(prependArray().apply("bar", new String[]{"foo"}), equalTo("foobar"));
@@ -674,14 +732,14 @@ public class StringFunctionsTest {
 
   @Test
   public void removeEmptyStrings_shouldRemoveEmptyStrings() throws Exception {
-    assertThat(removeEmptyStrings().apply(new String[]{"aa", "", "   ", "bb", "cc", null}), arrayContaining("aa", "bb", "cc"));
+    assertThat(removeEmptyStrings().apply(new String[]{"aa" , "" , "   " , "bb" , "cc" , null}), arrayContaining("aa", "bb", "cc"));
     assertThat(removeEmptyStrings().apply(new String[0]), emptyArray());
   }
 
   @Test
   public void removeLeft_shouldRemoveStringFromLeft() throws Exception {
     final String[] fixture = {
-        "foobar",
+        "foobar" ,
         "bar"
     };
 
@@ -693,7 +751,7 @@ public class StringFunctionsTest {
   @Test
   public void removeLeft_shouldRemoveStringFromLeftCaseInSensitive() throws Exception {
     final String[] fixture = {
-        "foobar",
+        "foobar" ,
         "bar"
     };
 
@@ -708,8 +766,8 @@ public class StringFunctionsTest {
   public void removeNonWords_shouldRemoveAllNonWordsFromInputString() throws Exception {
 
     final String[] fixture = {
-        "foo bar",
-        "foo&bar-",
+        "foo bar" ,
+        "foo&bar-" ,
         "foobar"
     };
 
@@ -719,7 +777,7 @@ public class StringFunctionsTest {
   @Test
   public void removeRight_shouldRemoveStringFromRight() throws Exception {
     final String[] fixture = {
-        "foobar",
+        "foobar" ,
         "foo"
     };
 
@@ -731,7 +789,7 @@ public class StringFunctionsTest {
   @Test
   public void removeRight_shouldRemoveStringFromRightCaseInSensitive() throws Exception {
     final String[] fixture = {
-        "foobar",
+        "foobar" ,
         "foo"
     };
 
@@ -741,9 +799,9 @@ public class StringFunctionsTest {
   @Test
   public void removeSpaces_shouldRemoveSpacesInTheString() throws Exception {
     final String[] fixture = {
-        "foo bar",
-        "foo bar ",
-        " foo bar",
+        "foo bar" ,
+        "foo bar " ,
+        " foo bar" ,
         " foo bar "
     };
     Arrays.stream(fixture).forEach(el -> assertThat(removeSpaces().apply(el), equalTo("foobar")));
@@ -906,15 +964,15 @@ public class StringFunctionsTest {
   @Test
   public void toCamelCase_shouldConvertStringToCamelCase() throws Exception {
     String[] fixture = {
-        "CamelCase",
-        "camelCase",
-        "Camel case",
-        "Camel  case",
-        "camel Case",
-        "camel-case",
-        "-camel--case",
-        "camel_case",
-        "     camel_case",
+        "CamelCase" ,
+        "camelCase" ,
+        "Camel case" ,
+        "Camel  case" ,
+        "camel Case" ,
+        "camel-case" ,
+        "-camel--case" ,
+        "camel_case" ,
+        "     camel_case" ,
     };
     Arrays.stream(fixture).forEach(el -> assertThat(String.format("toCameCase(%s) should be camelCase", el), toCamelCase().apply(el), equalTo("camelCase")));
 
@@ -924,14 +982,14 @@ public class StringFunctionsTest {
   @Test
   public void toDeCamelCase_shouldDeCamelCaseAString() throws Exception {
     String[] fixture = {
-        "deCamelize",
-        "de-Camelize",
-        "de camelize",
-        "de  camelize",
-        "de Camelize",
-        "de-camelize",
-        "-de--camelize",
-        "de_camelize",
+        "deCamelize" ,
+        "de-Camelize" ,
+        "de camelize" ,
+        "de  camelize" ,
+        "de Camelize" ,
+        "de-camelize" ,
+        "-de--camelize" ,
+        "de_camelize" ,
         "     de_camelize"
     };
 
@@ -949,14 +1007,14 @@ public class StringFunctionsTest {
   @Test
   public void toKebabCase_shouldKebabCaseAString() throws Exception {
     String[] fixture = {
-        "deCamelize",
-        "de-Camelize",
-        "de camelize",
-        "de  camelize",
-        "de Camelize",
-        "de-camelize",
-        "-de--camelize",
-        "de_camelize",
+        "deCamelize" ,
+        "de-Camelize" ,
+        "de camelize" ,
+        "de  camelize" ,
+        "de Camelize" ,
+        "de-camelize" ,
+        "-de--camelize" ,
+        "de_camelize" ,
         "     de_camelize"
     };
 
@@ -967,14 +1025,14 @@ public class StringFunctionsTest {
   @Test
   public void toSnakeCase_shouldSnakeCaseAString() throws Exception {
     String[] fixture = {
-        "deCamelize",
-        "de-Camelize",
-        "de camelize",
-        "de  camelize",
-        "de Camelize",
-        "de-camelize",
-        "-de--camelize",
-        "de_camelize",
+        "deCamelize" ,
+        "de-Camelize" ,
+        "de camelize" ,
+        "de  camelize" ,
+        "de Camelize" ,
+        "de-camelize" ,
+        "-de--camelize" ,
+        "de_camelize" ,
         "     de_camelize"
     };
 
@@ -1032,14 +1090,14 @@ public class StringFunctionsTest {
   @Ignore
   public void kebabCase_shouldConvertAStringToKebabCase() throws Exception {
     String[] input = {
-        "Foo Bar",
-        "fooBar",
+        "Foo Bar" ,
+        "fooBar" ,
         "__FOO_BAR__"
     };
 
     Arrays.stream(input).forEach(el ->
         assertThat(String
-            .format("%s should be foo-bar", el),
+                .format("%s should be foo-bar", el),
             toKebabCase().apply(el), is(equalTo("foo-bar"))));
 
   }
@@ -1061,8 +1119,8 @@ public class StringFunctionsTest {
   @Test
   public void join_shouldJoinArrayOfStringIntoASingleString() throws Exception {
     String[] strings = {
-        "hello",
-        "world",
+        "hello" ,
+        "world" ,
         "123"
     };
     assertThat(join().apply(strings, ";"), is(equalTo("hello;world;123")));
@@ -1071,8 +1129,8 @@ public class StringFunctionsTest {
   @Test(expected = NullPointerException.class)
   public void join_shouldThrowIllegalArgumentExceptionWhenSeparatorIsNull() throws Exception {
     String[] strings = {
-        "hello",
-        "world",
+        "hello" ,
+        "world" ,
         "123"
     };
 
@@ -1088,8 +1146,8 @@ public class StringFunctionsTest {
   @Test
   public void capitalize_shouldCapitalizeFirstCharacterOfString() throws Exception {
     String[] strings = {
-        "FRED",
-        "fRED",
+        "FRED" ,
+        "fRED" ,
         "fred"
     };
     Arrays.stream(strings)
@@ -1123,7 +1181,7 @@ public class StringFunctionsTest {
   @Test
   public void words_shouldConvertTextToWords() throws Exception {
     final String line = "This is a string, with words!";
-    assertThat(wordStream().apply(line).toArray(), is(new String[]{"This", "is", "a", "string", "with", "words"}));
+    assertThat(wordStream().apply(line).toArray(), is(new String[]{"This" , "is" , "a" , "string" , "with" , "words"}));
   }
 
   @Test

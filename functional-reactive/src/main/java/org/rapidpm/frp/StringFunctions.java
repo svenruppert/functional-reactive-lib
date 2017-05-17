@@ -801,8 +801,8 @@ public interface StringFunctions {
         (caseSenstive)
             ? removeLeft().apply(input, prefix)
             : (notStartsWithCaseSensitive().apply(input, prefix, false))
-              ? input
-              : input.substring(prefix.length());
+            ? input
+            : input.substring(prefix.length());
   }
 
 
@@ -876,9 +876,9 @@ public interface StringFunctions {
         (caseSensitive)
             ? value.replaceAll(search, newValue)
             : Pattern
-              .compile(search, CASE_INSENSITIVE)
-              .matcher(value)
-              .replaceAll(Matcher.quoteReplacement(newValue));
+            .compile(search, CASE_INSENSITIVE)
+            .matcher(value)
+            .replaceAll(Matcher.quoteReplacement(newValue));
   }
 
   /**

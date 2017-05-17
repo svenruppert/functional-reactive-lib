@@ -3,8 +3,7 @@ package org.rapidpm.frp.functions;
 import java.util.function.Predicate;
 
 /**
- *  if an exception is thrown, the predicate will give back false;
- *
+ * if an exception is thrown, the predicate will give back false;
  */
 public interface CheckedPredicate<T> extends Predicate<T> {
   @Override
