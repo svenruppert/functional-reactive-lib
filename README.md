@@ -4,6 +4,7 @@
 * added CheckedPredicate
 * added Result.thenCombine
 * added Result.thenCombineAsync
+* added CheckedBiFunction
 
 
 ## 0.0.2
