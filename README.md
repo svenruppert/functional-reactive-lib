@@ -1,11 +1,13 @@
 # Release Notes
 
-## 0.0.3
-* added CheckedPredicate
+
+## 0.0.4
 * added Result.thenCombine
 * added Result.thenCombineAsync
 * added CheckedBiFunction
 
+## 0.0.3
+* added CheckedPredicate
 
 ## 0.0.2
 * basic Datastructures like Pair, Triple, Quad
