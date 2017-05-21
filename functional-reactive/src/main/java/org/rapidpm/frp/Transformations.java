@@ -4,12 +4,15 @@ import java.util.Enumeration;
 import java.util.Iterator;
 import java.util.Spliterator;
 import java.util.Spliterators;
+import java.util.function.BiFunction;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
+
+import org.rapidpm.frp.functions.TriFunction;
 
 /**
  * Created by svenruppert on 24.04.17.
@@ -39,6 +42,29 @@ public interface Transformations {
               }
             }, Spliterator.ORDERED), false);
   }
+
+
+  static <A, B, R> Function<BiFunction<A, B, R>, Function<A, Function<B, R>>> curryBiFunction() {
+    return (func) -> a -> b -> func.apply(a, b);
+  }
+
+  static <A, B, R> Function<Function<A, Function<B, R>>, BiFunction<A, B, R>> unCurryBifunction() {
+    return (func) -> (a, b) -> func.apply(a).apply(b);
+  }
+
+  static <A, B, C, R> Function<
+      TriFunction<A, B, C, R>,
+      Function<A, Function<B, Function<C, R>>>> curryTriFunction() {
+    return (func) -> a -> b -> c -> func.apply(a, b, c);
+  }
+
+  static <A, B, C, R> Function<
+      Function<A, Function<B, Function<C, R>>>,
+      TriFunction<A, B, C, R>> unCurryTrifunction() {
+    return (func) -> (a, b, c) -> func.apply(a).apply(b).apply(c);
+  }
+
+
 
 
   //Function Casts

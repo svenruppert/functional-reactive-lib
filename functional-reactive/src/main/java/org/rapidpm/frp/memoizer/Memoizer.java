@@ -6,6 +6,7 @@ import java.util.function.BiFunction;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
+import org.rapidpm.frp.Transformations;
 import org.rapidpm.frp.functions.TriFunction;
 
 /**
@@ -51,16 +52,26 @@ public class Memoizer<T, U> {
     return new Memoizer<T, U>().doMemoize(function);
   }
 
+
   public static <T1, T2, R> BiFunction<T1, T2, R> memoize(final BiFunction<T1, T2, R> biFunc) {
-    final BiFunction<T1, T2, Supplier<R>> biFuncSupplier = (x, y) -> () -> biFunc.apply(x, y);
-    final Function<T1, Function<T2, R>> transformed = Memoizer.memoize(x -> Memoizer.memoize(y -> biFuncSupplier.apply(x, y).get()));
-    return (x, y) -> transformed.apply(x).apply(y);
+    final Function<T1, Function<T2, R>> transformed = Memoizer.memoize(x -> Memoizer.memoize(y -> biFunc.apply(x, y)));
+    return Transformations
+        .<T1, T2, R>unCurryBifunction()
+        .apply(transformed);
   }
 
+//  public static <T1, T2, R> BiFunction<T1, T2, R> memoize(final BiFunction<T1, T2, R> biFunc) {
+//    final Function<T1, Function<T2, R>> transformed = Memoizer.memoize(x -> Memoizer.memoize(y -> biFunc.apply(x, y)));
+//    return (x, y) -> transformed.apply(x).apply(y);
+//  }
+
   public static <T1, T2, T3, R> TriFunction<T1, T2, T3, R> memoize(final TriFunction<T1, T2, T3, R> threeFunc) {
-    final TriFunction<T1, T2, T3, Supplier<R>> threeFuncSupplier = (x, y, z) -> () -> threeFunc.apply(x, y, z);
-    final Function<T1, Function<T2, Function<T3, R>>> transformed = Memoizer.memoize(x -> Memoizer.memoize(y -> Memoizer.memoize(z -> threeFuncSupplier.apply(x, y, z).get())));
-    return (x, y, z) -> transformed.apply(x).apply(y).apply(z);
+    final Function<T1, Function<T2, Function<T3, R>>> transformed
+        = Memoizer.memoize(x -> Memoizer.memoize(y -> Memoizer.memoize(z -> threeFunc.apply(x, y, z))));
+    return Transformations
+        .<T1, T2, T3, R>unCurryTrifunction()
+        .apply(transformed);
+//    return (x, y, z) -> transformed.apply(x).apply(y).apply(z);
   }
 
 }

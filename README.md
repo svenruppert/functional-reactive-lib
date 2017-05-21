@@ -1,5 +1,8 @@
 # Release Notes
 
+## 0.0.5
+* Transformations
+    + curry / unCurry - BiFunction / TriFunction 
 
 ## 0.0.4
 * added Result.thenCombine
@@ -17,5 +20,6 @@
 * added QuadFuntion
 * added StringFunctions
 * added Transformations
+    + 
 * added StringFunctions
-* ported Strman-java to functinal style
+* ported Strman-java to functional style
