@@ -32,6 +32,18 @@ public interface Result<T> {
     return new Result.Success<>(value);
   }
 
+  static <T> Result<T> ofNullable(T value) {
+    return ofNullable(value, "Object was null");
+  }
+
+  static <T> Result<T> ofNullable(T value, String failedMessage) {
+    return (Objects.nonNull(value))
+        ? Result.success(value)
+        : Result.failure(failedMessage);
+  }
+
+
+
   T get();
 
   T getOrElse(Supplier<T> supplier);

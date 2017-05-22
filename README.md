@@ -2,7 +2,8 @@
 
 ## 0.0.5
 * Transformations
-    + curry / unCurry - BiFunction / TriFunction 
+    + curry / unCurry - BiFunction / TriFunction
+* Result.ofNullable
 
 ## 0.0.4
 * added Result.thenCombine
@@ -19,7 +20,6 @@
 * extracted TriFunction from Memoizer to pkg functions
 * added QuadFuntion
 * added StringFunctions
-* added Transformations
-    + 
+* added Transformations 
 * added StringFunctions
 * ported Strman-java to functional style
