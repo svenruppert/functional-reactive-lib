@@ -4,6 +4,14 @@
 * Transformations
     + curry / unCurry - BiFunction / TriFunction
 * Result.ofNullable
+* Result renamed ```bind(Consumer<T> success, Consumer<String> failure)``` 
+        to 
+        ```ifPresentOrElse(Consumer<T> success, Consumer<String> failure)```
+* Result added JDK9 signature ```ifPresentOrElse(Consumer<? super T> action, Runnable emptyAction)```
+* Result added JDK9 signature ```Stream<T> stream()```
+* Result added ```Result<T> or(Supplier<? extends Result<? extends T>> supplier)```
+* Result added ```void ifAbsent(Runnable action)```
+* 
 
 ## 0.0.4
 * added Result.thenCombine

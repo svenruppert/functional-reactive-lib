@@ -261,9 +261,18 @@ public class StringFunctionsTest {
     assertThat(at().apply("foobar", 2).get(), equalTo("o"));
     assertThat(at().apply("foobar", - 1).isAbsent(), equalTo(true));
     assertThat(at().apply("foobar", - 2).isAbsent(), equalTo(true));
-    assertThat(at().apply("foobar", 10).get(), equalTo(Result.failure("").get()));
-    assertThat(at().apply("foobar", - 10).get(), equalTo(Result.failure("").get()));
+//    assertThat(at().apply("foobar", 10).get(), equalTo(Result.failure("").get()));
+//    assertThat(at().apply("foobar", - 10).get(), equalTo(Result.failure("").get()));
   }
+
+  @Test
+  public void at_shouldNotFindCharacterAtIndex() throws Exception {
+    assertTrue(at().apply("foobar", 10).isAbsent());
+    assertTrue(at().apply("foobar", -10).isAbsent());
+  }
+
+
+
 
   @Test
   public void between_shouldReturnArrayWithStringsBetweenStartAndEnd() throws Exception {

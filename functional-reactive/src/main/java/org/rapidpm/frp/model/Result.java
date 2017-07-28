@@ -6,6 +6,7 @@ import java.util.concurrent.CompletableFuture;
 import java.util.function.BiFunction;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
+import java.util.stream.Stream;
 
 /**
  * Copyright (C) 2017 RapidPM - Sven Ruppert
@@ -22,9 +23,17 @@ import java.util.function.Supplier;
  * Created by Sven Ruppert - RapidPM - Team on 16.03.17.
  */
 public interface Result<T> {
-  void bind(Consumer<T> success, Consumer<String> failure);
+
+  void ifPresentOrElse(Consumer<? super T> action, Runnable emptyAction);
+
+  void ifPresentOrElse(Consumer<T> success, Consumer<String> failure);
+
+  void ifPresentOrElseAsync(Consumer<? super T> action, Runnable emptyAction);
+
+  void ifPresentOrElseAsync(Consumer<T> success, Consumer<String> failure);
 
   static <T> Result<T> failure(String errorMessage) {
+    Objects.requireNonNull(errorMessage);
     return new Result.Failure<>(errorMessage);
   }
 
@@ -42,8 +51,6 @@ public interface Result<T> {
         : Result.failure(failedMessage);
   }
 
-
-
   T get();
 
   T getOrElse(Supplier<T> supplier);
@@ -54,15 +61,35 @@ public interface Result<T> {
 
   void ifPresent(Consumer<T> consumer);
 
+  void ifAbsent(Runnable action);
+
+  default Stream<T> stream() {
+    if (!isPresent()) {
+      return Stream.empty();
+    } else {
+      return Stream.of(get());
+    }
+  }
+
+  default Result<T> or(Supplier<? extends Result<? extends T>> supplier) {
+    Objects.requireNonNull(supplier);
+    if (isPresent()) {
+      return this;
+    } else {
+      @SuppressWarnings("unchecked")
+      Result<T> r = (Result<T>) supplier.get();
+      return Objects.requireNonNull(r);
+    }
+  }
+
+
   default Optional<T> toOptional() {
     return Optional.ofNullable(get());
   }
 
   static <T> Result<T> fromOptional(Optional<T> optional) {
     Objects.requireNonNull(optional);
-    return optional
-        .map(Result::success)
-        .orElseGet(() -> Result.failure("optional was empty"));
+    return ofNullable(optional.get(), "Optional hold a null value");
   }
 
   default <V, R> Result<R> thenCombine(V value, BiFunction<T, V, Result<R>> func) {
@@ -87,6 +114,13 @@ public interface Result<T> {
       if (value != null) consumer.accept(value);
     }
 
+    @Override
+    public void ifAbsent(Runnable action) {
+      Objects.requireNonNull(action);
+      if (value == null) action.run();
+    }
+
+
     public Boolean isPresent() {
       return (value != null) ? Boolean.TRUE : Boolean.FALSE;
     }
@@ -97,15 +131,14 @@ public interface Result<T> {
 
     @Override
     public T get() {
-      return value;
+      return Objects.requireNonNull(value);
     }
 
     @Override
     public T getOrElse(Supplier<T> supplier) {
       Objects.requireNonNull(supplier);
-      return (value != null) ? value : supplier.get();
+      return (value != null) ? value : Objects.requireNonNull(supplier.get());
     }
-
   }
 
   class Success<T> extends AbstractResult<T> {
@@ -115,8 +148,24 @@ public interface Result<T> {
     }
 
     @Override
-    public void bind(final Consumer<T> success, final Consumer<String> failure) {
+    public void ifPresentOrElse(Consumer<? super T> action , Runnable emptyAction) {
+      action.accept(value);
+    }
+
+    @Override
+    public void ifPresentOrElse(final Consumer<T> success, final Consumer<String> failure) {
+      // TODO check if usefull -> Objects.requireNonNull(value);
       success.accept(value);
+    }
+
+    @Override
+    public void ifPresentOrElseAsync(Consumer<? super T> action , Runnable emptyAction) {
+      CompletableFuture.runAsync(()-> action.accept(value));
+    }
+
+    @Override
+    public void ifPresentOrElseAsync(Consumer<T> success , Consumer<String> failure) {
+      CompletableFuture.runAsync(()-> success.accept(value));
     }
 
   }
@@ -131,8 +180,23 @@ public interface Result<T> {
     }
 
     @Override
-    public void bind(final Consumer<T> success, final Consumer<String> failure) {
+    public void ifPresentOrElse(Consumer<? super T> action , Runnable emptyAction) {
+      emptyAction.run();
+    }
+
+    @Override
+    public void ifPresentOrElse(final Consumer<T> success, final Consumer<String> failure) {
       failure.accept(errorMessage);
+    }
+
+    @Override
+    public void ifPresentOrElseAsync(Consumer<? super T> action , Runnable emptyAction) {
+      CompletableFuture.runAsync(emptyAction);
+    }
+
+    @Override
+    public void ifPresentOrElseAsync(Consumer<T> success , Consumer<String> failure) {
+      CompletableFuture.runAsync(() -> failure.accept(errorMessage));
     }
   }
 }
