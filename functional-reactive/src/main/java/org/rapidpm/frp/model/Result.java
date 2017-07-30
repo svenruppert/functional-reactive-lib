@@ -5,6 +5,7 @@ import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.BiFunction;
 import java.util.function.Consumer;
+import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.stream.Stream;
 
@@ -99,6 +100,14 @@ public interface Result<T> {
   default <V, R> CompletableFuture<Result<R>> thenCombineAsync(V value , BiFunction<T, V, Result<R>> func) {
     return CompletableFuture.supplyAsync(() -> func.apply(get() , value));
   }
+
+  default <U> Result<U> map(Function<? super T, ? extends U> mapper) {
+    Objects.requireNonNull(mapper);
+    return (isPresent())
+        ? ofNullable(mapper.apply(get()))
+        : Result.failure("Value was null, could not apply the mapper function");
+  }
+
 
   abstract class AbstractResult<T> implements Result<T> {
     protected final T value;
