@@ -16,11 +16,11 @@ import java.io.Serializable;
  * <p>
  * Created by RapidPM - Team on 10.12.16.
  */
-public class Quint< T1 extends Serializable,
-                    T2 extends Serializable,
-                    T3 extends Serializable,
-                    T4 extends Serializable,
-                    T5 extends Serializable> {
+public class Quint<T1 extends Serializable,
+    T2 extends Serializable,
+    T3 extends Serializable,
+    T4 extends Serializable,
+    T5 extends Serializable> {
 
   private T1 t1;
   private T2 t2;
@@ -28,7 +28,7 @@ public class Quint< T1 extends Serializable,
   private T4 t4;
   private T5 t5;
 
-  public Quint(final T1 t1, final T2 t2, final T3 t3, final T4 t4, final T5 t5) {
+  public Quint(final T1 t1 , final T2 t2 , final T3 t3 , final T4 t4 , final T5 t5) {
     this.t1 = t1;
     this.t2 = t2;
     this.t3 = t3;
@@ -92,11 +92,11 @@ public class Quint< T1 extends Serializable,
         '}';
   }
 
-  public static < T1 extends Serializable,
-                  T2 extends Serializable,
-                  T3 extends Serializable,
-                  T4 extends Serializable,
-                  T5 extends Serializable> Quint<T1, T2, T3, T4, T5> next(final T1 t1, final T2 t2, final T3 t3, final T4 t4, final T5 t5) {
-    return new Quint<>(t1, t2, t3, t4, t5);
+  public static <T1 extends Serializable,
+      T2 extends Serializable,
+      T3 extends Serializable,
+      T4 extends Serializable,
+      T5 extends Serializable> Quint<T1, T2, T3, T4, T5> next(final T1 t1 , final T2 t2 , final T3 t3 , final T4 t4 , final T5 t5) {
+    return new Quint<>(t1 , t2 , t3 , t4 , t5);
   }
 }
