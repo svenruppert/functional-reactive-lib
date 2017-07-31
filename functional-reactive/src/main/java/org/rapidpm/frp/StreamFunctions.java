@@ -9,7 +9,7 @@ import java.util.stream.Stream;
  */
 public interface StreamFunctions {
 
-  static <T> Function<Predicate<T>, Function<Stream<T>, Stream<T>>> streamFilter(){
+  static <T> Function<Predicate<T>, Function<Stream<T>, Stream<T>>> streamFilter() {
     return (filter) -> (Function<Stream<T>, Stream<T>>) inputStream -> inputStream.filter(filter);
   }
 }
