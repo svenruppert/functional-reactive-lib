@@ -4,6 +4,7 @@
 * added model.serial pkg with Data classes only for ```extends Serializable``` types
 * Transformations
     + curry / unCurry - BiFunction / TriFunction
+* StreamFunctions added ```<T> Function<Predicate<T>, Function<Stream<T>, Stream<T>>> streamFilter()```
 * Result.ofNullable
 * Result renamed ```bind(Consumer<T> success, Consumer<String> failure)``` 
         to 
