@@ -23,7 +23,7 @@ public class Quad<T1 extends Serializable, T2 extends Serializable, T3 extends S
   private T3 t3;
   private T4 t4;
 
-  public Quad(final T1 t1, final T2 t2, final T3 t3, final T4 t4) {
+  public Quad(final T1 t1 , final T2 t2 , final T3 t3 , final T4 t4) {
     this.t1 = t1;
     this.t2 = t2;
     this.t3 = t3;
@@ -78,10 +78,10 @@ public class Quad<T1 extends Serializable, T2 extends Serializable, T3 extends S
         '}';
   }
 
-  public static < T1 extends Serializable,
-                  T2 extends Serializable,
-                  T3 extends Serializable,
-                  T4 extends Serializable> Quad<T1, T2, T3, T4> next(final T1 t1, final T2 t2, final T3 t3, final T4 t4) {
-    return new Quad<>(t1, t2, t3, t4);
+  public static <T1 extends Serializable,
+      T2 extends Serializable,
+      T3 extends Serializable,
+      T4 extends Serializable> Quad<T1, T2, T3, T4> next(final T1 t1 , final T2 t2 , final T3 t3 , final T4 t4) {
+    return new Quad<>(t1 , t2 , t3 , t4);
   }
 }
