@@ -4,7 +4,6 @@ import static org.rapidpm.frp.ExceptionFunctions.message;
 
 import java.util.function.Function;
 
-import org.rapidpm.frp.ExceptionFunctions;
 import org.rapidpm.frp.model.Result;
 
 /**
