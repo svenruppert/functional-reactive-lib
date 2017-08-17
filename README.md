@@ -1,7 +1,9 @@
 # Release Notes
 
 ## 0.0.6
-* ExceptionFunctions added 
+* ExceptionFunctions added ```Function<Exception, String> message()```
+* ExceptionFunctions added ```Function<Exception, Stream<StackTraceElement>> toStackTraceStream()```
+
 
 ## 0.0.5
 * added model.serial pkg with Data classes only for ```extends Serializable``` types
