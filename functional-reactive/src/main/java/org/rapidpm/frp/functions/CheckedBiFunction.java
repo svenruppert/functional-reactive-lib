@@ -1,5 +1,7 @@
 package org.rapidpm.frp.functions;
 
+import static org.rapidpm.frp.ExceptionFunctions.message;
+
 import java.util.function.BiFunction;
 
 import org.rapidpm.frp.model.Result;
@@ -13,7 +15,7 @@ public interface CheckedBiFunction<T1, T2, R> extends BiFunction<T1, T2, Result<
     try {
       return Result.success(applyWithException(t1, t2));
     } catch (Exception e) {
-      return Result.failure(e.getMessage());
+      return Result.failure(message().apply(e));
     }
   }
 

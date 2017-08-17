@@ -1,5 +1,7 @@
 package org.rapidpm.frp.functions;
 
+import static org.rapidpm.frp.ExceptionFunctions.message;
+
 import java.util.function.Function;
 
 import org.rapidpm.frp.model.Result;
@@ -21,7 +23,7 @@ public interface CheckedExecutor extends Function<Void, Result<Void>> {
       applyWithException();
       return Result.success(null);
     } catch (Exception e) {
-      return Result.failure(e.getMessage());
+      return Result.failure(message().apply(e));
     }
   }
 

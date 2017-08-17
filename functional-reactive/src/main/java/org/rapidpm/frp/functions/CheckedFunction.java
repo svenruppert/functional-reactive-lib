@@ -1,7 +1,10 @@
 package org.rapidpm.frp.functions;
 
+import static org.rapidpm.frp.ExceptionFunctions.message;
+
 import java.util.function.Function;
 
+import org.rapidpm.frp.ExceptionFunctions;
 import org.rapidpm.frp.model.Result;
 
 /**
@@ -14,7 +17,7 @@ public interface CheckedFunction<T, R> extends Function<T, Result<R>> {
     try {
       return Result.success(applyWithException(t));
     } catch (Exception e) {
-      return Result.failure(e.getMessage());
+      return Result.failure(message().apply(e));
     }
   }
 

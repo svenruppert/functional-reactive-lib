@@ -1,5 +1,7 @@
 package org.rapidpm.frp.functions;
 
+import static org.rapidpm.frp.ExceptionFunctions.message;
+
 import java.util.function.Supplier;
 
 import org.rapidpm.frp.model.Result;
@@ -15,7 +17,7 @@ public interface CheckedSupplier<T> extends Supplier<Result<T>> {
     try {
       return Result.success(getWithException());
     } catch (Exception e) {
-      return Result.failure(e.getMessage());
+      return Result.failure(message().apply(e));
     }
   }
 
