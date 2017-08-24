@@ -3,7 +3,7 @@
 ## 0.0.6
 * ExceptionFunctions added ```Function<Exception, String> message()```
 * ExceptionFunctions added ```Function<Exception, Stream<StackTraceElement>> toStackTraceStream()```
-
+* added Sext and Sept data-classes
 
 ## 0.0.5
 * added model.serial pkg with Data classes only for ```extends Serializable``` types
