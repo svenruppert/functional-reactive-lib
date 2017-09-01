@@ -1,5 +1,6 @@
 package org.rapidpm.frp.matcher;
 
+import java.util.Arrays;
 import java.util.function.Supplier;
 
 import org.rapidpm.frp.model.Pair;
@@ -21,31 +22,37 @@ import org.rapidpm.frp.model.Result;
  */
 public class Case<T> extends Pair<Supplier<Boolean>, Supplier<Result<T>>> {
 
-  public Case(final Supplier<Boolean> booleanSupplier, final Supplier<Result<T>> resultSupplier) {
-    super(booleanSupplier, resultSupplier);
+  public Case(final Supplier<Boolean> booleanSupplier , final Supplier<Result<T>> resultSupplier) {
+    super(booleanSupplier , resultSupplier);
   }
 
-  public static <T> Case<T> matchCase(Supplier<Boolean> condition,
+  public static <T> Case<T> matchCase(Supplier<Boolean> condition ,
                                       Supplier<Result<T>> value) {
-    return new Case<>(condition, value);
+    return new Case<>(condition , value);
   }
 
   public static <T> DefaultCase<T> matchCase(Supplier<Result<T>> value) {
-    return new DefaultCase<>(() -> true, value);
+    return new DefaultCase<>(() -> true , value);
   }
 
   @SafeVarargs
-  public static <T> Result<T> match(DefaultCase<T> defaultCase, Case<T>... matchers) {
+  public static <T> Result<T> match(DefaultCase<T> defaultCase , Case<T>... matchers) {
 
-    for (final Case<T> matcher : matchers) {
-      if (matcher.getT1().get()) return matcher.getT2().get();
-    }
-    return defaultCase.getT2().get();
+    return Arrays.stream(matchers)
+        .filter(m -> m.getT1().get())
+        .map(m -> m.getT2().get())
+        .findFirst()
+        .orElse(defaultCase.getT2().get());
+
+//    for (final Case<T> matcher : matchers) {
+//      if (matcher.getT1().get()) return matcher.getT2().get();
+//    }
+//    return defaultCase.getT2().get();
   }
 
   public static class DefaultCase<T> extends Case<T> {
-    public DefaultCase(final Supplier<Boolean> booleanSupplier, final Supplier<Result<T>> resultSupplier) {
-      super(booleanSupplier, resultSupplier);
+    public DefaultCase(final Supplier<Boolean> booleanSupplier , final Supplier<Result<T>> resultSupplier) {
+      super(booleanSupplier , resultSupplier);
     }
 
   }
