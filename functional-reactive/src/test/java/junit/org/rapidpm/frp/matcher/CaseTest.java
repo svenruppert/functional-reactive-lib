@@ -17,6 +17,18 @@ public class CaseTest {
 
 
   @Test
+  void test000() {
+    String value = "OK";
+
+    match(
+        matchCase(() -> Result.success(value))
+    )
+        .ifPresentOrElse(
+            s -> assertEquals(value , s),
+            s -> Assert.fail()
+            );
+  }
+  @Test
   void test001() {
     final String error_message = "error message";
     String value = null;
