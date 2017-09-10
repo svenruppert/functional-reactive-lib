@@ -51,9 +51,9 @@ public interface StringFunctions {
   /**
    * Get the character at index.
    * <p>
-   * This is not 0 based. The first Element will adressed with a 1 !!
+   * This is not 0 based. The first Element will addressed with a 1 !!
    * <p>
-   * For values which don't fall under this range Optional.empty will be returned.
+   * For values which don't fall under this range Result.failure will be returned.
    * <p>
    * param value input value
    * param index location

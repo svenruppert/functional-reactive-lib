@@ -1,7 +1,7 @@
 package org.rapidpm.frp.matcher;
 
-import java.util.Arrays;
 import java.util.function.Supplier;
+import java.util.stream.Stream;
 
 import org.rapidpm.frp.model.Pair;
 import org.rapidpm.frp.model.Result;
@@ -35,19 +35,25 @@ public class Case<T> extends Pair<Supplier<Boolean>, Supplier<Result<T>>> {
     return new DefaultCase<>(() -> true , value);
   }
 
+  public boolean isMatching() {
+    return getT1().get();
+  }
+
+  public Result<T> result() {
+    return getT2().get();
+  }
+
+
   @SafeVarargs
   public static <T> Result<T> match(DefaultCase<T> defaultCase , Case<T>... matchers) {
 
-    return Arrays.stream(matchers)
-        .filter(m -> m.getT1().get())
-        .map(m -> m.getT2().get())
+    return Stream
+        .of(matchers)
+        .filter(Case::isMatching)
+        .map(Case::result)
         .findFirst()
-        .orElse(defaultCase.getT2().get());
+        .orElseGet(defaultCase::result);
 
-//    for (final Case<T> matcher : matchers) {
-//      if (matcher.getT1().get()) return matcher.getT2().get();
-//    }
-//    return defaultCase.getT2().get();
   }
 
   public static class DefaultCase<T> extends Case<T> {
