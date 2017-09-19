@@ -1,5 +1,7 @@
 # Release Notes
 
+## 0.1.0
+
 ## 0.0.6
 * ExceptionFunctions added ```Function<Exception, String> message()```
 * ExceptionFunctions added ```Function<Exception, Stream<StackTraceElement>> toStackTraceStream()```
