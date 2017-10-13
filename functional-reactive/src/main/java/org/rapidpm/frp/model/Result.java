@@ -9,6 +9,8 @@ import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.stream.Stream;
 
+import org.rapidpm.frp.functions.CheckedFunction;
+
 /**
  * Copyright (C) 2017 RapidPM - Sven Ruppert
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -103,10 +105,25 @@ public interface Result<T> {
 
   default <U> Result<U> map(Function<? super T, ? extends U> mapper) {
     Objects.requireNonNull(mapper);
-    return (isPresent())
-        ? ofNullable(mapper.apply(get()))
-        : Result.failure("Value was null, could not apply the mapper function");
+    return isPresent()
+        ? ((CheckedFunction<T, U>) mapper::apply).apply(get())
+        : this.asFailure();
   }
+
+  default <U> Result<U> flatMap(Function<? super T, Result<U>> mapper) {
+    Objects.requireNonNull(mapper);
+    return this.isPresent()
+        ? mapper.apply(get())
+        : this.asFailure();
+  }
+
+
+  default <U> Result<U> asFailure() {
+    return (isAbsent())
+        ? (Result<U>) this
+        : Result.failure("converted to Failure orig was " + this);
+  }
+
 
 
   abstract class AbstractResult<T> implements Result<T> {

@@ -1,6 +1,10 @@
 # Release Notes
 
 ## 0.1.0
+* Result added ```<U> Result<U> asFailure()```
+* Result added ```<U> Result<U> flatMap(Function<T, Result<U>> mapper)```
+* ExceptionFunctions.message() extended exception message with Exception Classname
+* added CompletableFutureQueue
 
 ## 0.0.6
 * ExceptionFunctions added ```Function<Exception, String> message()```

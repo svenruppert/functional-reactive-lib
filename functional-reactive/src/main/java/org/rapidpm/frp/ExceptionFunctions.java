@@ -14,7 +14,8 @@ public interface ExceptionFunctions {
     return (e) -> {
       Objects.requireNonNull(e , "Exception instance was null.");
       final String message = e.getMessage();
-      return (message != null ? message : e.getClass().getSimpleName());
+      final String simpleName = e.getClass().getSimpleName();
+      return (message != null ? simpleName + " - " + message : simpleName + " - no message");
     };
   }
 
@@ -26,6 +27,4 @@ public interface ExceptionFunctions {
           : Stream.empty();
     };
   }
-
-
 }

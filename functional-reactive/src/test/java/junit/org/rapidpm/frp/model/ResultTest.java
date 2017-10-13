@@ -30,4 +30,20 @@ public class ResultTest {
     Assert.assertTrue(result.isPresent());
     Assert.assertEquals("Hello - World", result.get());
   }
+
+
+  @Test
+  public void test003() throws Exception {
+    final Result<Integer> asFailure = Result.success("Hello").asFailure();
+    Assert.assertTrue(asFailure.isAbsent());
+//    asFailure.ifAbsent(Assert::fail);
+    asFailure.ifPresent(v -> Assert.fail());
+  }
+
+  @Test
+  public void test004() throws Exception {
+    final Result<Integer> asFailure = Result.failure("Hello").asFailure();
+    Assert.assertTrue(asFailure.isAbsent());
+    asFailure.ifPresent(v -> Assert.fail());
+  }
 }

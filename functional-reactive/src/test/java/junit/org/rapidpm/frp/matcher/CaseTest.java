@@ -1,9 +1,11 @@
 package junit.org.rapidpm.frp.matcher;
 
+import static java.util.Objects.isNull;
 import static org.junit.Assert.assertEquals;
 import static org.rapidpm.frp.matcher.Case.match;
 import static org.rapidpm.frp.matcher.Case.matchCase;
 
+import java.util.Objects;
 import java.util.stream.IntStream;
 
 import org.junit.Assert;
@@ -35,7 +37,7 @@ public class CaseTest {
 
     match(
         matchCase(() -> Result.success(value)) ,
-        matchCase(() -> value == null , () -> Result.failure(error_message))
+        matchCase(() -> isNull(value) , () -> Result.failure(error_message))
     )
         .ifPresentOrElse(
             s -> Assert.fail() ,
@@ -50,7 +52,7 @@ public class CaseTest {
 
     match(
         matchCase(() -> Result.success(value)) ,
-        matchCase(() -> value == null , () -> Result.failure(error_message))
+        matchCase(() -> isNull(value) , () -> Result.failure(error_message))
     )
         .ifPresentOrElse(
             s -> assertEquals(value , s) ,
