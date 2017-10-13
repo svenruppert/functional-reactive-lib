@@ -8,7 +8,7 @@ import java.util.function.Function;
 /**
  *
  */
-public class CompletableFutureQueue <T, R> {
+public class CompletableFutureQueue<T, R> {
 
   private Function<T, CompletableFuture<R>> resultFunction;
 
