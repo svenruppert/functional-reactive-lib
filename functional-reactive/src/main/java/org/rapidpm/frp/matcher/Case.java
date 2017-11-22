@@ -43,7 +43,6 @@ public class Case<T> extends Pair<Supplier<Boolean>, Supplier<Result<T>>> {
     return getT2().get();
   }
 
-
   @SafeVarargs
   public static <T> Result<T> match(DefaultCase<T> defaultCase , Case<T>... matchers) {
 
@@ -53,14 +52,11 @@ public class Case<T> extends Pair<Supplier<Boolean>, Supplier<Result<T>>> {
         .map(Case::result)
         .findFirst()
         .orElseGet(defaultCase::result);
-
   }
 
   public static class DefaultCase<T> extends Case<T> {
     public DefaultCase(final Supplier<Boolean> booleanSupplier , final Supplier<Result<T>> resultSupplier) {
       super(booleanSupplier , resultSupplier);
     }
-
   }
-
 }

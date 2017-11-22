@@ -19,7 +19,5 @@ public interface CheckedFunction<T, R> extends Function<T, Result<R>> {
       return Result.failure(message().apply(e));
     }
   }
-
   R applyWithException(T t) throws Exception;
-
 }
