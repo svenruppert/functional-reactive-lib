@@ -1,5 +1,9 @@
 # Release Notes
 
+## 0.5.0
+* Result added ```void ifFailed(Consumer<String> failed);```
+
+
 ## 0.1.0
 * Result added ```<U> Result<U> asFailure()```
 * Result added ```<U> Result<U> flatMap(Function<T, Result<U>> mapper)```
