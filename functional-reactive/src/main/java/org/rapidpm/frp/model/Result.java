@@ -66,6 +66,8 @@ public interface Result<T> {
 
   void ifAbsent(Runnable action);
 
+  void ifFailed(Consumer<String> failed);
+
   default Stream<T> stream() {
     if (! isPresent()) {
       return Stream.empty();
@@ -125,7 +127,6 @@ public interface Result<T> {
   }
 
 
-
   abstract class AbstractResult<T> implements Result<T> {
     protected final T value;
 
@@ -144,7 +145,6 @@ public interface Result<T> {
       Objects.requireNonNull(action);
       if (value == null) action.run();
     }
-
 
     public Boolean isPresent() {
       return (value != null) ? Boolean.TRUE : Boolean.FALSE;
@@ -193,6 +193,10 @@ public interface Result<T> {
       CompletableFuture.runAsync(() -> success.accept(value));
     }
 
+    public void ifFailed(Consumer<String> failed) {
+      Objects.requireNonNull(failed);
+    }
+
   }
 
   class Failure<T> extends AbstractResult<T> {
@@ -222,6 +226,11 @@ public interface Result<T> {
     @Override
     public void ifPresentOrElseAsync(Consumer<T> success , Consumer<String> failure) {
       CompletableFuture.runAsync(() -> failure.accept(errorMessage));
+    }
+
+    public void ifFailed(Consumer<String> failed) {
+      Objects.requireNonNull(failed);
+      failed.accept(errorMessage);
     }
   }
 }
