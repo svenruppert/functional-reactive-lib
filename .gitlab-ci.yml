@@ -7,7 +7,6 @@ variables:
 
 before_script:
   - if [ -z "$SOURCE_PIPELINE_ID" ]; then export SOURCE_PIPELINE_ID=$CI_PIPELINE_ID ; fi;
-  - cd functional-reactive
   
 build:
   script:
