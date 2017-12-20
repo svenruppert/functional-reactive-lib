@@ -26,9 +26,9 @@ mutation-testing:
   script:
     - mvn $MAVEN_CLI_OPTS test org.pitest:pitest-maven:mutationCoverage -Dpipeline=$SOURCE_PIPELINE_ID       
 
-trigger-functional-vaadin-addons:
+trigger-vaadin-addons:
   stage: deploy
   script:
     - export SOURCE_PROJ_VER=`mvn help:evaluate -Dexpression=project.version | grep -Ev '(^\[|Download\w+:)'`
     - export SOURCE_PROJ=`mvn help:evaluate -Dexpression=project.artifactId | grep -Ev '(^\[|Download\w+:)'`
-    - curl --request POST --form "variables[SOURCE_PROJ_VER]=$SOURCE_PROJ_VER" --form "variables[SOURCE_PROJ]=$SOURCE_PROJ" --form "variables[SOURCE_PIPELINE_ID]=$SOURCE_PIPELINE_ID" --form "token=$CI_JOB_TOKEN" --form ref=develop https://gitlab.com/api/v4/projects/3401756/trigger/pipeline
+    - curl --request POST --form "variables[SOURCE_PROJ_VER]=$SOURCE_PROJ_VER" --form "variables[SOURCE_PROJ]=$SOURCE_PROJ" --form "variables[SOURCE_PIPELINE_ID]=$SOURCE_PIPELINE_ID" --form "token=$CI_JOB_TOKEN" --form ref=develop https://gitlab.com/api/v4/projects/4950840/trigger/pipeline
