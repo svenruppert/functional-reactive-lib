@@ -20,6 +20,9 @@ build:
       
 mutation-testing:
   stage: deploy
+  artifacts:
+    paths:
+      - "*/target/pit-reports/*/*"
   script:
     - mvn $MAVEN_CLI_OPTS test org.pitest:pitest-maven:mutationCoverage -Dpipeline=$SOURCE_PIPELINE_ID       
 
