@@ -1,0 +1,24 @@
+image: maven:3.3.9-jdk-8
+
+variables:
+  MAVEN_CLI_OPTS: "-s .m2/settings.xml --batch-mode -P sys-nexus-ci"
+  MAVEN_OPTS: "-Dmaven.repo.local=.m2/repository"
+  TEXT_PLAIN: " text/plain" # welcome to escaping hell
+
+before_script:
+  - if [ -z "$SOURCE_PIPELINE_ID" ]; then export SOURCE_PIPELINE_ID=$CI_PIPELINE_ID ; fi;
+  
+build:
+  script:
+    - curl --request POST "http://cimonitor.craftwater.de/api/v1/jobs/start/$SOURCE_PIPELINE_ID/$CI_PROJECT_ID/$CI_PIPELINE_ID/$CI_JOB_ID"
+    - echo $SOURCE_PIPELINE_ID
+    - if [ "$CI_PIPELINE_SOURCE" != "pipeline" ] ; then curl -X POST -u $MAVEN_REPO_USER:$MAVEN_REPO_PASS --header "Content-Type:$TEXT_PLAIN" "https://nexus.craftwater.de/service/siesta/rest/v1/script/maven2/run" -d $SOURCE_PIPELINE_ID ; fi;
+    # update to new parent pom if there is one
+    - mvn $MAVEN_CLI_OPTS versions:update-parent -DallowSnapshots=true  
+    - mvn $MAVEN_CLI_OPTS install -Dpipeline=$SOURCE_PIPELINE_ID
+    - mvn $MAVEN_CLI_OPTS deploy -Dpipeline=$SOURCE_PIPELINE_ID
+      
+mutation-testing:
+  stage: deploy
+  script:
+    - mvn $MAVEN_CLI_OPTS test org.pitest:pitest-maven:mutationCoverage -Dpipeline=$SOURCE_PIPELINE_ID       
