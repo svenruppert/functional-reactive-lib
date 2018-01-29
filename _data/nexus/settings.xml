@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<settings xmlns="http://maven.apache.org/SETTINGS/1.1.0"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.1.0 http://maven.apache.org/xsd/settings-1.1.0.xsd">
+
+  <servers>
+    <server>
+      <id>sonatype-nexus</id>
+      <username>admin</username>
+      <password>admin123</password>
+    </server>
+    <server>
+      <id>sonatype-nexus-snapshots</id>
+      <username>admin</username>
+      <password>admin123</password>
+    </server>
+  </servers>
+
+  <mirrors>
+    <mirror>
+      <id>central</id>
+      <name>central</name>
+      <url>http://nexus-server:8081/repository/maven-public/</url>
+      <!--<url>${mirror-url}</url>-->
+      <mirrorOf>*</mirrorOf>
+    </mirror>
+  </mirrors>
+
+  <profiles>
+    <profile>
+      <id>sys-nexus-deploy</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+      <properties>
+        <!--<mirror-url>http://nexus-server:8081/repository/maven-public/</mirror-url>-->
+        <sonatype-nexus-url>http://nexus-server:8081/repository/maven-releases/</sonatype-nexus-url>
+        <sonatype-nexus-snapshots-url>http://nexus-server:8081/repository/maven-snapshots/
+        </sonatype-nexus-snapshots-url>
+      </properties>
+    </profile>
+    <profile>
+      <id>sys-properties</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+      <properties>
+        <!--<gpg.passphrase>XXXXX</gpg.passphrase>-->
+        <!--<gpg.keyname>YYYYY</gpg.keyname>-->
+      </properties>
+    </profile>
+  </profiles>
+
+
+</settings>
