@@ -1,11 +1,11 @@
 package junit.org.rapidpm.frp;
 
 import static java.util.stream.Collectors.toSet;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.Set;
 import java.util.stream.Stream;
 
-import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 import org.rapidpm.frp.StreamFunctions;
 
@@ -23,7 +23,7 @@ public class StreamFunctionsTest {
         .collect(toSet());
 
 
-    Assert.assertEquals(1 , set.size());
-    set.forEach(i -> Assert.assertEquals(Long.valueOf(i) , Long.valueOf(5)));
+    assertEquals(1 , set.size());
+    set.forEach(i -> assertEquals(Long.valueOf(i) , Long.valueOf(5)));
   }
 }

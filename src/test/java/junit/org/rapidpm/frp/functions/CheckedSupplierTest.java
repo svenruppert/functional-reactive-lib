@@ -1,7 +1,10 @@
 package junit.org.rapidpm.frp.functions;
 
-import org.junit.Assert;
-import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import org.junit.jupiter.api.Test;
 import org.rapidpm.frp.functions.CheckedSupplier;
 import org.rapidpm.frp.model.Result;
 
@@ -13,9 +16,9 @@ public class CheckedSupplierTest {
   @Test
   public void test001() throws Exception {
     Result<String> result = ((CheckedSupplier<String>) () -> "Hello").get();
-    Assert.assertNotNull(result);
-    Assert.assertTrue(result.isPresent());
-    Assert.assertEquals("Hello", result.get());
+    assertNotNull(result);
+    assertTrue(result.isPresent());
+    assertEquals("Hello", result.get());
   }
 
   @Test
@@ -24,7 +27,7 @@ public class CheckedSupplierTest {
       throw new RuntimeException("Hello");
     })
         .get();
-    Assert.assertNotNull(result);
-    Assert.assertTrue(result.isAbsent());
+    assertNotNull(result);
+    assertTrue(result.isAbsent());
   }
 }

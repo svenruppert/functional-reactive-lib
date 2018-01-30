@@ -1,7 +1,10 @@
 package junit.org.rapidpm.frp.functions;
 
-import org.junit.Assert;
-import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import org.junit.jupiter.api.Test;
 import org.rapidpm.frp.functions.CheckedFunction;
 import org.rapidpm.frp.model.Result;
 
@@ -16,9 +19,9 @@ public class CheckedFunctionTest {
     final Result<String> result = ((CheckedFunction<String, String>) s -> "ok")
         .apply("Hello World");
 
-    Assert.assertNotNull(result);
-    Assert.assertTrue(result.isPresent());
-    Assert.assertEquals("ok", result.get());
+    assertNotNull(result);
+    assertTrue(result.isPresent());
+    assertEquals("ok" , result.get());
 
   }
 
@@ -30,8 +33,8 @@ public class CheckedFunctionTest {
     })
         .apply("Hello World");
 
-    Assert.assertNotNull(result);
-    Assert.assertTrue(result.isAbsent());
+    assertNotNull(result);
+    assertTrue(result.isAbsent());
 
   }
 

@@ -1,9 +1,11 @@
 package junit.org.rapidpm.frp.functions;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import java.io.IOException;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.rapidpm.frp.functions.CheckedPredicate;
 
 /**
@@ -16,7 +18,7 @@ public class CheckedPredicateTest {
     CheckedPredicate<String> p = s -> {
       throw new RuntimeException("foo");
     };
-    Assert.assertFalse(p.test(""));
+    assertFalse(p.test(""));
   }
 
   @Test
@@ -24,14 +26,14 @@ public class CheckedPredicateTest {
     CheckedPredicate<String> p = s -> {
       throw new IOException("foo");
     };
-    Assert.assertFalse(p.test(""));
+    assertFalse(p.test(""));
   }
 
   @Test
   public void test003() throws Exception {
     CheckedPredicate<String> p = s -> s.equals("foo");
-    Assert.assertFalse(p.test(""));
-    Assert.assertTrue(p.test("foo"));
+    assertFalse(p.test(""));
+    assertTrue(p.test("foo"));
   }
 
 

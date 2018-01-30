@@ -1,7 +1,10 @@
 package junit.org.rapidpm.frp.functions;
 
-import org.junit.Assert;
-import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import org.junit.jupiter.api.Test;
 import org.rapidpm.frp.functions.CheckedExecutor;
 import org.rapidpm.frp.model.Result;
 
@@ -16,12 +19,12 @@ public class CheckedExecutorTest {
 
     final CheckedExecutor e = () -> { /* do magic here */};
     final Result<Void> result = e.execute();
-    Assert.assertNotNull(result);
+    assertNotNull(result);
 
-    Assert.assertFalse(result.isPresent());
-    Assert.assertTrue(result.isAbsent());
+    assertFalse(result.isPresent());
+    assertTrue(result.isAbsent());
 
-    Assert.assertTrue(result instanceof Result.Success);
+    assertTrue(result instanceof Result.Success);
 
   }
 
@@ -32,12 +35,12 @@ public class CheckedExecutorTest {
       throw new RuntimeException("noop");
     };
     final Result<Void> result = e.execute();
-    Assert.assertNotNull(result);
+    assertNotNull(result);
 
-    Assert.assertFalse(result.isPresent());
-    Assert.assertTrue(result.isAbsent());
+    assertFalse(result.isPresent());
+    assertTrue(result.isAbsent());
 
-    Assert.assertTrue(result instanceof Result.Failure);
+    assertTrue(result instanceof Result.Failure);
 
   }
 }

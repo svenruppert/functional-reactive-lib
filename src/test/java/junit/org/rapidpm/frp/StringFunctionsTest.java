@@ -5,11 +5,14 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.hasItems;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.collection.IsArrayContainingInOrder.arrayContaining;
 import static org.hamcrest.collection.IsArrayWithSize.emptyArray;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertThat;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.rapidpm.frp.StringFunctions.append;
 import static org.rapidpm.frp.StringFunctions.appendArray;
 import static org.rapidpm.frp.StringFunctions.appendStream;
@@ -79,9 +82,8 @@ import static org.rapidpm.frp.StringFunctions.wordStream;
 import java.util.Arrays;
 import java.util.stream.Stream;
 
-import org.junit.Assert;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 import org.rapidpm.frp.model.Result;
 
 /**
@@ -92,150 +94,150 @@ public class StringFunctionsTest {
 
   @Test
   public void collapseWhitespace001() throws Exception {
-    Assert.assertEquals("", collapseWhitespace().apply(""));
+    assertEquals("" , collapseWhitespace().apply(""));
   }
 
   @Test
   public void collapseWhitespace002() throws Exception {
-    Assert.assertEquals("A", collapseWhitespace().apply("A"));
+    assertEquals("A" , collapseWhitespace().apply("A"));
   }
 
   @Test
   public void collapseWhitespace002a() throws Exception {
-    Assert.assertEquals("A", collapseWhitespace().apply(" A"));
+    assertEquals("A" , collapseWhitespace().apply(" A"));
   }
 
   @Test
   public void collapseWhitespace002b() throws Exception {
-    Assert.assertEquals("A", collapseWhitespace().apply("A "));
+    assertEquals("A" , collapseWhitespace().apply("A "));
   }
 
   @Test
   public void collapseWhitespace002c() throws Exception {
-    Assert.assertEquals("A", collapseWhitespace().apply(" A "));
+    assertEquals("A" , collapseWhitespace().apply(" A "));
   }
 
   @Test
   public void collapseWhitespace003() throws Exception {
-    Assert.assertEquals("A B", collapseWhitespace().apply("A B"));
+    assertEquals("A B" , collapseWhitespace().apply("A B"));
   }
 
   @Test
   public void collapseWhitespace004() throws Exception {
-    Assert.assertEquals("A B", collapseWhitespace().apply(" A B"));
+    assertEquals("A B" , collapseWhitespace().apply(" A B"));
   }
 
   @Test
   public void collapseWhitespace005() throws Exception {
-    Assert.assertEquals("A B", collapseWhitespace().apply(" A  B"));
+    assertEquals("A B" , collapseWhitespace().apply(" A  B"));
   }
 
   @Test
   public void collapseWhitespace006() throws Exception {
-    Assert.assertEquals("A B", collapseWhitespace().apply(" A  B "));
+    assertEquals("A B" , collapseWhitespace().apply(" A  B "));
   }
 
   @Test
   public void collapseWhitespace007() throws Exception {
-    Assert.assertEquals("A B", collapseWhitespace().apply(" A   B "));
+    assertEquals("A B" , collapseWhitespace().apply(" A   B "));
   }
 
 
   @Test
   public void at001() throws Exception {
-    Result<String> r = at().apply("ABCD", 1);
-    Assert.assertNotNull(r);
-    Assert.assertTrue(r.isPresent());
-    Assert.assertEquals("A", r.get());
+    Result<String> r = at().apply("ABCD" , 1);
+    assertNotNull(r);
+    assertTrue(r.isPresent());
+    assertEquals("A" , r.get());
   }
 
   @Test
   public void at002() throws Exception {
-    Result<String> r = at().apply("ABCD", 5);
-    Assert.assertNotNull(r);
-    Assert.assertFalse(r.isPresent());
+    Result<String> r = at().apply("ABCD" , 5);
+    assertNotNull(r);
+    assertFalse(r.isPresent());
   }
 
   @Test
   public void at003() throws Exception {
-    Result<String> r = at().apply("ABCD", - 5);
-    Assert.assertNotNull(r);
-    Assert.assertFalse(r.isPresent());
+    Result<String> r = at().apply("ABCD" , - 5);
+    assertNotNull(r);
+    assertFalse(r.isPresent());
   }
 
   @Test
   public void at004() throws Exception {
-    Result<String> r = at().apply("ABCD", 0);
-    Assert.assertNotNull(r);
-    Assert.assertFalse(r.isPresent());
+    Result<String> r = at().apply("ABCD" , 0);
+    assertNotNull(r);
+    assertFalse(r.isPresent());
   }
 
   @Test
   public void at005() throws Exception {
-    Result<String> r = at().apply("ABCD", 4);
-    Assert.assertNotNull(r);
-    Assert.assertTrue(r.isPresent());
-    Assert.assertEquals("D", r.get());
+    Result<String> r = at().apply("ABCD" , 4);
+    assertNotNull(r);
+    assertTrue(r.isPresent());
+    assertEquals("D" , r.get());
   }
 
 
   @Test
   public void notStartsWith001() throws Exception {
-    Assert.assertFalse(notStartsWith().apply("AAA", "A"));
+    assertFalse(notStartsWith().apply("AAA" , "A"));
   }
 
   @Test
   public void notStartsWith002() throws Exception {
-    Assert.assertFalse(notStartsWith().apply("AAA", "AAA"));
+    assertFalse(notStartsWith().apply("AAA" , "AAA"));
   }
 
   @Test
   public void notStartsWith003() throws Exception {
-    Assert.assertTrue(notStartsWith().apply("AAA", "AAAA"));
+    assertTrue(notStartsWith().apply("AAA" , "AAAA"));
   }
 
   @Test
   public void notStartsWith004() throws Exception {
-    Assert.assertTrue(notStartsWith().apply("AAA", "B"));
+    assertTrue(notStartsWith().apply("AAA" , "B"));
   }
 
   @Test
   public void notStartsWith005() throws Exception {
-    Assert.assertFalse(notStartsWith().apply("AAA", ""));
+    assertFalse(notStartsWith().apply("AAA" , ""));
   }
 
   @Test
   public void notStartsWith006() throws Exception {
-    Assert.assertFalse(notStartsWith().apply(" AAA", ""));
+    assertFalse(notStartsWith().apply(" AAA" , ""));
   }
 
   @Test
   public void notStartsWith007() throws Exception {
-    Assert.assertFalse(notStartsWith().apply(" AAA", " "));
+    assertFalse(notStartsWith().apply(" AAA" , " "));
   }
 
   @Test
   public void notEmpty001() throws Exception {
-    Assert.assertFalse(notEmpty().test(""));
+    assertFalse(notEmpty().test(""));
   }
 
   @Test
   public void notEmpty002() throws Exception {
-    Assert.assertTrue(notEmpty().test(" "));
+    assertTrue(notEmpty().test(" "));
   }
 
   @Test
   public void notEmpty003() throws Exception {
-    Assert.assertTrue(notEmpty().test("A"));
+    assertTrue(notEmpty().test("A"));
   }
 
 
   @Test
   public void append_shouldAppendStringsToEndOfValue() throws Exception {
-    assertThat(appendStream().apply("f", Stream.of("o", "o", "b", "a", "r")),
+    assertThat(appendStream().apply("f" , Stream.of("o" , "o" , "b" , "a" , "r")) ,
         equalTo("foobar"));
-    assertThat(append().apply("foobar", ""), equalTo("foobar"));
-    assertThat(append().apply("", "foobar"), equalTo("foobar"));
+    assertThat(append().apply("foobar" , "") , equalTo("foobar"));
+    assertThat(append().apply("" , "foobar") , equalTo("foobar"));
   }
 
 //  @Test(expected = IllegalArgumentException.class)
@@ -245,9 +247,9 @@ public class StringFunctionsTest {
 
   @Test
   public void appendArray_shouldAppendStringArrayToEndOfValue() throws Exception {
-    assertThat(appendArray().apply("f", new String[]{"o" , "o" , "b" , "a" , "r"}), equalTo("foobar"));
-    assertThat(appendArray().apply("foobar", new String[]{}), equalTo("foobar"));
-    assertThat(appendArray().apply("", new String[]{"foobar"}), equalTo("foobar"));
+    assertThat(appendArray().apply("f" , new String[]{"o" , "o" , "b" , "a" , "r"}) , equalTo("foobar"));
+    assertThat(appendArray().apply("foobar" , new String[]{}) , equalTo("foobar"));
+    assertThat(appendArray().apply("" , new String[]{"foobar"}) , equalTo("foobar"));
   }
 
 //  @Test(expected = IllegalArgumentException.class)
@@ -257,21 +259,19 @@ public class StringFunctionsTest {
 
   @Test
   public void at_shouldFindCharacterAtIndex() throws Exception {
-    assertThat(at().apply("foobar", 1).get(), equalTo("f"));
-    assertThat(at().apply("foobar", 2).get(), equalTo("o"));
-    assertThat(at().apply("foobar", - 1).isAbsent(), equalTo(true));
-    assertThat(at().apply("foobar", - 2).isAbsent(), equalTo(true));
+    assertThat(at().apply("foobar" , 1).get() , equalTo("f"));
+    assertThat(at().apply("foobar" , 2).get() , equalTo("o"));
+    assertThat(at().apply("foobar" , - 1).isAbsent() , equalTo(true));
+    assertThat(at().apply("foobar" , - 2).isAbsent() , equalTo(true));
 //    assertThat(at().apply("foobar", 10).get(), equalTo(Result.failure("").get()));
 //    assertThat(at().apply("foobar", - 10).get(), equalTo(Result.failure("").get()));
   }
 
   @Test
   public void at_shouldNotFindCharacterAtIndex() throws Exception {
-    assertTrue(at().apply("foobar", 10).isAbsent());
-    assertTrue(at().apply("foobar", -10).isAbsent());
+    assertTrue(at().apply("foobar" , 10).isAbsent());
+    assertTrue(at().apply("foobar" , - 10).isAbsent());
   }
-
-
 
 
   @Test
@@ -294,7 +294,7 @@ public class StringFunctionsTest {
   @Test
   public void chars_shouldReturnAllCharactersInString() throws Exception {
     final String title = "title";
-    assertThat(chars().apply(title), equalTo(new String[]{"t" , "i" , "t" , "l" , "e"}));
+    assertThat(chars().apply(title) , equalTo(new String[]{"t" , "i" , "t" , "l" , "e"}));
   }
 
   @Test
@@ -306,13 +306,13 @@ public class StringFunctionsTest {
         "    foo     bar "
     };
     Arrays.stream(fixture)
-        .forEach(el -> assertThat(collapseWhitespace().apply(el), equalTo("foo bar")));
+        .forEach(el -> assertThat(collapseWhitespace().apply(el) , equalTo("foo bar")));
   }
 
   @Test
   public void collapseWhitespace_shouldReplaceConsecutiveWhitespaceBetweenMultipleStrings() throws Exception {
     String input = " foo      bar      bazz     hello    world    ";
-    assertThat(collapseWhitespace().apply(input), equalTo("foo bar bazz hello world"));
+    assertThat(collapseWhitespace().apply(input) , equalTo("foo bar bazz hello world"));
   }
 
   @Test
@@ -324,7 +324,7 @@ public class StringFunctionsTest {
         "foo"
     };
 
-    Arrays.stream(fixture).forEach(el -> assertTrue(contains().apply(el, "FOO")));
+    Arrays.stream(fixture).forEach(el -> assertTrue(contains().apply(el , "FOO")));
   }
 
   @Test
@@ -337,7 +337,7 @@ public class StringFunctionsTest {
     };
 
     Arrays.stream(fixture)
-        .forEach(el -> assertFalse(containsCaseSensitive().apply(el, "FOO", true)));
+        .forEach(el -> assertFalse(containsCaseSensitive().apply(el , "FOO" , true)));
   }
 
   @Test
@@ -349,7 +349,7 @@ public class StringFunctionsTest {
     };
 
     Arrays.stream(fixture)
-        .forEach(el -> assertTrue(containsAll().apply(el, new String[]{"foo" , "bar"})));
+        .forEach(el -> assertTrue(containsAll().apply(el , new String[]{"foo" , "bar"})));
   }
 
   @Test
@@ -360,7 +360,7 @@ public class StringFunctionsTest {
         "foobar" ,
     };
     Arrays.stream(fixture)
-        .forEach(el -> assertFalse(containsAllCaseSensitive().apply(el, new String[]{"FOO" , "bar"}, true)));
+        .forEach(el -> assertFalse(containsAllCaseSensitive().apply(el , new String[]{"FOO" , "bar"} , true)));
   }
 
 //  @Test
@@ -386,22 +386,22 @@ public class StringFunctionsTest {
 
   @Test
   public void countSubstr_shouldCountSubStrCountCaseInsensitiveWithoutOverlapInValue() throws Exception {
-    assertThat(countSubStrCaseSensitive().apply("aaaAAAaaa", "aaa", false, false), equalTo(3L));
+    assertThat(countSubStrCaseSensitive().apply("aaaAAAaaa" , "aaa" , false , false) , equalTo(3L));
   }
 
   @Test
   public void countSubstr_shouldCountSubStrCountCaseSensitiveWithoutOverlapInValue() throws Exception {
-    assertThat(countSubStr().apply("aaaAAAaaa", "aaa"), equalTo(2L));
+    assertThat(countSubStr().apply("aaaAAAaaa" , "aaa") , equalTo(2L));
   }
 
   @Test
   public void countSubstr_shouldCountSubStrCountCaseInsensitiveWithOverlapInValue() throws Exception {
-    assertThat(countSubStrCaseSensitive().apply("aaaAAAaaa", "aaa", false, true), equalTo(7L));
+    assertThat(countSubStrCaseSensitive().apply("aaaAAAaaa" , "aaa" , false , true) , equalTo(7L));
   }
 
   @Test
   public void countSubstr_shouldCountSubStrCountCaseSensitiveWithOverlapInValue() throws Exception {
-    assertThat(countSubStrCaseSensitive().apply("aaaAAAaaa", "AAA", true, true), equalTo(1L));
+    assertThat(countSubStrCaseSensitive().apply("aaaAAAaaa" , "AAA" , true , true) , equalTo(1L));
   }
 
 //  @Test
@@ -437,7 +437,7 @@ public class StringFunctionsTest {
         "foo bar" ,
         "bar"
     };
-    Arrays.stream(fixture).forEach(el -> assertTrue(endsWith().apply(el, "bar")));
+    Arrays.stream(fixture).forEach(el -> assertTrue(endsWith().apply(el , "bar")));
   }
 
   @Test
@@ -446,7 +446,7 @@ public class StringFunctionsTest {
         "foo bar" ,
         "bar"
     };
-    Arrays.stream(fixture).forEach(el -> assertTrue(endsWithCaseSensitive().apply(el, "BAR", false)));
+    Arrays.stream(fixture).forEach(el -> assertTrue(endsWithCaseSensitive().apply(el , "BAR" , false)));
   }
 
 //  @Test
@@ -474,67 +474,67 @@ public class StringFunctionsTest {
         "bar"
     };
 
-    Arrays.stream(fixture).forEach(el -> assertThat(ensureLeft().apply(el, "foo"), equalTo("foobar")));
+    Arrays.stream(fixture).forEach(el -> assertThat(ensureLeft().apply(el , "foo") , equalTo("foobar")));
   }
 
   @Test
   public void ensureLeft_notCaseSensitive_shouldEnsureValueStartsWithFoo() throws Exception {
-    assertThat(ensureLeftCaseSensitive().apply("foobar", "FOO", false), equalTo("foobar"));
-    assertThat(ensureLeftCaseSensitive().apply("bar", "FOO", false), equalTo("FOObar"));
+    assertThat(ensureLeftCaseSensitive().apply("foobar" , "FOO" , false) , equalTo("foobar"));
+    assertThat(ensureLeftCaseSensitive().apply("bar" , "FOO" , false) , equalTo("FOObar"));
   }
 
   @Test
   public void base64Decode_shouldDecodeABase64DecodedValueToString() throws Exception {
-    assertThat(base64Decode().apply("c3RybWFu"), equalTo("strman"));
-    assertThat(base64Decode().apply("Zm9v"), equalTo("foo"));
-    assertThat(base64Decode().apply("YmFy"), equalTo("bar"));
-    assertThat(base64Decode().apply("YsOhciE="), equalTo("bár!"));
-    assertThat(base64Decode().apply("5ryi"), equalTo("漢"));
+    assertThat(base64Decode().apply("c3RybWFu") , equalTo("strman"));
+    assertThat(base64Decode().apply("Zm9v") , equalTo("foo"));
+    assertThat(base64Decode().apply("YmFy") , equalTo("bar"));
+    assertThat(base64Decode().apply("YsOhciE=") , equalTo("bár!"));
+    assertThat(base64Decode().apply("5ryi") , equalTo("漢"));
   }
 
   @Test
   public void base64Encode_shouldEncodeAString() throws Exception {
-    assertThat(base64Encode().apply("strman"), equalTo("c3RybWFu"));
-    assertThat(base64Encode().apply("foo"), equalTo("Zm9v"));
-    assertThat(base64Encode().apply("bar"), equalTo("YmFy"));
-    assertThat(base64Encode().apply("bár!"), equalTo("YsOhciE="));
-    assertThat(base64Encode().apply("漢"), equalTo("5ryi"));
+    assertThat(base64Encode().apply("strman") , equalTo("c3RybWFu"));
+    assertThat(base64Encode().apply("foo") , equalTo("Zm9v"));
+    assertThat(base64Encode().apply("bar") , equalTo("YmFy"));
+    assertThat(base64Encode().apply("bár!") , equalTo("YsOhciE="));
+    assertThat(base64Encode().apply("漢") , equalTo("5ryi"));
   }
 
   @Test
   public void binDecode_shouldDecodeABinaryStringToAValue() throws Exception {
     assertThat(
-        binDecode().apply("000000000111001100000000011101000000000001110010000000000110110100000000011000010000000001101110"),
+        binDecode().apply("000000000111001100000000011101000000000001110010000000000110110100000000011000010000000001101110") ,
         equalTo("strman"));
 
-    assertThat(binDecode().apply("0110111100100010"), equalTo("漢"));
-    assertThat(binDecode().apply("0000000001000001"), equalTo("A"));
-    assertThat(binDecode().apply("0000000011000001"), equalTo("Á"));
-    assertThat(binDecode().apply("00000000010000010000000001000001"), equalTo("AA"));
+    assertThat(binDecode().apply("0110111100100010") , equalTo("漢"));
+    assertThat(binDecode().apply("0000000001000001") , equalTo("A"));
+    assertThat(binDecode().apply("0000000011000001") , equalTo("Á"));
+    assertThat(binDecode().apply("00000000010000010000000001000001") , equalTo("AA"));
   }
 
   @Test
   public void binEncode_shouldEncodeAStringToBinaryFormat() throws Exception {
-    assertThat(binEncode().apply("漢"), equalTo("0110111100100010"));
-    assertThat(binEncode().apply("A"), equalTo("0000000001000001"));
-    assertThat(binEncode().apply("Á"), equalTo("0000000011000001"));
-    assertThat(binEncode().apply("AA"), equalTo("00000000010000010000000001000001"));
+    assertThat(binEncode().apply("漢") , equalTo("0110111100100010"));
+    assertThat(binEncode().apply("A") , equalTo("0000000001000001"));
+    assertThat(binEncode().apply("Á") , equalTo("0000000011000001"));
+    assertThat(binEncode().apply("AA") , equalTo("00000000010000010000000001000001"));
   }
 
   @Test
   public void decDecode_shouldDecodeDecimalStringToString() throws Exception {
-    assertThat(decDecode().apply("28450"), equalTo("漢"));
-    assertThat(decDecode().apply("00065"), equalTo("A"));
-    assertThat(decDecode().apply("00193"), equalTo("Á"));
-    assertThat(decDecode().apply("0006500065"), equalTo("AA"));
+    assertThat(decDecode().apply("28450") , equalTo("漢"));
+    assertThat(decDecode().apply("00065") , equalTo("A"));
+    assertThat(decDecode().apply("00193") , equalTo("Á"));
+    assertThat(decDecode().apply("0006500065") , equalTo("AA"));
   }
 
   @Test
   public void decEncode_shouldEncodeStringToDecimal() throws Exception {
-    assertThat(decEncode().apply("漢"), equalTo("28450"));
-    assertThat(decEncode().apply("A"), equalTo("00065"));
-    assertThat(decEncode().apply("Á"), equalTo("00193"));
-    assertThat(decEncode().apply("AA"), equalTo("0006500065"));
+    assertThat(decEncode().apply("漢") , equalTo("28450"));
+    assertThat(decEncode().apply("A") , equalTo("00065"));
+    assertThat(decEncode().apply("Á") , equalTo("00193"));
+    assertThat(decEncode().apply("AA") , equalTo("0006500065"));
   }
 
   @Test
@@ -542,8 +542,8 @@ public class StringFunctionsTest {
     final String[] fixture = {
         "foo" , "foobar" , "fooBAR"
     };
-    assertThat(Arrays.stream(fixture).map(el -> ensureRightCaseSensitive().apply(el, "bar", false)).collect(toList()), hasItems("foobar", "foobar", "fooBAR"));
-    assertThat(Arrays.stream(fixture).map(el -> ensureRight().apply(el, "bar")).collect(toList()), hasItems("foobar", "foobar", "fooBARbar"));
+    assertThat(Arrays.stream(fixture).map(el -> ensureRightCaseSensitive().apply(el , "bar" , false)).collect(toList()) , hasItems("foobar" , "foobar" , "fooBAR"));
+    assertThat(Arrays.stream(fixture).map(el -> ensureRight().apply(el , "bar")).collect(toList()) , hasItems("foobar" , "foobar" , "fooBARbar"));
   }
 
   @Test
@@ -553,7 +553,7 @@ public class StringFunctionsTest {
     };
     Arrays.stream(fixture).forEach(el ->
         assertThat(
-            first().apply(el, 3),
+            first().apply(el , 3) ,
             equalTo("foo")));
   }
 
@@ -566,7 +566,7 @@ public class StringFunctionsTest {
     Arrays.stream(fixture)
         .forEach(el ->
             assertThat(
-                head().apply(el),
+                head().apply(el) ,
                 equalTo("f")));
   }
 
@@ -586,40 +586,40 @@ public class StringFunctionsTest {
 
   @Test
   public void hexDecode_shouldDecodeHexCodeToString() throws Exception {
-    assertThat(hexDecode().apply("6f22"), equalTo("漢"));
-    assertThat(hexDecode().apply("0041"), equalTo("A"));
-    assertThat(hexDecode().apply("00c1"), equalTo("Á"));
-    assertThat(hexDecode().apply("00410041"), equalTo("AA"));
+    assertThat(hexDecode().apply("6f22") , equalTo("漢"));
+    assertThat(hexDecode().apply("0041") , equalTo("A"));
+    assertThat(hexDecode().apply("00c1") , equalTo("Á"));
+    assertThat(hexDecode().apply("00410041") , equalTo("AA"));
   }
 
   @Test
   public void hexEncode_shouldEncodeStringToHexadecimalFormat() throws Exception {
-    assertThat(hexEncode().apply("漢"), equalTo("6f22"));
-    assertThat(hexEncode().apply("A"), equalTo("0041"));
-    assertThat(hexEncode().apply("Á"), equalTo("00c1"));
-    assertThat(hexEncode().apply("AA"), equalTo("00410041"));
+    assertThat(hexEncode().apply("漢") , equalTo("6f22"));
+    assertThat(hexEncode().apply("A") , equalTo("0041"));
+    assertThat(hexEncode().apply("Á") , equalTo("00c1"));
+    assertThat(hexEncode().apply("AA") , equalTo("00410041"));
   }
 
   @Test
   public void indexOf_shouldBeTrueWhenNeedleExists() throws Exception {
     final String value = "foobar";
-    assertThat(indexOfCoseSensitive().apply(value, "f", 0, true), equalTo(0));
-    assertThat(indexOfCoseSensitive().apply(value, "o", 0, true), equalTo(1));
-    assertThat(indexOfCoseSensitive().apply(value, "b", 0, true), equalTo(3));
-    assertThat(indexOfCoseSensitive().apply(value, "a", 0, true), equalTo(4));
-    assertThat(indexOfCoseSensitive().apply(value, "r", 0, true), equalTo(5));
-    assertThat(indexOfCoseSensitive().apply(value, "t", 0, true), equalTo(- 1));
+    assertThat(indexOfCoseSensitive().apply(value , "f" , 0 , true) , equalTo(0));
+    assertThat(indexOfCoseSensitive().apply(value , "o" , 0 , true) , equalTo(1));
+    assertThat(indexOfCoseSensitive().apply(value , "b" , 0 , true) , equalTo(3));
+    assertThat(indexOfCoseSensitive().apply(value , "a" , 0 , true) , equalTo(4));
+    assertThat(indexOfCoseSensitive().apply(value , "r" , 0 , true) , equalTo(5));
+    assertThat(indexOfCoseSensitive().apply(value , "t" , 0 , true) , equalTo(- 1));
   }
 
   @Test
   public void indexOf_shouldBeTrueWhenNeedleExistCaseSensitive() throws Exception {
     final String value = "foobar";
-    assertThat(indexOfCoseSensitive().apply(value, "F", 0, false), equalTo(0));
-    assertThat(indexOfCoseSensitive().apply(value, "O", 0, false), equalTo(1));
-    assertThat(indexOfCoseSensitive().apply(value, "B", 0, false), equalTo(3));
-    assertThat(indexOfCoseSensitive().apply(value, "A", 0, false), equalTo(4));
-    assertThat(indexOfCoseSensitive().apply(value, "R", 0, false), equalTo(5));
-    assertThat(indexOfCoseSensitive().apply(value, "T", 0, false), equalTo(- 1));
+    assertThat(indexOfCoseSensitive().apply(value , "F" , 0 , false) , equalTo(0));
+    assertThat(indexOfCoseSensitive().apply(value , "O" , 0 , false) , equalTo(1));
+    assertThat(indexOfCoseSensitive().apply(value , "B" , 0 , false) , equalTo(3));
+    assertThat(indexOfCoseSensitive().apply(value , "A" , 0 , false) , equalTo(4));
+    assertThat(indexOfCoseSensitive().apply(value , "R" , 0 , false) , equalTo(5));
+    assertThat(indexOfCoseSensitive().apply(value , "T" , 0 , false) , equalTo(- 1));
   }
 
 //  @Test
@@ -631,54 +631,54 @@ public class StringFunctionsTest {
 
   @Test
   public void insert_shouldInsertStringAtIndex() throws Exception {
-    assertThat(insert().apply("fbar", "oo", 1), equalTo("foobar"));
-    assertThat(insert().apply("foo", "bar", 3), equalTo("foobar"));
-    assertThat(insert().apply("foobar", "x", 5), equalTo("foobaxr"));
-    assertThat(insert().apply("foobar", "x", 6), equalTo("foobarx"));
-    assertThat(insert().apply("foo bar", "asadasd", 100), equalTo("foo bar"));
+    assertThat(insert().apply("fbar" , "oo" , 1) , equalTo("foobar"));
+    assertThat(insert().apply("foo" , "bar" , 3) , equalTo("foobar"));
+    assertThat(insert().apply("foobar" , "x" , 5) , equalTo("foobaxr"));
+    assertThat(insert().apply("foobar" , "x" , 6) , equalTo("foobarx"));
+    assertThat(insert().apply("foo bar" , "asadasd" , 100) , equalTo("foo bar"));
   }
 
   @Test
   public void isLowerCase_shouldBeTrueWhenStringIsLowerCase() throws Exception {
-    assertThat(isLowerCase().apply(""), equalTo(true));
-    assertThat(isLowerCase().apply("foo"), equalTo(true));
-    assertThat(isLowerCase().apply("foobarfoo"), equalTo(true));
+    assertThat(isLowerCase().apply("") , equalTo(true));
+    assertThat(isLowerCase().apply("foo") , equalTo(true));
+    assertThat(isLowerCase().apply("foobarfoo") , equalTo(true));
   }
 
   @Test
   public void isLowerCase_shouldBeFalseWhenStringIsNotLowerCase() throws Exception {
-    assertThat(isLowerCase().apply("Foo"), equalTo(false));
-    assertThat(isLowerCase().apply("foobarfooA"), equalTo(false));
+    assertThat(isLowerCase().apply("Foo") , equalTo(false));
+    assertThat(isLowerCase().apply("foobarfooA") , equalTo(false));
   }
 
   @Test
   public void isUpperCase_shouldBeTrueWhenStringIsUpperCase() throws Exception {
-    assertThat(isUpperCase().apply(""), equalTo(true));
-    assertThat(isUpperCase().apply("FOO"), equalTo(true));
-    assertThat(isUpperCase().apply("FOOBARFOO"), equalTo(true));
+    assertThat(isUpperCase().apply("") , equalTo(true));
+    assertThat(isUpperCase().apply("FOO") , equalTo(true));
+    assertThat(isUpperCase().apply("FOOBARFOO") , equalTo(true));
   }
 
   @Test
   public void isUpperCase_shouldBeFalseWhenStringIsNotUpperCase() throws Exception {
-    assertThat(isUpperCase().apply("Foo"), equalTo(false));
-    assertThat(isUpperCase().apply("foobarfooA"), equalTo(false));
+    assertThat(isUpperCase().apply("Foo") , equalTo(false));
+    assertThat(isUpperCase().apply("foobarfooA") , equalTo(false));
   }
 
   @Test
   public void last_shouldReturnLastNChars() throws Exception {
-    assertThat(last().apply("foo", 3), equalTo("foo"));
-    assertThat(last().apply("foobarfoo", 3), equalTo("foo"));
-    assertThat(last().apply("", 3), equalTo(""));
-    assertThat(last().apply("f", 3), equalTo("f"));
+    assertThat(last().apply("foo" , 3) , equalTo("foo"));
+    assertThat(last().apply("foobarfoo" , 3) , equalTo("foo"));
+    assertThat(last().apply("" , 3) , equalTo(""));
+    assertThat(last().apply("f" , 3) , equalTo("f"));
   }
 
   @Test
   public void leftPad_shouldAddPaddingOnTheLeft() throws Exception {
-    assertThat(leftPad().apply("1", "0", 5), equalTo("00001"));
-    assertThat(leftPad().apply("01", "0", 5), equalTo("00001"));
-    assertThat(leftPad().apply("001", "0", 5), equalTo("00001"));
-    assertThat(leftPad().apply("0001", "0", 5), equalTo("00001"));
-    assertThat(leftPad().apply("00001", "0", 5), equalTo("00001"));
+    assertThat(leftPad().apply("1" , "0" , 5) , equalTo("00001"));
+    assertThat(leftPad().apply("01" , "0" , 5) , equalTo("00001"));
+    assertThat(leftPad().apply("001" , "0" , 5) , equalTo("00001"));
+    assertThat(leftPad().apply("0001" , "0" , 5) , equalTo("00001"));
+    assertThat(leftPad().apply("00001" , "0" , 5) , equalTo("00001"));
   }
 
   @Test
@@ -698,29 +698,29 @@ public class StringFunctionsTest {
   @Test
   public void lastIndexOf_shouldFindIndexOfNeedle() throws Exception {
     final String value = "foobarfoobar";
-    assertThat(lastIndexOf().apply(value, "f"), equalTo(6));
-    assertThat(lastIndexOf().apply(value, "o"), equalTo(8));
-    assertThat(lastIndexOf().apply(value, "b"), equalTo(9));
-    assertThat(lastIndexOf().apply(value, "a"), equalTo(10));
-    assertThat(lastIndexOf().apply(value, "r"), equalTo(11));
-    assertThat(lastIndexOf().apply(value, "t"), equalTo(- 1));
+    assertThat(lastIndexOf().apply(value , "f") , equalTo(6));
+    assertThat(lastIndexOf().apply(value , "o") , equalTo(8));
+    assertThat(lastIndexOf().apply(value , "b") , equalTo(9));
+    assertThat(lastIndexOf().apply(value , "a") , equalTo(10));
+    assertThat(lastIndexOf().apply(value , "r") , equalTo(11));
+    assertThat(lastIndexOf().apply(value , "t") , equalTo(- 1));
   }
 
   @Test
   public void lastIndexOf_shouldFindIndexOfNeedleCaseInsensitive() throws Exception {
     final String value = "foobarfoobar";
-    assertThat(lastIndexOfCaseSensitive().apply(value, "F", false), equalTo(6));
-    assertThat(lastIndexOfCaseSensitive().apply(value, "O", false), equalTo(8));
-    assertThat(lastIndexOfCaseSensitive().apply(value, "B", false), equalTo(9));
-    assertThat(lastIndexOfCaseSensitive().apply(value, "A", false), equalTo(10));
-    assertThat(lastIndexOfCaseSensitive().apply(value, "R", false), equalTo(11));
-    assertThat(lastIndexOfCaseSensitive().apply(value, "T", false), equalTo(- 1));
+    assertThat(lastIndexOfCaseSensitive().apply(value , "F" , false) , equalTo(6));
+    assertThat(lastIndexOfCaseSensitive().apply(value , "O" , false) , equalTo(8));
+    assertThat(lastIndexOfCaseSensitive().apply(value , "B" , false) , equalTo(9));
+    assertThat(lastIndexOfCaseSensitive().apply(value , "A" , false) , equalTo(10));
+    assertThat(lastIndexOfCaseSensitive().apply(value , "R" , false) , equalTo(11));
+    assertThat(lastIndexOfCaseSensitive().apply(value , "T" , false) , equalTo(- 1));
   }
 
   @Test
   public void leftTrim_shouldRemoveSpacesOnLeft() throws Exception {
-    assertThat(leftTrim().apply("     strman"), equalTo("strman"));
-    assertThat(leftTrim().apply("     strman  "), equalTo("strman  "));
+    assertThat(leftTrim().apply("     strman") , equalTo("strman"));
+    assertThat(leftTrim().apply("     strman  ") , equalTo("strman  "));
   }
 
 //  @Test
@@ -733,16 +733,16 @@ public class StringFunctionsTest {
 
   @Test
   public void prependArray_shouldPrependStrings() throws Exception {
-    assertThat(prependArray().apply("r", new String[]{"f" , "o" , "o" , "b" , "a"}), equalTo("foobar"));
-    assertThat(prependArray().apply("foobar", new String[0]), equalTo("foobar"));
-    assertThat(prependArray().apply("", new String[]{"foobar"}), equalTo("foobar"));
-    assertThat(prependArray().apply("bar", new String[]{"foo"}), equalTo("foobar"));
+    assertThat(prependArray().apply("r" , new String[]{"f" , "o" , "o" , "b" , "a"}) , equalTo("foobar"));
+    assertThat(prependArray().apply("foobar" , new String[0]) , equalTo("foobar"));
+    assertThat(prependArray().apply("" , new String[]{"foobar"}) , equalTo("foobar"));
+    assertThat(prependArray().apply("bar" , new String[]{"foo"}) , equalTo("foobar"));
   }
 
   @Test
   public void removeEmptyStrings_shouldRemoveEmptyStrings() throws Exception {
-    assertThat(removeEmptyStrings().apply(new String[]{"aa" , "" , "   " , "bb" , "cc" , null}), arrayContaining("aa", "bb", "cc"));
-    assertThat(removeEmptyStrings().apply(new String[0]), emptyArray());
+    assertThat(removeEmptyStrings().apply(new String[]{"aa" , "" , "   " , "bb" , "cc" , null}) , arrayContaining("aa" , "bb" , "cc"));
+    assertThat(removeEmptyStrings().apply(new String[0]) , emptyArray());
   }
 
   @Test
@@ -752,9 +752,9 @@ public class StringFunctionsTest {
         "bar"
     };
 
-    Arrays.stream(fixture).forEach(el -> assertThat(removeLeft().apply(el, "foo"), equalTo("bar")));
-    assertThat(removeLeft().apply("barfoo", "foo"), equalTo("barfoo"));
-    assertThat(removeLeft().apply("foofoo", "foo"), equalTo("foo"));
+    Arrays.stream(fixture).forEach(el -> assertThat(removeLeft().apply(el , "foo") , equalTo("bar")));
+    assertThat(removeLeft().apply("barfoo" , "foo") , equalTo("barfoo"));
+    assertThat(removeLeft().apply("foofoo" , "foo") , equalTo("foo"));
   }
 
   @Test
@@ -767,7 +767,7 @@ public class StringFunctionsTest {
     Arrays.stream(fixture)
         .forEach(el ->
             assertThat(
-                removeFromLeftCaseSensitive().apply(el, "FOO", false),
+                removeFromLeftCaseSensitive().apply(el , "FOO" , false) ,
                 equalTo("bar")));
   }
 
@@ -780,7 +780,7 @@ public class StringFunctionsTest {
         "foobar"
     };
 
-    Arrays.stream(fixture).forEach(el -> assertThat(removeNonWord().apply(el), equalTo("foobar")));
+    Arrays.stream(fixture).forEach(el -> assertThat(removeNonWord().apply(el) , equalTo("foobar")));
   }
 
   @Test
@@ -790,9 +790,9 @@ public class StringFunctionsTest {
         "foo"
     };
 
-    Arrays.stream(fixture).forEach(el -> assertThat(removeRight().apply(el, "bar"), equalTo("foo")));
-    assertThat(removeRight().apply("barfoo", "bar"), equalTo("barfoo"));
-    assertThat(removeRight().apply("barbar", "bar"), equalTo("bar"));
+    Arrays.stream(fixture).forEach(el -> assertThat(removeRight().apply(el , "bar") , equalTo("foo")));
+    assertThat(removeRight().apply("barfoo" , "bar") , equalTo("barfoo"));
+    assertThat(removeRight().apply("barbar" , "bar") , equalTo("bar"));
   }
 
   @Test
@@ -802,7 +802,7 @@ public class StringFunctionsTest {
         "foo"
     };
 
-    Arrays.stream(fixture).forEach(el -> assertThat(removeRightCaseSensitive().apply(el, "BAR", false), equalTo("foo")));
+    Arrays.stream(fixture).forEach(el -> assertThat(removeRightCaseSensitive().apply(el , "BAR" , false) , equalTo("foo")));
   }
 
   @Test
@@ -813,55 +813,55 @@ public class StringFunctionsTest {
         " foo bar" ,
         " foo bar "
     };
-    Arrays.stream(fixture).forEach(el -> assertThat(removeSpaces().apply(el), equalTo("foobar")));
+    Arrays.stream(fixture).forEach(el -> assertThat(removeSpaces().apply(el) , equalTo("foobar")));
   }
 
   @Test
   public void repeat_shouldRepeatAStringNTimes() throws Exception {
-    assertThat(repeat().apply("1", 1), equalTo("1"));
-    assertThat(repeat().apply("1", 2), equalTo("11"));
-    assertThat(repeat().apply("1", 3), equalTo("111"));
-    assertThat(repeat().apply("1", 4), equalTo("1111"));
-    assertThat(repeat().apply("1", 5), equalTo("11111"));
+    assertThat(repeat().apply("1" , 1) , equalTo("1"));
+    assertThat(repeat().apply("1" , 2) , equalTo("11"));
+    assertThat(repeat().apply("1" , 3) , equalTo("111"));
+    assertThat(repeat().apply("1" , 4) , equalTo("1111"));
+    assertThat(repeat().apply("1" , 5) , equalTo("11111"));
   }
 
   @Test
   public void replace_shouldReplaceAllOccurrencesOfString() throws Exception {
-    assertThat(replace().apply("foo bar", "foo", "bar", true), equalTo("bar bar"));
-    assertThat(replace().apply("foo bar foo", "foo", "bar", true), equalTo("bar bar bar"));
+    assertThat(replace().apply("foo bar" , "foo" , "bar" , true) , equalTo("bar bar"));
+    assertThat(replace().apply("foo bar foo" , "foo" , "bar" , true) , equalTo("bar bar bar"));
   }
 
   @Test
   public void replace_shouldReplaceAllOccurrencesOfStringCaseSensitive() throws Exception {
-    assertThat(replace().apply("FOO bar", "foo", "bar", false), equalTo("bar bar"));
-    assertThat(replace().apply("FOO bar foo", "foo", "bar", false), equalTo("bar bar bar"));
+    assertThat(replace().apply("FOO bar" , "foo" , "bar" , false) , equalTo("bar bar"));
+    assertThat(replace().apply("FOO bar foo" , "foo" , "bar" , false) , equalTo("bar bar bar"));
   }
 
   @Test
   public void reverse_shouldReverseInputString() throws Exception {
-    assertThat(reverse().apply(""), equalTo(""));
-    assertThat(reverse().apply("foo"), equalTo("oof"));
-    assertThat(reverse().apply("shekhar"), equalTo("rahkehs"));
-    assertThat(reverse().apply("bar"), equalTo("rab"));
-    assertThat(reverse().apply("foo_"), equalTo("_oof"));
-    assertThat(reverse().apply("f"), equalTo("f"));
+    assertThat(reverse().apply("") , equalTo(""));
+    assertThat(reverse().apply("foo") , equalTo("oof"));
+    assertThat(reverse().apply("shekhar") , equalTo("rahkehs"));
+    assertThat(reverse().apply("bar") , equalTo("rab"));
+    assertThat(reverse().apply("foo_") , equalTo("_oof"));
+    assertThat(reverse().apply("f") , equalTo("f"));
   }
 
   @Test
   public void rightPad_shouldRightPadAString() throws Exception {
-    assertThat(rightPad().apply("1", "0", 5), equalTo("10000"));
-    assertThat(rightPad().apply("10", "0", 5), equalTo("10000"));
-    assertThat(rightPad().apply("100", "0", 5), equalTo("10000"));
-    assertThat(rightPad().apply("1000", "0", 5), equalTo("10000"));
-    assertThat(rightPad().apply("10000", "0", 5), equalTo("10000"));
-    assertThat(rightPad().apply("10000000", "0", 5), equalTo("10000000"));
+    assertThat(rightPad().apply("1" , "0" , 5) , equalTo("10000"));
+    assertThat(rightPad().apply("10" , "0" , 5) , equalTo("10000"));
+    assertThat(rightPad().apply("100" , "0" , 5) , equalTo("10000"));
+    assertThat(rightPad().apply("1000" , "0" , 5) , equalTo("10000"));
+    assertThat(rightPad().apply("10000" , "0" , 5) , equalTo("10000"));
+    assertThat(rightPad().apply("10000000" , "0" , 5) , equalTo("10000000"));
   }
 
   @Test
   public void rightTrim_shouldRemoveSpacesFromTheRight() throws Exception {
-    assertThat(rightTrim().apply("strman   "), equalTo("strman"));
-    assertThat(rightTrim().apply("   strman"), equalTo("   strman"));
-    assertThat(rightTrim().apply("strman"), equalTo("strman"));
+    assertThat(rightTrim().apply("strman   ") , equalTo("strman"));
+    assertThat(rightTrim().apply("   strman") , equalTo("   strman"));
+    assertThat(rightTrim().apply("strman") , equalTo("strman"));
   }
 
 //  @Test
@@ -880,15 +880,15 @@ public class StringFunctionsTest {
 
   @Test
   public void truncate_shouldTruncateString() throws Exception {
-    assertThat(truncate().apply("foo bar", 0, "."), equalTo(""));
-    assertThat(truncate().apply("foo bar", 3, "."), equalTo("fo."));
-    assertThat(truncate().apply("foo bar", 2, "."), equalTo("f."));
-    assertThat(truncate().apply("foo bar", 4, "."), equalTo("foo."));
-    assertThat(truncate().apply("foo bar", 7, "."), equalTo("foo bar"));
-    assertThat(truncate().apply("foo bar", 8, "."), equalTo("foo bar"));
-    assertThat(truncate().apply("A Javascript string manipulation library.", 16, "..."), equalTo("A Javascript ..."));
-    assertThat(truncate().apply("A Javascript string manipulation library.", 15, "..."), equalTo("A Javascript..."));
-    assertThat(truncate().apply("A Javascript string manipulation library.", 14, "..."), equalTo("A Javascrip..."));
+    assertThat(truncate().apply("foo bar" , 0 , ".") , equalTo(""));
+    assertThat(truncate().apply("foo bar" , 3 , ".") , equalTo("fo."));
+    assertThat(truncate().apply("foo bar" , 2 , ".") , equalTo("f."));
+    assertThat(truncate().apply("foo bar" , 4 , ".") , equalTo("foo."));
+    assertThat(truncate().apply("foo bar" , 7 , ".") , equalTo("foo bar"));
+    assertThat(truncate().apply("foo bar" , 8 , ".") , equalTo("foo bar"));
+    assertThat(truncate().apply("A Javascript string manipulation library." , 16 , "...") , equalTo("A Javascript ..."));
+    assertThat(truncate().apply("A Javascript string manipulation library." , 15 , "...") , equalTo("A Javascript..."));
+    assertThat(truncate().apply("A Javascript string manipulation library." , 14 , "...") , equalTo("A Javascrip..."));
   }
 
 //  @Test
@@ -910,10 +910,10 @@ public class StringFunctionsTest {
 
   @Test
   public void shuffle_shouldShuffleAString() throws Exception {
-    assertThat(shuffle().apply("shekhar"), not(equalTo("shekhar")));
-    assertThat(shuffle().apply("strman"), not(equalTo("strman")));
-    assertThat(shuffle().apply(""), equalTo(""));
-    assertThat(shuffle().apply("s"), equalTo("s"));
+    assertThat(shuffle().apply("sjkhvalkehc ök") , not(equalTo("shekhar")));
+    assertThat(shuffle().apply("strman") , not(equalTo("strman")));
+    assertThat(shuffle().apply("") , equalTo(""));
+    assertThat(shuffle().apply("s") , equalTo("s"));
   }
 
 //  @Test
@@ -962,12 +962,12 @@ public class StringFunctionsTest {
 
   @Test
   public void surround_shouldSurroundStringWithPrefixAndSuffix() throws Exception {
-    assertThat(surround().apply("foo", "bar", null), equalTo("barfoobar"));
-    assertThat(surround().apply("shekhar", "***", null), equalTo("***shekhar***"));
-    assertThat(surround().apply("", ">", null), equalTo(">>"));
-    assertThat(surround().apply("bar", "", null), equalTo("bar"));
-    assertThat(surround().apply("f", null, null), equalTo("f"));
-    assertThat(surround().apply("div", "<", ">"), equalTo("<div>"));
+    assertThat(surround().apply("foo" , "bar" , null) , equalTo("barfoobar"));
+    assertThat(surround().apply("shekhar" , "***" , null) , equalTo("***shekhar***"));
+    assertThat(surround().apply("" , ">" , null) , equalTo(">>"));
+    assertThat(surround().apply("bar" , "" , null) , equalTo("bar"));
+    assertThat(surround().apply("f" , null , null) , equalTo("f"));
+    assertThat(surround().apply("div" , "<" , ">") , equalTo("<div>"));
   }
 
   @Test
@@ -983,9 +983,9 @@ public class StringFunctionsTest {
         "camel_case" ,
         "     camel_case" ,
     };
-    Arrays.stream(fixture).forEach(el -> assertThat(String.format("toCameCase(%s) should be camelCase", el), toCamelCase().apply(el), equalTo("camelCase")));
+    Arrays.stream(fixture).forEach(el -> assertThat(String.format("toCameCase(%s) should be camelCase" , el) , toCamelCase().apply(el) , equalTo("camelCase")));
 
-    assertThat(toCamelCase().apply("c"), equalTo("c"));
+    assertThat(toCamelCase().apply("c") , equalTo("c"));
   }
 
   @Test
@@ -1006,11 +1006,11 @@ public class StringFunctionsTest {
         .stream(fixture)
         .forEach(el ->
             assertThat(
-                String.format("toDecamelize(%s) should be de-camelize", el),
-                toDecamelize().apply(el, " "),
+                String.format("toDecamelize(%s) should be de-camelize" , el) ,
+                toDecamelize().apply(el , " ") ,
                 equalTo("de camelize")));
 
-    assertThat(toDecamelize().apply("camelCase", "_"), equalTo("camel_case"));
+    assertThat(toDecamelize().apply("camelCase" , "_") , equalTo("camel_case"));
   }
 
   @Test
@@ -1028,7 +1028,7 @@ public class StringFunctionsTest {
     };
 
     Arrays.stream(fixture).forEach(el ->
-        assertThat(String.format("toKebabCase(%s) should be de-camelize", el), toKebabCase().apply(el), equalTo("de-camelize")));
+        assertThat(String.format("toKebabCase(%s) should be de-camelize" , el) , toKebabCase().apply(el) , equalTo("de-camelize")));
   }
 
   @Test
@@ -1048,8 +1048,8 @@ public class StringFunctionsTest {
     Arrays.stream(fixture)
         .forEach(el ->
             assertThat(
-                String.format("toSnakeCase(%s) should be de_camelize", el),
-                toSnakeCase().apply(el),
+                String.format("toSnakeCase(%s) should be de_camelize" , el) ,
+                toSnakeCase().apply(el) ,
                 equalTo("de_camelize"))
         );
   }
@@ -1064,24 +1064,24 @@ public class StringFunctionsTest {
 
   @Test
   public void removeLeft_shouldNotLowercaseWhenCaseInsensitive() throws Exception {
-    String result = removeFromLeftCaseSensitive().apply("This HAS A THIS IN FRONT", "THIS ", false);
+    String result = removeFromLeftCaseSensitive().apply("This HAS A THIS IN FRONT" , "THIS " , false);
     assertThat(
-        result,
+        result ,
         is("HAS A THIS IN FRONT"));
   }
 
   @Test
   public void replace_shouldNotLowercaseWhenCaseInsensitive() throws Exception {
-    String result = replace().apply("One and two and THREE and Four", "and", "&", false);
+    String result = replace().apply("One and two and THREE and Four" , "and" , "&" , false);
     assertThat(
-        result,
+        result ,
         is("One & two & THREE & Four"));
   }
 
   @Test
   public void removeRight_shouldNotLowercaseWhenCaseInsensitive() throws Exception {
-    String result = removeRightCaseSensitive().apply("Remove the END at the end", " END", false);
-    assertThat(result, is("Remove the END at the"));
+    String result = removeRightCaseSensitive().apply("Remove the END at the end" , " END" , false);
+    assertThat(result , is("Remove the END at the"));
   }
 
 //  @Test
@@ -1096,7 +1096,8 @@ public class StringFunctionsTest {
 //    assertThat(result, is(equalTo("fred, barney, &amp; pebbles")));
 //  }
 
-  @Ignore
+  @Disabled
+  @Test
   public void kebabCase_shouldConvertAStringToKebabCase() throws Exception {
     String[] input = {
         "Foo Bar" ,
@@ -1106,8 +1107,8 @@ public class StringFunctionsTest {
 
     Arrays.stream(input).forEach(el ->
         assertThat(String
-                .format("%s should be foo-bar", el),
-            toKebabCase().apply(el), is(equalTo("foo-bar"))));
+                .format("%s should be foo-bar" , el) ,
+            toKebabCase().apply(el) , is(equalTo("foo-bar"))));
 
   }
 
@@ -1132,10 +1133,10 @@ public class StringFunctionsTest {
         "world" ,
         "123"
     };
-    assertThat(join().apply(strings, ";"), is(equalTo("hello;world;123")));
+    assertThat(join().apply(strings , ";") , is(equalTo("hello;world;123")));
   }
 
-  @Test(expected = NullPointerException.class)
+  @Test()
   public void join_shouldThrowIllegalArgumentExceptionWhenSeparatorIsNull() throws Exception {
     String[] strings = {
         "hello" ,
@@ -1143,13 +1144,13 @@ public class StringFunctionsTest {
         "123"
     };
 
-    join().apply(strings, null);
+    assertThrows(NullPointerException.class , () -> join().apply(strings , null));
   }
 
   @Test
   public void join_shouldReturnEmptyStringWhenInputArrayIsEmpty() throws Exception {
     String[] emptyArray = {};
-    assertThat(join().apply(emptyArray, ","), is(equalTo("")));
+    assertThat(join().apply(emptyArray , ",") , is(equalTo("")));
   }
 
   @Test
@@ -1162,16 +1163,16 @@ public class StringFunctionsTest {
     Arrays.stream(strings)
         .forEach(el ->
             assertThat(
-                String.format("%s should be Fred", el),
-                capitalize().apply(el),
+                String.format("%s should be Fred" , el) ,
+                capitalize().apply(el) ,
                 equalTo("Fred")));
   }
 
   @Test
   public void lowerFirst_shouldLowercasedFirstCharacterOfString() throws Exception {
-    assertThat(lowerFirst().apply("FRED"), is(equalTo("fRED")));
-    assertThat(lowerFirst().apply("fred"), is(equalTo("fred")));
-    assertThat(lowerFirst().apply("Fred"), is(equalTo("fred")));
+    assertThat(lowerFirst().apply("FRED") , is(equalTo("fRED")));
+    assertThat(lowerFirst().apply("fred") , is(equalTo("fred")));
+    assertThat(lowerFirst().apply("Fred") , is(equalTo("fred")));
   }
 
 //  @Test
@@ -1190,17 +1191,17 @@ public class StringFunctionsTest {
   @Test
   public void words_shouldConvertTextToWords() throws Exception {
     final String line = "This is a string, with words!";
-    assertThat(wordStream().apply(line).toArray(), is(new String[]{"This" , "is" , "a" , "string" , "with" , "words"}));
+    assertThat(wordStream().apply(line).toArray() , is(new String[]{"This" , "is" , "a" , "string" , "with" , "words"}));
   }
 
   @Test
   public void upperFirst_shouldConvertFirstCharToUpperCase() throws Exception {
-    assertThat(upperFirst().apply("fred"), is("Fred"));
+    assertThat(upperFirst().apply("fred") , is("Fred"));
   }
 
   @Test
   public void upperFirst_shouldReturnSameStringIfFirstCharIsUpperCase() throws Exception {
-    assertThat(upperFirst().apply("FRED"), is("FRED"));
+    assertThat(upperFirst().apply("FRED") , is("FRED"));
   }
 
 //  @Test

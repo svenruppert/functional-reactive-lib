@@ -1,14 +1,13 @@
 package junit.org.rapidpm.frp.matcher;
 
 import static java.util.Objects.isNull;
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 import static org.rapidpm.frp.matcher.Case.match;
 import static org.rapidpm.frp.matcher.Case.matchCase;
 
-import java.util.Objects;
 import java.util.stream.IntStream;
 
-import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 import org.rapidpm.frp.model.Result;
 
@@ -26,10 +25,11 @@ public class CaseTest {
         matchCase(() -> Result.success(value))
     )
         .ifPresentOrElse(
-            s -> assertEquals(value , s),
-            s -> Assert.fail()
-            );
+            s -> assertEquals(value , s) ,
+            s -> fail("not good")
+        );
   }
+
   @Test
   void test001() {
     final String error_message = "error message";
@@ -40,7 +40,7 @@ public class CaseTest {
         matchCase(() -> isNull(value) , () -> Result.failure(error_message))
     )
         .ifPresentOrElse(
-            s -> Assert.fail() ,
+            s -> fail("not good") ,
             s -> assertEquals(error_message , s)
         );
   }
@@ -56,7 +56,7 @@ public class CaseTest {
     )
         .ifPresentOrElse(
             s -> assertEquals(value , s) ,
-            s -> Assert.fail()
+            s -> fail("not good")
         );
   }
 
@@ -80,7 +80,7 @@ public class CaseTest {
                   else if (value == 2) assertEquals(Long.valueOf(200) , Long.valueOf(s));
                   else assertEquals(Long.valueOf(value) , Long.valueOf(s));
                 } ,
-                s -> Assert.fail()
+                s -> fail("not good")
             ));
 
 

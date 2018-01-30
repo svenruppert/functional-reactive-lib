@@ -1,7 +1,8 @@
 package junit.org.rapidpm.frp;
 
-import org.junit.Assert;
-import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
 import org.rapidpm.frp.Transformations;
 
 /**
@@ -17,7 +18,7 @@ public class TransformationsTest {
         .<String, String, String>curryBiFunction()
         .apply((s1 , s2) -> s1 + " " + s2)
         .apply("Hello").apply("World");
-    Assert.assertEquals("Hello World" , helloWorld);
+    assertEquals("Hello World" , helloWorld);
   }
 
 
@@ -27,7 +28,7 @@ public class TransformationsTest {
         .<String, String, String>unCurryBifunction()
         .apply(inputA -> inputB -> inputA + " " + inputB)
         .apply("Hello" , "World");
-    Assert.assertEquals("Hello World" , helloWorld);
+    assertEquals("Hello World" , helloWorld);
   }
 
   @Test
@@ -37,7 +38,7 @@ public class TransformationsTest {
         .<String, String, String, String>curryTriFunction()
         .apply((s1 , s2 , s3) -> s1 + " " + s2 + " " + s3)
         .apply("Hello").apply("World").apply("!");
-    Assert.assertEquals("Hello World !" , helloWorld);
+    assertEquals("Hello World !" , helloWorld);
   }
 
 
@@ -47,7 +48,7 @@ public class TransformationsTest {
         .<String, String, String, String>unCurryTrifunction()
         .apply(inputA -> inputB -> inputC -> inputA + " " + inputB + " " + inputC)
         .apply("Hello" , "World" , "!");
-    Assert.assertEquals("Hello World !" , helloWorld);
+    assertEquals("Hello World !" , helloWorld);
   }
 
 }
