@@ -5,13 +5,12 @@ workspace:
 pipeline:
   build:
     image: maven:${JDK_VERSION}
-#    image: maven:3.5-jdk-8
     pull: true
     commands:
       - mkdir /root/.m2
       - cp /drone/src/rapidpm-functional-reactive/_data/nexus/settings.xml /root/.m2/settings.xml
       - mvn clean
-      - mvn install
+      - mvn package
       - mvn deploy
 
 matrix:
@@ -20,5 +19,5 @@ matrix:
 #  - 3.5-jdk-8
   - 3.5-jdk-8-alpine
 #  - 3.5-jdk-8-slim
-  - 3.5-ibmjava-8
-  - 3.5-jdk-9
+#  - 3.5-ibmjava-8
+#  - 3.5-jdk-9
