@@ -13,7 +13,7 @@ pipeline:
       - mvn clean
       - mvn test
 
-  deploy:
+  deploy-locale:
     image: ${JDK_VERSION}
     pull: true
     commands:
