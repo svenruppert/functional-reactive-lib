@@ -1,7 +1,14 @@
 # Release Notes
 
+This Lib is working with
+ * Java 8
+ * Java 9
+ * Java 10 b41
+
 ## 0.5.0
 * Result added ```void ifFailed(Consumer<String> failed);```
+* switched to jUnit5
+* updated parent pom to 3.5.7
 
 
 ## 0.1.0
