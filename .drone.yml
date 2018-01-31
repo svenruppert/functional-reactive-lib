@@ -24,7 +24,8 @@ pipeline:
       - mvn clean
       - mvn test
     when:
-      branch: [develop, release/* ]
+      branches:
+        include: develop, release/*
         exclude: feature/*
       status: success
 
@@ -38,7 +39,8 @@ pipeline:
       - mvn clean
       - mvn test
     when:
-      branch: [develop, release/* ]
+      branches:
+        include: develop, release/*
         exclude: feature/*
       status: success
 
@@ -52,7 +54,8 @@ pipeline:
       - mvn clean
       - mvn test
     when:
-      branch: [develop, release/* ]
+      branches:
+        include: develop, release/*
         exclude: feature/*
       status: success
 
@@ -66,7 +69,8 @@ pipeline:
       - mvn clean
       - mvn test
     when:
-      branch: [develop, release/* ]
+      branches:
+        include: develop, release/*
         exclude: feature/*
       status: success
 
