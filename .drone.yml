@@ -23,7 +23,7 @@ pipeline:
       - mvn deploy
     when:
         matrix:
-          JDK_VERSION: 3.5-jdk-8-alpine
+          JDK_VERSION: "3.5-jdk-8-alpine"
         branches:
           include: develop, release/*
           exclude: feature/*
