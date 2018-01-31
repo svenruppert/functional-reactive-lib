@@ -3,6 +3,7 @@ workspace:
   path: rapidpm-functional-reactive
 
 pipeline:
+
   build:
     image: maven:3.5-jdk-8-alpine
     pull: true
@@ -13,26 +14,73 @@ pipeline:
       - mvn package
       - mvn deploy
 
-  compat:
-    image: ${JDK_VERSION}
+  compat-01:
+    image: maven:3.5-jdk-9
+    group: compat
     pull: true
     commands:
       - mkdir /root/.m2
       - cp /drone/src/rapidpm-functional-reactive/_data/nexus/settings.xml /root/.m2/settings.xml
       - mvn clean
       - mvn test
+    when:
+      branch: [develop, release/* ]
+        exclude: feature/*
+      status: success
+
+  compat-02:
+    image: maven:3.5-ibmjava-8
+    group: compat
+    pull: true
+    commands:
+      - mkdir /root/.m2
+      - cp /drone/src/rapidpm-functional-reactive/_data/nexus/settings.xml /root/.m2/settings.xml
+      - mvn clean
+      - mvn test
+    when:
+      branch: [develop, release/* ]
+        exclude: feature/*
+      status: success
+
+  compat-03:
+    image: maven:3.5-ibmjava-9
+    group: compat
+    pull: true
+    commands:
+      - mkdir /root/.m2
+      - cp /drone/src/rapidpm-functional-reactive/_data/nexus/settings.xml /root/.m2/settings.xml
+      - mvn clean
+      - mvn test
+    when:
+      branch: [develop, release/* ]
+        exclude: feature/*
+      status: success
+
+  compat-04:
+    image: svenruppert/maven-3.5-jdk-10
+    group: compat
+    pull: true
+    commands:
+      - mkdir /root/.m2
+      - cp /drone/src/rapidpm-functional-reactive/_data/nexus/settings.xml /root/.m2/settings.xml
+      - mvn clean
+      - mvn test
+    when:
+      branch: [develop, release/* ]
+        exclude: feature/*
+      status: success
 
 
 
-matrix:
-  JDK_VERSION:
-  - maven:latest
-#  - maven:3.5-jdk-8-alpine
-  - maven:3.5-jdk-9
-  - maven:3.5-ibmjava-8
-  - maven:3.5-ibmjava-9
-  - svenruppert/maven-3.5-jdk-10
-#  - 3.5-jdk-8
-#  - 3.5-jdk-8-slim
-#  - 3.5-ibmjava-8-alpine
-#  - 3.5-ibmjava-9-alpine
+#matrix:
+#  JDK_VERSION:
+#  - maven:latest
+##  - maven:3.5-jdk-8-alpine
+#  - maven:3.5-jdk-9
+#  - maven:3.5-ibmjava-8
+#  - maven:3.5-ibmjava-9
+#  - svenruppert/maven-3.5-jdk-10
+##  - 3.5-jdk-8
+##  - 3.5-jdk-8-slim
+##  - 3.5-ibmjava-8-alpine
+##  - 3.5-ibmjava-9-alpine
