@@ -19,30 +19,72 @@ import org.rapidpm.frp.model.Result;
  * limitations under the License.
  * <p>
  * Created by Sven Ruppert - RapidPM - Team on 16.03.17.
+ *
+ * @author svenruppert
+ * @version $Id: $Id
  */
 public class Case<T> extends Pair<Supplier<Boolean>, Supplier<Result<T>>> {
 
+  /**
+   * <p>Constructor for Case.</p>
+   *
+   * @param booleanSupplier a {@link java.util.function.Supplier} object.
+   * @param resultSupplier a {@link java.util.function.Supplier} object.
+   */
   public Case(final Supplier<Boolean> booleanSupplier , final Supplier<Result<T>> resultSupplier) {
     super(booleanSupplier , resultSupplier);
   }
 
+  /**
+   * <p>matchCase.</p>
+   *
+   * @param condition a {@link java.util.function.Supplier} object.
+   * @param value a {@link java.util.function.Supplier} object.
+   * @param <T> a T object.
+   * @return a {@link org.rapidpm.frp.matcher.Case} object.
+   */
   public static <T> Case<T> matchCase(Supplier<Boolean> condition ,
                                       Supplier<Result<T>> value) {
     return new Case<>(condition , value);
   }
 
+  /**
+   * <p>matchCase.</p>
+   *
+   * @param value a {@link java.util.function.Supplier} object.
+   * @param <T> a T object.
+   * @return a {@link org.rapidpm.frp.matcher.Case.DefaultCase} object.
+   */
   public static <T> DefaultCase<T> matchCase(Supplier<Result<T>> value) {
     return new DefaultCase<>(() -> true , value);
   }
 
+  /**
+   * <p>isMatching.</p>
+   *
+   * @return a boolean.
+   */
   public boolean isMatching() {
     return getT1().get();
   }
 
+  /**
+   * <p>result.</p>
+   *
+   * @return a {@link org.rapidpm.frp.model.Result} object.
+   */
   public Result<T> result() {
     return getT2().get();
   }
 
+  /**
+   * <p>match.</p>
+   *
+   * @param defaultCase a {@link org.rapidpm.frp.matcher.Case.DefaultCase} object.
+   * @param matchers a {@link org.rapidpm.frp.matcher.Case} object.
+   * @param <T> a T object.
+   * @return a {@link org.rapidpm.frp.model.Result} object.
+   */
   @SafeVarargs
   public static <T> Result<T> match(DefaultCase<T> defaultCase , Case<T>... matchers) {
 

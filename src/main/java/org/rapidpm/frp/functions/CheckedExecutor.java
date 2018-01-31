@@ -8,6 +8,9 @@ import org.rapidpm.frp.model.Result;
 
 /**
  * Created by svenruppert on 25.04.17.
+ *
+ * @author svenruppert
+ * @version $Id: $Id
  */
 @FunctionalInterface
 public interface CheckedExecutor extends Function<Void, Result<Void>> {

@@ -13,6 +13,9 @@ package org.rapidpm.frp.model;
  * limitations under the License.
  * <p>
  * Created by RapidPM - Team on 10.12.16.
+ *
+ * @author svenruppert
+ * @version $Id: $Id
  */
 public class Quad<T1, T2, T3, T4> {
 
@@ -21,6 +24,14 @@ public class Quad<T1, T2, T3, T4> {
   private T3 t3;
   private T4 t4;
 
+  /**
+   * <p>Constructor for Quad.</p>
+   *
+   * @param t1 a T1 object.
+   * @param t2 a T2 object.
+   * @param t3 a T3 object.
+   * @param t4 a T4 object.
+   */
   public Quad(final T1 t1, final T2 t2, final T3 t3, final T4 t4) {
     this.t1 = t1;
     this.t2 = t2;
@@ -28,22 +39,43 @@ public class Quad<T1, T2, T3, T4> {
     this.t4 = t4;
   }
 
+  /**
+   * <p>Getter for the field <code>t4</code>.</p>
+   *
+   * @return a T4 object.
+   */
   public T4 getT4() {
     return t4;
   }
 
+  /**
+   * <p>Getter for the field <code>t3</code>.</p>
+   *
+   * @return a T3 object.
+   */
   public T3 getT3() {
     return t3;
   }
 
+  /**
+   * <p>Getter for the field <code>t1</code>.</p>
+   *
+   * @return a T1 object.
+   */
   public T1 getT1() {
     return t1;
   }
 
+  /**
+   * <p>Getter for the field <code>t2</code>.</p>
+   *
+   * @return a T2 object.
+   */
   public T2 getT2() {
     return t2;
   }
 
+  /** {@inheritDoc} */
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
@@ -57,6 +89,7 @@ public class Quad<T1, T2, T3, T4> {
     return t4 != null ? t4.equals(quad.t4) : quad.t4 == null;
   }
 
+  /** {@inheritDoc} */
   @Override
   public int hashCode() {
     int result = t1 != null ? t1.hashCode() : 0;
@@ -66,6 +99,7 @@ public class Quad<T1, T2, T3, T4> {
     return result;
   }
 
+  /** {@inheritDoc} */
   @Override
   public String toString() {
     return "Quad{" +
@@ -76,6 +110,19 @@ public class Quad<T1, T2, T3, T4> {
         '}';
   }
 
+  /**
+   * <p>next.</p>
+   *
+   * @param t1 a T1 object.
+   * @param t2 a T2 object.
+   * @param t3 a T3 object.
+   * @param t4 a T4 object.
+   * @param <T1> a T1 object.
+   * @param <T2> a T2 object.
+   * @param <T3> a T3 object.
+   * @param <T4> a T4 object.
+   * @return a {@link org.rapidpm.frp.model.Quad} object.
+   */
   public static <T1, T2, T3, T4> Quad<T1, T2, T3, T4> next(final T1 t1, final T2 t2, final T3 t3, final T4 t4) {
     return new Quad<>(t1, t2, t3, t4);
   }

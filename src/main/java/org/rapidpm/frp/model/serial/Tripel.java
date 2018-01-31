@@ -15,30 +15,56 @@ import java.io.Serializable;
  * limitations under the License.
  * <p>
  * Created by RapidPM - Team on 10.12.16.
+ *
+ * @author svenruppert
+ * @version $Id: $Id
  */
 public class Tripel<T1 extends Serializable, T2 extends Serializable, T3 extends Serializable> {
   private T1 t1;
   private T2 t2;
   private T3 t3;
 
+  /**
+   * <p>Constructor for Tripel.</p>
+   *
+   * @param t1 a T1 object.
+   * @param t2 a T2 object.
+   * @param t3 a T3 object.
+   */
   public Tripel(final T1 t1, final T2 t2, final T3 t3) {
     this.t1 = t1;
     this.t2 = t2;
     this.t3 = t3;
   }
 
+  /**
+   * <p>Getter for the field <code>t3</code>.</p>
+   *
+   * @return a T3 object.
+   */
   public T3 getT3() {
     return t3;
   }
 
+  /**
+   * <p>Getter for the field <code>t1</code>.</p>
+   *
+   * @return a T1 object.
+   */
   public T1 getT1() {
     return t1;
   }
 
+  /**
+   * <p>Getter for the field <code>t2</code>.</p>
+   *
+   * @return a T2 object.
+   */
   public T2 getT2() {
     return t2;
   }
 
+  /** {@inheritDoc} */
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
@@ -51,6 +77,7 @@ public class Tripel<T1 extends Serializable, T2 extends Serializable, T3 extends
     return t3 != null ? t3.equals(tripel.t3) : tripel.t3 == null;
   }
 
+  /** {@inheritDoc} */
   @Override
   public int hashCode() {
     int result = t1 != null ? t1.hashCode() : 0;
@@ -59,6 +86,7 @@ public class Tripel<T1 extends Serializable, T2 extends Serializable, T3 extends
     return result;
   }
 
+  /** {@inheritDoc} */
   @Override
   public String toString() {
     return "Tripel{" +
@@ -68,6 +96,17 @@ public class Tripel<T1 extends Serializable, T2 extends Serializable, T3 extends
         '}';
   }
 
+  /**
+   * <p>next.</p>
+   *
+   * @param t1 a T1 object.
+   * @param t2 a T2 object.
+   * @param t3 a T3 object.
+   * @param <T1> a T1 object.
+   * @param <T2> a T2 object.
+   * @param <T3> a T3 object.
+   * @return a {@link org.rapidpm.frp.model.serial.Tripel} object.
+   */
   public static <T1 extends Serializable, T2 extends Serializable, T3 extends Serializable> Tripel<T1, T2, T3> next(final T1 t1, final T2 t2, final T3 t3) {
     return new Tripel<>(t1, t2, t3);
   }

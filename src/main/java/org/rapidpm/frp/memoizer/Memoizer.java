@@ -22,8 +22,10 @@ import org.rapidpm.frp.functions.TriFunction;
  * limitations under the License.
  * <p>
  * Created by RapidPM - Team on 10.12.16.
+ *
+ * @author svenruppert
+ * @version $Id: $Id
  */
-
 public class Memoizer<T, U> {
   private final Map<T, U> memoizationCache = new ConcurrentHashMap<>();
 
@@ -44,15 +46,39 @@ public class Memoizer<T, U> {
     return input -> memoizationCache.computeIfAbsent(input, function);
   }
 
+  /**
+   * <p>memoize.</p>
+   *
+   * @param function a {@link java.util.function.Supplier} object.
+   * @param <T> a T object.
+   * @return a {@link java.util.function.Supplier} object.
+   */
   public static <T> Supplier<T> memoize(final Supplier<T> function) {
     return new Memoizer<T, T>().doMemoize(function);
   }
 
+  /**
+   * <p>memoize.</p>
+   *
+   * @param function a {@link java.util.function.Function} object.
+   * @param <T> a T object.
+   * @param <U> a U object.
+   * @return a {@link java.util.function.Function} object.
+   */
   public static <T, U> Function<T, U> memoize(final Function<T, U> function) {
     return new Memoizer<T, U>().doMemoize(function);
   }
 
 
+  /**
+   * <p>memoize.</p>
+   *
+   * @param biFunc a {@link java.util.function.BiFunction} object.
+   * @param <T1> a T1 object.
+   * @param <T2> a T2 object.
+   * @param <R> a R object.
+   * @return a {@link java.util.function.BiFunction} object.
+   */
   public static <T1, T2, R> BiFunction<T1, T2, R> memoize(final BiFunction<T1, T2, R> biFunc) {
     final Function<T1, Function<T2, R>> transformed = Memoizer.memoize(x -> Memoizer.memoize(y -> biFunc.apply(x, y)));
     return Transformations
@@ -65,6 +91,16 @@ public class Memoizer<T, U> {
 //    return (x, y) -> transformed.apply(x).apply(y);
 //  }
 
+  /**
+   * <p>memoize.</p>
+   *
+   * @param threeFunc a {@link org.rapidpm.frp.functions.TriFunction} object.
+   * @param <T1> a T1 object.
+   * @param <T2> a T2 object.
+   * @param <T3> a T3 object.
+   * @param <R> a R object.
+   * @return a {@link org.rapidpm.frp.functions.TriFunction} object.
+   */
   public static <T1, T2, T3, R> TriFunction<T1, T2, T3, R> memoize(final TriFunction<T1, T2, T3, R> threeFunc) {
     final Function<T1, Function<T2, Function<T3, R>>> transformed
         = Memoizer.memoize(x -> Memoizer.memoize(y -> Memoizer.memoize(z -> threeFunc.apply(x, y, z))));

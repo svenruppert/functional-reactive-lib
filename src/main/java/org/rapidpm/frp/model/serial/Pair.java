@@ -16,24 +16,44 @@ import java.util.Objects;
  * limitations under the License.
  * <p>
  * Created by RapidPM - Team on 10.12.16.
+ *
+ * @author svenruppert
+ * @version $Id: $Id
  */
 public class Pair<T1 extends Serializable, T2 extends Serializable> implements Serializable {
   private T1 t1;
   private T2 t2;
 
+  /**
+   * <p>Constructor for Pair.</p>
+   *
+   * @param t1 a T1 object.
+   * @param t2 a T2 object.
+   */
   public Pair(final T1 t1, final T2 t2) {
     this.t1 = t1;
     this.t2 = t2;
   }
 
+  /**
+   * <p>Getter for the field <code>t1</code>.</p>
+   *
+   * @return a T1 object.
+   */
   public T1 getT1() {
     return t1;
   }
 
+  /**
+   * <p>Getter for the field <code>t2</code>.</p>
+   *
+   * @return a T2 object.
+   */
   public T2 getT2() {
     return t2;
   }
 
+  /** {@inheritDoc} */
   @Override
   public String toString() {
     return "Pair{" +
@@ -42,6 +62,7 @@ public class Pair<T1 extends Serializable, T2 extends Serializable> implements S
         '}';
   }
 
+  /** {@inheritDoc} */
   @Override
   public boolean equals(final Object o) {
     if (this == o) return true;
@@ -51,11 +72,21 @@ public class Pair<T1 extends Serializable, T2 extends Serializable> implements S
         Objects.equals(t2, pair.t2);
   }
 
+  /** {@inheritDoc} */
   @Override
   public int hashCode() {
     return Objects.hash(t1, t2);
   }
 
+  /**
+   * <p>next.</p>
+   *
+   * @param a a T1 object.
+   * @param b a T2 object.
+   * @param <T1> a T1 object.
+   * @param <T2> a T2 object.
+   * @return a {@link org.rapidpm.frp.model.serial.Pair} object.
+   */
   public static <T1 extends Serializable, T2 extends Serializable> Pair<T1, T2> next(T1 a, T2 b) {
     return new Pair<>(a, b);
   }

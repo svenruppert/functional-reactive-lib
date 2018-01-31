@@ -29,13 +29,26 @@ import org.rapidpm.frp.model.Result;
 
 /**
  * Created by svenruppert on 25.04.17.
+ *
+ * @author svenruppert
+ * @version $Id: $Id
  */
 public interface StringFunctions {
 
+  /**
+   * <p>notStartsWith.</p>
+   *
+   * @return a {@link java.util.function.BiFunction} object.
+   */
   static BiFunction<String, String, Boolean> notStartsWith() {
     return (s, prefix) -> ! s.startsWith(prefix);
   }
 
+  /**
+   * <p>notStartsWithCaseSensitive.</p>
+   *
+   * @return a {@link org.rapidpm.frp.functions.TriFunction} object.
+   */
   static TriFunction<String, String, Boolean, Boolean> notStartsWithCaseSensitive() {
     return (input, prefix, caseSensitive) ->
         (caseSensitive)
@@ -43,6 +56,11 @@ public interface StringFunctions {
             : not().apply(input.toLowerCase().startsWith(prefix.toLowerCase()));
   }
 
+  /**
+   * <p>notEmpty.</p>
+   *
+   * @return a {@link java.util.function.Predicate} object.
+   */
   static Predicate<String> notEmpty() {
     return (str) -> not().apply(str.isEmpty());
   }
@@ -90,7 +108,6 @@ public interface StringFunctions {
    *
    * @return true if found else false.
    */
-
   static BiFunction<String, String, Boolean> contains() {
     return (value, needle) -> containsCaseSensitive().apply(value, needle, false);
   }
@@ -104,7 +121,6 @@ public interface StringFunctions {
    *
    * @return true if found else false.
    */
-
   static TriFunction<String, String, Boolean, Boolean> containsCaseSensitive() {
     return (value, needle, caseSensitive) ->
         match(
@@ -147,25 +163,19 @@ public interface StringFunctions {
 
 
   /**
-   * Verifies that one or more of needles are contained in value. This is case insensitive
-   * <p>
-   * param value   input
-   * param needles needles to search
+   * <p>containsAny.</p>
    *
-   * @return boolean true if any needle is found else false
+   * @return a {@link java.util.function.BiFunction} object.
    */
   static BiFunction<String, String[], Boolean> containsAny() {
     return (value, needles) -> containsAnyCaseSensitive().apply(value, needles, false);
   }
 
+
   /**
-   * Verifies that one or more of needles are contained in value.
-   * <p>
-   * param value         input
-   * param needles       needles to search
-   * param caseSensitive true or false
+   * <p>containsAnyCaseSensitive.</p>
    *
-   * @return boolean true if any needle is found else false
+   * @return a {@link org.rapidpm.frp.functions.TriFunction} object.
    */
   static TriFunction<String, String[], Boolean, Boolean> containsAnyCaseSensitive() {
     return (value, needles, caseSensitive) -> Arrays
@@ -174,27 +184,21 @@ public interface StringFunctions {
   }
 
 
+
   /**
-   * Count the number of times substr appears in value
-   * <p>
-   * param value  input
-   * param subStr to search
+   * <p>countSubStr.</p>
    *
-   * @return count of times substring exists
+   * @return a {@link java.util.function.BiFunction} object.
    */
   static BiFunction<String, String, Long> countSubStr() {
     return (value, subStr) -> countSubStrCaseSensitive().apply(value, subStr, true, false);
   }
 
+
   /**
-   * Count the number of times substr appears in value
-   * <p>
-   * param value            input
-   * param subStr           search string
-   * param caseSensitive    whether search should be case sensitive
-   * param allowOverlapping boolean to take into account overlapping
+   * <p>countSubStrCaseSensitive.</p>
    *
-   * @return count of times substring exists
+   * @return a {@link org.rapidpm.frp.functions.QuadFunction} object.
    */
   static QuadFunction<String, String, Boolean, Boolean, Long> countSubStrCaseSensitive() {
     return (value, subStr, caseSensitive, allowOverlapping) ->
@@ -206,6 +210,11 @@ public interface StringFunctions {
                 0L);
   }
 
+  /**
+   * <p>countSubStrCaseSensitiveOverlapping.</p>
+   *
+   * @return a {@link org.rapidpm.frp.functions.QuadFunction} object.
+   */
   static QuadFunction<String, String, Boolean, Long, Long> countSubStrCaseSensitiveOverlapping() {
     return (value, subStr, allowOverlapping, count) -> {
       int position = value.indexOf(subStr);
@@ -223,13 +232,11 @@ public interface StringFunctions {
   }
 
 
+
   /**
-   * Test if value ends with search. The search is case sensitive.
-   * <p>
-   * param value  input string
-   * param search string to search
+   * <p>endsWith.</p>
    *
-   * @return true or false
+   * @return a {@link java.util.function.BiFunction} object.
    */
   static BiFunction<String, String, Boolean> endsWith() {
     return (value, search) -> endsWithCaseSensitive().apply(value, search, true);
@@ -249,15 +256,11 @@ public interface StringFunctions {
         .apply(value, search, value.length(), caseSensitive);
   }
 
+
   /**
-   * Test if value ends with search.
-   * <p>
-   * param value         input string
-   * param search        string to search
-   * param position      position till which you want to search.
-   * param caseSensitive true or false
+   * <p>endsWithCaseSensitiveUpTo.</p>
    *
-   * @return true or false
+   * @return a {@link org.rapidpm.frp.functions.QuadFunction} object.
    */
   static QuadFunction<String, String, Integer, Boolean, Boolean> endsWithCaseSensitiveUpTo() {
     return (value, search, position, caseSensitive) -> {
@@ -269,30 +272,22 @@ public interface StringFunctions {
   }
 
 
+
   /**
-   * Ensures that the value begins with prefix. If it doesn't exist, it's prepended. It is case sensitive.
-   * <p>
-   * param value  input
-   * param prefix prefix
+   * <p>ensureLeft.</p>
    *
-   * @return string with prefix if it was not present.
+   * @return a {@link java.util.function.BiFunction} object.
    */
-//  public static String ensureLeft(final String value, final String prefix) {
-//    return ensureLeft(value, prefix, true);
-//  }
   static BiFunction<String, String, String> ensureLeft() {
     return (input, prefix) -> ensureLeftCaseSensitive().apply(input, prefix, true);
   }
 
 
+
   /**
-   * Ensures that the value begins with prefix. If it doesn't exist, it's prepended.
-   * <p>
-   * param value         input
-   * param prefix        prefix
-   * param caseSensitive true or false
+   * <p>ensureLeftCaseSensitive.</p>
    *
-   * @return string with prefix if it was not present.
+   * @return a {@link org.rapidpm.frp.functions.TriFunction} object.
    */
   static TriFunction<String, String, Boolean, String> ensureLeftCaseSensitive() {
     return (input, prefix, caseSensitive) ->
@@ -302,23 +297,19 @@ public interface StringFunctions {
   }
 
   /**
-   * Decodes data encoded with MIME base64
-   * <p>
-   * param value The data to decode
+   * <p>base64Decode.</p>
    *
-   * @return decoded data
+   * @return a {@link java.util.function.Function} object.
    */
-
   static Function<String, String> base64Decode() {
     return (input) -> new String(Base64.getDecoder().decode(input)).intern();
   }
 
+
   /**
-   * Encodes data with MIME base64.
-   * <p>
-   * param value The data to encode
+   * <p>base64Encode.</p>
    *
-   * @return The encoded String
+   * @return a {@link java.util.function.Function} object.
    */
   static Function<String, String> base64Encode() {
     return (input) -> Base64.getEncoder().encodeToString(input.getBytes());
@@ -326,18 +317,20 @@ public interface StringFunctions {
 
 
   /**
-   * Append an array of String to value
-   * <p>
-   * param value   initial String
-   * param appends an array of strings to append
+   * <p>appendArray.</p>
    *
-   * @return full String
+   * @return a {@link java.util.function.BiFunction} object.
    */
   static BiFunction<String, String[], String> appendArray() {
     return (input, appends) -> appendStream()
         .apply(input, Arrays.stream(appends));
   }
 
+  /**
+   * <p>appendStream.</p>
+   *
+   * @return a {@link java.util.function.BiFunction} object.
+   */
   static BiFunction<String, Stream<String>, String> appendStream() {
     return (input, appendStream) -> Stream
         .concat(
@@ -346,19 +339,22 @@ public interface StringFunctions {
         .collect(joining());
   }
 
+
   /**
-   * Appends Strings to value
-   * <p>
-   * param value   initial String
-   * param appends an array of strings to append
+   * <p>append.</p>
    *
-   * @return full String
+   * @return a {@link java.util.function.BiFunction} object.
    */
   static BiFunction<String, String, String> append() {
     return (input, append) -> appendStream()
         .apply(input, Stream.of(append));
   }
 
+  /**
+   * <p>appendCollection.</p>
+   *
+   * @return a {@link java.util.function.BiFunction} object.
+   */
   static BiFunction<String, Collection<String>, String> appendCollection() {
     return (input, appendCollection) ->
         appendStream().apply(input, appendCollection.stream());
@@ -396,6 +392,11 @@ public interface StringFunctions {
   }
 
 
+  /**
+   * <p>decode.</p>
+   *
+   * @return a {@link org.rapidpm.frp.functions.TriFunction} object.
+   */
   static TriFunction<String, Integer, Integer, String> decode() {
     return (value, digits, radix) -> Arrays
         .stream(value.split("(?<=\\G.{" + digits + "})"))
@@ -403,6 +404,11 @@ public interface StringFunctions {
         .collect(joining());
   }
 
+  /**
+   * <p>encode.</p>
+   *
+   * @return a {@link org.rapidpm.frp.functions.TriFunction} object.
+   */
   static TriFunction<String, Integer, Integer, String> encode() {
     return (value, digits, radix) -> value
         .chars()
@@ -440,7 +446,6 @@ public interface StringFunctions {
    *
    * @return decoded String
    */
-
   static Function<String, String> decDecode() {
     return (value) -> decode().apply(value, 5, 10);
   }
@@ -452,7 +457,6 @@ public interface StringFunctions {
    *
    * @return Encoded value
    */
-
   static Function<String, String> decEncode() {
     return (value) -> encode().apply(value, 5, 10);
   }
@@ -465,7 +469,6 @@ public interface StringFunctions {
    *
    * @return The string which is guarenteed to start with substr
    */
-
   static BiFunction<String, String, String> ensureRight() {
     return (value, suffix) -> ensureRightCaseSensitive().apply(value, suffix, true);
   }
@@ -627,7 +630,6 @@ public interface StringFunctions {
    *
    * @return true if String is lowercase false otherwise
    */
-
   static Function<String, Boolean> isLowerCase() {
     return (input) -> Objects.equals(input, input.toLowerCase());
   }
@@ -668,7 +670,6 @@ public interface StringFunctions {
    *
    * @return Return position of the last occurrence of 'needle'.
    */
-
   static BiFunction<String, String, Integer> lastIndexOf() {
     return (value, needle) -> lastIndexOfCaseSensitive().apply(value, needle, true);
   }
@@ -749,7 +750,6 @@ public interface StringFunctions {
    *
    * @return The prepended String
    */
-
   static BiFunction<String, Stream<String>, String> prependStream() {
     return (value, stream) -> stream.collect(joining()) + value;
   }
@@ -787,6 +787,11 @@ public interface StringFunctions {
   }
 
 
+  /**
+   * <p>removeFromLeftCaseSensitive.</p>
+   *
+   * @return a {@link org.rapidpm.frp.functions.TriFunction} object.
+   */
   static TriFunction<String, String, Boolean, String> removeFromLeftCaseSensitive() {
     return (input, prefix, caseSenstive) ->
         (caseSenstive)
@@ -797,21 +802,41 @@ public interface StringFunctions {
   }
 
 
+  /**
+   * <p>startsWith.</p>
+   *
+   * @return a {@link java.util.function.BiFunction} object.
+   */
   static BiFunction<String, String, Boolean> startsWith() {
     return String::startsWith;
   }
 
+  /**
+   * <p>removeNonWord.</p>
+   *
+   * @return a {@link java.util.function.Function} object.
+   */
   static Function<String, String> removeNonWord() {
     return (value) -> value.replaceAll("[^\\w]+", "");
   }
 
 
 
+  /**
+   * <p>removeRight.</p>
+   *
+   * @return a {@link java.util.function.BiFunction} object.
+   */
   static BiFunction<String, String, String> removeRight() {
     return (value, suffix) -> removeRightCaseSensitive().apply(value, suffix, true);
   }
 
 
+  /**
+   * <p>removeRightCaseSensitive.</p>
+   *
+   * @return a {@link org.rapidpm.frp.functions.TriFunction} object.
+   */
   static TriFunction<String, String, Boolean, String> removeRightCaseSensitive() {
     return (value, suffix, caseSensitive) ->
         endsWithCaseSensitive().apply(value, suffix, caseSensitive)
@@ -877,118 +902,57 @@ public interface StringFunctions {
             : append().apply(value, repeat().apply(pad, length - value.length()));
   }
 
+
   /**
-   * Remove all spaces on right.
-   * <p>
-   * param value The String
+   * <p>rightTrim.</p>
    *
-   * @return String without right boarders spaces.
+   * @return a {@link java.util.function.Function} object.
    */
   static Function<String, String> rightTrim() {
     return (value) -> value.replaceAll("\\s+$", "");
   }
 
-
-  //TODO safeTruncate
   /**
-   * Truncate the string securely, not cutting a word in half. It always returns the last full word.
+   * <p>split.</p>
    *
-   * @param value  The input String
-   * @param length Max size of the truncated String
-   * @param filler String that will be added to the end of the return string. Example: '...'
-   * @return The truncated String
-   */
-//  public static String safeTruncate(final String value, final int length, final String filler) {
-//    validate(value, NULL_STRING_PREDICATE, NULL_STRING_MSG_SUPPLIER);
-//    if (length == 0) {
-//      return "";
-//    }
-//    if (length >= value.length()) {
-//      return value;
-//    }
-//
-//    String[] words = words(value);
-//    StringJoiner result = new StringJoiner(" ");
-//    int spaceCount = 0;
-//    for (String word : words) {
-//      if (result.length() + word.length() + filler.length() + spaceCount > length) {
-//        break;
-//      } else {
-//        result.add(word);
-//        spaceCount++;
-//      }
-//    }
-//    return append(result.toString(), filler);
-//  }
-//
-//  static TriFunction<String, Integer, String, String> safeTruncate() {
-//    return (value, length, filler) -> {
-//      Result<String> result = Case
-//          .match(
-//              Case.matchCase(() -> {
-//                wordStream().apply(value)
-//
-//
-//
-//                return Result.success((String) null);
-//              }),
-//              Case.matchCase(() -> length == 0, () -> Result.success("")),
-//              Case.matchCase(() -> length >= value.length(), () -> Result.success(value))
-//          );
-//
-//      return append().apply(result.get(), filler);
-//    };
-//  }
-
-
-  /**
-   * Alias to String split function. Defined only for completeness.
-   * <p>
-   * param value The input String
-   * param regex The delimiting regular expression
-   *
-   * @return String Array
+   * @return a {@link java.util.function.BiFunction} object.
    */
   static BiFunction<String, String, String[]> split() {
     return String::split;
   }
 
+  /**
+   * <p>splitStream.</p>
+   *
+   * @return a {@link java.util.function.BiFunction} object.
+   */
   static BiFunction<String, String, Stream<String>> splitStream() {
     return (input, regex) -> Arrays.stream(input.split(regex));
   }
 
 
   /**
-   * Join concatenates all the elements of the strings array into a single String. The separator string is placed between elements in the resulting string.
-   * <p>
-   * param strings   The input array to concatenate
-   * param separator The separator to use
+   * <p>join.</p>
    *
-   * @return Concatenated String
+   * @return a {@link java.util.function.BiFunction} object.
    */
   static BiFunction<String[], String, String> join() {
     return (strings, sperator) -> Arrays.stream(strings).collect(joining(sperator));
   }
 
   /**
-   * Splits a String to words
-   * <p>
-   * param value The input String
+   * <p>wordStream.</p>
    *
-   * @return word Stream
+   * @return a {@link java.util.function.Function} object.
    */
   static Function<String, Stream<String>> wordStream() {
     return (input) -> Arrays.stream(input.split("\\W+"));
   }
 
   /**
-   * Truncate the unsecured form string, cutting the independent string of required position.
-   * <p>
-   * param value  Value will be truncated unsecurely.
-   * param length Size of the returned string.
-   * param filler Value that will be added to the end of the return string. Example: '...'
+   * <p>truncate.</p>
    *
-   * @return String truncated unsafely.
+   * @return a {@link org.rapidpm.frp.functions.TriFunction} object.
    */
   static TriFunction<String, Integer, String, String> truncate() {
     return (value, length, filler) -> Case
@@ -1002,27 +966,27 @@ public interface StringFunctions {
   }
 
   /**
-   * Returns a String array consisting of the characters in the String.
-   * <p>
-   * param value input
+   * <p>chars.</p>
    *
-   * @return character array
+   * @return a {@link java.util.function.Function} object.
    */
   static Function<String, String[]> chars() {
     return (input) -> input.split("");
   }
 
+  /**
+   * <p>charsStream.</p>
+   *
+   * @return a {@link java.util.function.Function} object.
+   */
   static Function<String, Stream<String>> charsStream() {
     return (input) -> Arrays.stream(input.split(""));
   }
 
-
   /**
-   * It returns a string with its characters in random order.
-   * <p>
-   * param value The input String
+   * <p>shuffle.</p>
    *
-   * @return The shuffled String
+   * @return a {@link java.util.function.Function} object.
    */
   static Function<String, String> shuffle() {
     return (input) -> {
@@ -1040,68 +1004,18 @@ public interface StringFunctions {
 
 
   /**
-   * Alias of substring method
-   * <p>
-   * param value The input String
-   * param begin Start of slice.
-   * param end   End of slice.
+   * <p>slice.</p>
    *
-   * @return The String sliced!
+   * @return a {@link org.rapidpm.frp.functions.TriFunction} object.
    */
   static TriFunction<String, Integer, Integer, String> slice() {
     return String::substring;
   }
 
-//  /**
-//   * Convert a String to a slug
-//   *
-//   * @param value The value to slugify
-//   * @return The slugified value
-//   */
-//  public static String slugify(final String value) {
-//    validate(value, NULL_STRING_PREDICATE, NULL_STRING_MSG_SUPPLIER);
-//    String transliterated = transliterate(collapseWhitespace(value.trim().toLowerCase()));
-//    return Arrays.stream(words(transliterated.replace("&", "-and-"))).collect(joining("-"));
-//  }
-//
-//  static Function<String, String> slugify(){
-//
-//  }
-
-//  /**
-//   * Remove all non valid characters.
-//   *
-//   * @param value The input String
-//   * @return String without non valid characters.
-//   */
-//  public static String transliterate(final String value) {
-//    validate(value, NULL_STRING_PREDICATE, NULL_STRING_MSG_SUPPLIER);
-//    String result = value;
-//    Set<Map.Entry<String, List<String>>> entries = Ascii.ascii.entrySet();
-//    for (Map.Entry<String, List<String>> entry : entries) {
-//      for (String ch : entry.getValue()) {
-//        result = result.replace(ch, entry.getKey());
-//      }
-//    }
-//    return result;
-//  }
-//
-//  static Function<String, String> transliterate(){
-//    return (value)->{
-//
-//
-//    };
-//  }
-
-
   /**
-   * Surrounds a 'value' with the given 'prefix' and 'suffix'.
-   * <p>
-   * param value  The input String
-   * param prefix prefix. If suffix is null then prefix is used
-   * param suffix suffix
+   * <p>surround.</p>
    *
-   * @return The String with surround substrs!
+   * @return a {@link org.rapidpm.frp.functions.TriFunction} object.
    */
   static TriFunction<String, String, String, String> surround() {
     return (value, prefix, suffix) -> Case
@@ -1113,15 +1027,11 @@ public interface StringFunctions {
         ).get();
   }
 
-
   /**
-   * Transform to camelCase
-   * <p>
-   * param value The input String
+   * <p>toCamelCase.</p>
    *
-   * @return String in camelCase.
+   * @return a {@link java.util.function.Function} object.
    */
-
   static Function<String, String> toCamelCase() {
     return (value) -> toStudlyCase()
         .apply(value)
@@ -1135,11 +1045,9 @@ public interface StringFunctions {
 
 
   /**
-   * Transform to StudlyCaps.
-   * <p>
-   * param value The input String
+   * <p>toStudlyCase.</p>
    *
-   * @return String in StudlyCaps.
+   * @return a {@link java.util.function.Function} object.
    */
   static Function<String, String> toStudlyCase() {
     return (value) -> splitStream()
@@ -1150,23 +1058,18 @@ public interface StringFunctions {
   }
 
   /**
-   * Return tail of the String
-   * <p>
-   * param value The input String
+   * <p>tail.</p>
    *
-   * @return String tail
+   * @return a {@link java.util.function.Function} object.
    */
   static Function<String, String> tail() {
     return (value) -> last().apply(value, value.length() - 1);
   }
 
   /**
-   * Decamelize String
-   * <p>
-   * param value The input String
-   * param chr   string to use
+   * <p>toDecamelize.</p>
    *
-   * @return String decamelized.
+   * @return a {@link java.util.function.BiFunction} object.
    */
   static BiFunction<String, String, String> toDecamelize() {
     return (value, chr) ->
@@ -1176,37 +1079,32 @@ public interface StringFunctions {
             .collect(joining(chr));
   }
 
+
   /**
-   * Transform to kebab-case.
-   * <p>
-   * param value The input String
+   * <p>toKebabCase.</p>
    *
-   * @return String in kebab-case.
+   * @return a {@link java.util.function.Function} object.
    */
   static Function<String, String> toKebabCase() {
     return (value) -> toDecamelize().apply(value, "-");
   }
 
+
   /**
-   * Transform to snake_case.
-   * <p>
-   * param value The input String
+   * <p>toSnakeCase.</p>
    *
-   * @return String in snake_case.
+   * @return a {@link java.util.function.Function} object.
    */
   static Function<String, String> toSnakeCase() {
     return (value) -> toDecamelize().apply(value, "_");
   }
 
-
-  /**
-   * Converts the first character of string to upper case and the remaining to lower case.
-   * <p>
-   * param input The string to capitalize
-   *
-   * @return The capitalized string
-   */
   //TODO refactoring - remove optinal
+  /**
+   * <p>capitalize.</p>
+   *
+   * @return a {@link java.util.function.Function} object.
+   */
   static Function<String, String> capitalize() {
     return (input) -> (input.length() == 0)
         ? ""
@@ -1221,15 +1119,13 @@ public interface StringFunctions {
         .get();
   }
 
-  /**
-   * Converts the first character of string to lower case.
-   * <p>
-   * param input The string to convert
-   *
-   * @return The converted string
-   * @throws IllegalArgumentException
-   */
+
   //TODO refactoring - remove optinal
+  /**
+   * <p>lowerFirst.</p>
+   *
+   * @return a {@link java.util.function.Function} object.
+   */
   static Function<String, String> lowerFirst() {
     return (input) -> (input.length() == 0)
         ? ""
@@ -1241,37 +1137,31 @@ public interface StringFunctions {
   }
 
 
+
   /**
-   * Verifies whether String is enclosed by encloser
-   * <p>
-   * param input    The input String
-   * param encloser String which encloses input String
+   * <p>isEnclosedBetween.</p>
    *
-   * @return true if enclosed false otherwise
+   * @return a {@link java.util.function.BiFunction} object.
    */
   static BiFunction<String, String, Boolean> isEnclosedBetween() {
     return (input, encloser) -> input.startsWith(encloser) && input.startsWith(encloser);
   }
 
+
   /**
-   * Verifies whether String is enclosed by encloser
-   * <p>
-   * param input         The input String
-   * param leftEncloser  String which encloses input String at left start
-   * param rightEncloser String which encloses input String at the right end
+   * <p>isEnclosedBetweenBoth.</p>
    *
-   * @return true if enclosed false otherwise
+   * @return a {@link org.rapidpm.frp.functions.TriFunction} object.
    */
   static TriFunction<String, String, String, Boolean> isEnclosedBetweenBoth() {
     return (input, left, right) -> input.startsWith(left) && input.startsWith(right);
   }
 
+
   /**
-   * Converts the first character of string to upper case.
-   * <p>
-   * param input The string to convert.
+   * <p>upperFirst.</p>
    *
-   * @return Returns the converted string.
+   * @return a {@link java.util.function.Function} object.
    */
   static Function<String, String> upperFirst() {
     return (input) ->
@@ -1285,64 +1175,5 @@ public interface StringFunctions {
                     .orElse(h))
             .get();
   }
-
-//  /**
-//   * Removes leading whitespace from string.
-//   *
-//   * @param input The string to trim.
-//   * @return Returns the trimmed string.
-//   */
-//  public static Optional<String> trimStart(final String input) {
-//    return Optional.ofNullable(input)
-//        .filter(v -> ! v.isEmpty())
-//        .map(Strman::leftTrim);
-//  }
-//
-//
-//  /**
-//   * Removes leading characters from string.
-//   *
-//   * @param input The string to trim.
-//   * @param chars The characters to trim.
-//   * @return Returns the trimmed string.
-//   */
-//  public static Optional<String> trimStart(final String input, String... chars) {
-//    return Optional.ofNullable(input)
-//        .filter(v -> ! v.isEmpty())
-//        .map(v -> {
-//          String pattern = String.format("^[%s]+", join(chars, "\\"));
-//          return v.replaceAll(pattern, "");
-//        });
-//  }
-//
-//  /**
-//   * Removes trailing whitespace from string.
-//   *
-//   * @param input The string to trim.
-//   * @return Returns the trimmed string.
-//   */
-//  public static Optional<String> trimEnd(final String input) {
-//    return Optional.ofNullable(input)
-//        .filter(v -> ! v.isEmpty())
-//        .map(Strman::rightTrim);
-//  }
-
-
-//  /**
-//   * Removes trailing characters from string.
-//   *
-//   * @param input The string to trim.
-//   * @param chars The characters to trim.
-//   * @return Returns the trimmed string.
-//   */
-//  public static Optional<String> trimEnd(final String input, String... chars) {
-//    return Optional.ofNullable(input)
-//        .filter(v -> ! v.isEmpty())
-//        .map(v -> {
-//          String pattern = String.format("[%s]+$", join(chars, "\\"));
-//          return v.replaceAll(pattern, "");
-//        });
-//  }
-
 
 }

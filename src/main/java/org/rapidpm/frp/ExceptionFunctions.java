@@ -6,10 +6,18 @@ import java.util.function.Function;
 import java.util.stream.Stream;
 
 /**
+ * <p>ExceptionFunctions interface.</p>
  *
+ * @author svenruppert
+ * @version $Id: $Id
  */
 public interface ExceptionFunctions {
 
+  /**
+   * <p>message.</p>
+   *
+   * @return a {@link java.util.function.Function} object.
+   */
   static Function<Exception, String> message() {
     return (e) -> {
       Objects.requireNonNull(e , "Exception instance was null.");
@@ -19,6 +27,11 @@ public interface ExceptionFunctions {
     };
   }
 
+  /**
+   * <p>toStackTraceStream.</p>
+   *
+   * @return a {@link java.util.function.Function} object.
+   */
   static Function<Exception, Stream<StackTraceElement>> toStackTraceStream() {
     return (e) -> {
       final StackTraceElement[] stackTrace = e.getStackTrace();

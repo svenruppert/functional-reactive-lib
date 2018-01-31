@@ -31,10 +31,16 @@
       <activation>
         <activeByDefault>true</activeByDefault>
       </activation>
+      <properties>
+        <!--<mirror-url>http://nexus-server:8081/repository/maven-public/</mirror-url>-->
+        <sonatype-nexus-url>http://nexus-server:8081/repository/maven-releases/</sonatype-nexus-url>
+        <sonatype-nexus-snapshots-url>http://nexus-server:8081/repository/maven-snapshots/
+        </sonatype-nexus-snapshots-url>
+      </properties>
       <repositories>
         <repository>
           <id>build-snapshots-repo</id>
-          <url>http://nexus-server:8081/repository/maven-snapshots/</url>
+          <url>${sonatype-nexus-snapshots-url}</url>
           <releases>
             <enabled>false</enabled>
           </releases>
@@ -44,12 +50,6 @@
           </snapshots>
         </repository>
       </repositories>
-      <properties>
-        <!--<mirror-url>http://nexus-server:8081/repository/maven-public/</mirror-url>-->
-        <sonatype-nexus-url>http://nexus-server:8081/repository/maven-releases/</sonatype-nexus-url>
-        <sonatype-nexus-snapshots-url>http://nexus-server:8081/repository/maven-snapshots/
-        </sonatype-nexus-snapshots-url>
-      </properties>
     </profile>
   </profiles>
 </settings>

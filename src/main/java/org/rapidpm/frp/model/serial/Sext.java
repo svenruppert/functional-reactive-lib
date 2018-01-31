@@ -3,7 +3,10 @@ package org.rapidpm.frp.model.serial;
 import java.io.Serializable;
 
 /**
+ * <p>Sext class.</p>
  *
+ * @author svenruppert
+ * @version $Id: $Id
  */
 public class Sext<T1 extends Serializable, T2 extends Serializable, T3 extends Serializable,
     T4 extends Serializable, T5 extends Serializable, T6 extends Serializable> {
@@ -15,6 +18,16 @@ public class Sext<T1 extends Serializable, T2 extends Serializable, T3 extends S
   private T5 t5;
   private T6 t6;
 
+  /**
+   * <p>Constructor for Sext.</p>
+   *
+   * @param t1 a T1 object.
+   * @param t2 a T2 object.
+   * @param t3 a T3 object.
+   * @param t4 a T4 object.
+   * @param t5 a T5 object.
+   * @param t6 a T6 object.
+   */
   public Sext(final T1 t1 , final T2 t2 , final T3 t3 ,
               final T4 t4 , final T5 t5 , final T6 t6) {
     this.t1 = t1;
@@ -25,31 +38,62 @@ public class Sext<T1 extends Serializable, T2 extends Serializable, T3 extends S
     this.t6 = t6;
   }
 
+  /**
+   * <p>Getter for the field <code>t6</code>.</p>
+   *
+   * @return a T6 object.
+   */
   public T6 getT6() {
     return t6;
   }
 
+  /**
+   * <p>Getter for the field <code>t5</code>.</p>
+   *
+   * @return a T5 object.
+   */
   public T5 getT5() {
     return t5;
   }
 
+  /**
+   * <p>Getter for the field <code>t4</code>.</p>
+   *
+   * @return a T4 object.
+   */
   public T4 getT4() {
     return t4;
   }
 
+  /**
+   * <p>Getter for the field <code>t3</code>.</p>
+   *
+   * @return a T3 object.
+   */
   public T3 getT3() {
     return t3;
   }
 
+  /**
+   * <p>Getter for the field <code>t1</code>.</p>
+   *
+   * @return a T1 object.
+   */
   public T1 getT1() {
     return t1;
   }
 
+  /**
+   * <p>Getter for the field <code>t2</code>.</p>
+   *
+   * @return a T2 object.
+   */
   public T2 getT2() {
     return t2;
   }
 
 
+  /** {@inheritDoc} */
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
@@ -65,6 +109,7 @@ public class Sext<T1 extends Serializable, T2 extends Serializable, T3 extends S
     return t6 != null ? t6.equals(sext.t6) : sext.t6 == null;
   }
 
+  /** {@inheritDoc} */
   @Override
   public int hashCode() {
     int result = t1 != null ? t1.hashCode() : 0;
@@ -76,6 +121,7 @@ public class Sext<T1 extends Serializable, T2 extends Serializable, T3 extends S
     return result;
   }
 
+  /** {@inheritDoc} */
   @Override
   public String toString() {
     return "Quint{" +
@@ -87,6 +133,23 @@ public class Sext<T1 extends Serializable, T2 extends Serializable, T3 extends S
         '}';
   }
 
+  /**
+   * <p>next.</p>
+   *
+   * @param t1 a T1 object.
+   * @param t2 a T2 object.
+   * @param t3 a T3 object.
+   * @param t4 a T4 object.
+   * @param t5 a T5 object.
+   * @param t6 a T6 object.
+   * @param <T1> a T1 object.
+   * @param <T2> a T2 object.
+   * @param <T3> a T3 object.
+   * @param <T4> a T4 object.
+   * @param <T5> a T5 object.
+   * @param <T6> a T6 object.
+   * @return a {@link org.rapidpm.frp.model.serial.Sext} object.
+   */
   public static <T1 extends Serializable, T2 extends Serializable, T3 extends Serializable,
       T4 extends Serializable, T5 extends Serializable, T6 extends Serializable> Sext<T1, T2, T3, T4, T5, T6> next(final T1 t1 , final T2 t2 , final T3 t3 ,
                                                                                                                    final T4 t4 , final T5 t5 , final T6 t6) {

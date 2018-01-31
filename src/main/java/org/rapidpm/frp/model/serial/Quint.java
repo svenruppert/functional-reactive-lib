@@ -15,6 +15,9 @@ import java.io.Serializable;
  * limitations under the License.
  * <p>
  * Created by RapidPM - Team on 10.12.16.
+ *
+ * @author svenruppert
+ * @version $Id: $Id
  */
 public class Quint<T1 extends Serializable,
     T2 extends Serializable,
@@ -28,6 +31,15 @@ public class Quint<T1 extends Serializable,
   private T4 t4;
   private T5 t5;
 
+  /**
+   * <p>Constructor for Quint.</p>
+   *
+   * @param t1 a T1 object.
+   * @param t2 a T2 object.
+   * @param t3 a T3 object.
+   * @param t4 a T4 object.
+   * @param t5 a T5 object.
+   */
   public Quint(final T1 t1 , final T2 t2 , final T3 t3 , final T4 t4 , final T5 t5) {
     this.t1 = t1;
     this.t2 = t2;
@@ -36,27 +48,53 @@ public class Quint<T1 extends Serializable,
     this.t5 = t5;
   }
 
+  /**
+   * <p>Getter for the field <code>t5</code>.</p>
+   *
+   * @return a T5 object.
+   */
   public T5 getT5() {
     return t5;
   }
 
+  /**
+   * <p>Getter for the field <code>t4</code>.</p>
+   *
+   * @return a T4 object.
+   */
   public T4 getT4() {
     return t4;
   }
 
+  /**
+   * <p>Getter for the field <code>t3</code>.</p>
+   *
+   * @return a T3 object.
+   */
   public T3 getT3() {
     return t3;
   }
 
+  /**
+   * <p>Getter for the field <code>t1</code>.</p>
+   *
+   * @return a T1 object.
+   */
   public T1 getT1() {
     return t1;
   }
 
+  /**
+   * <p>Getter for the field <code>t2</code>.</p>
+   *
+   * @return a T2 object.
+   */
   public T2 getT2() {
     return t2;
   }
 
 
+  /** {@inheritDoc} */
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
@@ -71,6 +109,7 @@ public class Quint<T1 extends Serializable,
     return t5 != null ? t5.equals(quint.t5) : quint.t5 == null;
   }
 
+  /** {@inheritDoc} */
   @Override
   public int hashCode() {
     int result = t1 != null ? t1.hashCode() : 0;
@@ -81,6 +120,7 @@ public class Quint<T1 extends Serializable,
     return result;
   }
 
+  /** {@inheritDoc} */
   @Override
   public String toString() {
     return "Quint{" +
@@ -92,6 +132,21 @@ public class Quint<T1 extends Serializable,
         '}';
   }
 
+  /**
+   * <p>next.</p>
+   *
+   * @param t1 a T1 object.
+   * @param t2 a T2 object.
+   * @param t3 a T3 object.
+   * @param t4 a T4 object.
+   * @param t5 a T5 object.
+   * @param <T1> a T1 object.
+   * @param <T2> a T2 object.
+   * @param <T3> a T3 object.
+   * @param <T4> a T4 object.
+   * @param <T5> a T5 object.
+   * @return a {@link org.rapidpm.frp.model.serial.Quint} object.
+   */
   public static <T1 extends Serializable,
       T2 extends Serializable,
       T3 extends Serializable,

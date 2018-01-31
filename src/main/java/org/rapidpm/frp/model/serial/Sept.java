@@ -3,7 +3,10 @@ package org.rapidpm.frp.model.serial;
 import java.io.Serializable;
 
 /**
+ * <p>Sept class.</p>
  *
+ * @author svenruppert
+ * @version $Id: $Id
  */
 public class Sept<T1 extends Serializable, T2 extends Serializable, T3 extends Serializable,
     T4 extends Serializable, T5 extends Serializable, T6 extends Serializable, T7 extends Serializable> {
@@ -16,6 +19,17 @@ public class Sept<T1 extends Serializable, T2 extends Serializable, T3 extends S
   private T6 t6;
   private T7 t7;
 
+  /**
+   * <p>Constructor for Sept.</p>
+   *
+   * @param t1 a T1 object.
+   * @param t2 a T2 object.
+   * @param t3 a T3 object.
+   * @param t4 a T4 object.
+   * @param t5 a T5 object.
+   * @param t6 a T6 object.
+   * @param t7 a T7 object.
+   */
   public Sept(T1 t1 , T2 t2 , T3 t3 , T4 t4 , T5 t5 , T6 t6 , T7 t7) {
     this.t1 = t1;
     this.t2 = t2;
@@ -26,6 +40,7 @@ public class Sept<T1 extends Serializable, T2 extends Serializable, T3 extends S
     this.t7 = t7;
   }
 
+  /** {@inheritDoc} */
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
@@ -42,6 +57,7 @@ public class Sept<T1 extends Serializable, T2 extends Serializable, T3 extends S
     return t7 != null ? t7.equals(sept.t7) : sept.t7 == null;
   }
 
+  /** {@inheritDoc} */
   @Override
   public int hashCode() {
     int result = t1 != null ? t1.hashCode() : 0;
@@ -54,6 +70,7 @@ public class Sept<T1 extends Serializable, T2 extends Serializable, T3 extends S
     return result;
   }
 
+  /** {@inheritDoc} */
   @Override
   public String toString() {
     return "Sept{" +
@@ -67,36 +84,90 @@ public class Sept<T1 extends Serializable, T2 extends Serializable, T3 extends S
         '}';
   }
 
+  /**
+   * <p>next.</p>
+   *
+   * @param t1 a T1 object.
+   * @param t2 a T2 object.
+   * @param t3 a T3 object.
+   * @param t4 a T4 object.
+   * @param t5 a T5 object.
+   * @param t6 a T6 object.
+   * @param t7 a T7 object.
+   * @param <T1> a T1 object.
+   * @param <T2> a T2 object.
+   * @param <T3> a T3 object.
+   * @param <T4> a T4 object.
+   * @param <T5> a T5 object.
+   * @param <T6> a T6 object.
+   * @param <T7> a T7 object.
+   * @return a {@link org.rapidpm.frp.model.serial.Sept} object.
+   */
   public static <T1 extends Serializable, T2 extends Serializable, T3 extends Serializable,
       T4 extends Serializable, T5 extends Serializable, T6 extends Serializable, T7 extends Serializable> Sept<T1, T2, T3, T4, T5, T6, T7> next(final T1 t1 , final T2 t2 , final T3 t3 ,
                                                                                                                                                 final T4 t4 , final T5 t5 , final T6 t6 , final T7 t7) {
     return new Sept<>(t1 , t2 , t3 , t4 , t5 , t6 , t7);
   }
 
+  /**
+   * <p>Getter for the field <code>t1</code>.</p>
+   *
+   * @return a T1 object.
+   */
   public T1 getT1() {
     return t1;
   }
 
+  /**
+   * <p>Getter for the field <code>t2</code>.</p>
+   *
+   * @return a T2 object.
+   */
   public T2 getT2() {
     return t2;
   }
 
+  /**
+   * <p>Getter for the field <code>t3</code>.</p>
+   *
+   * @return a T3 object.
+   */
   public T3 getT3() {
     return t3;
   }
 
+  /**
+   * <p>Getter for the field <code>t4</code>.</p>
+   *
+   * @return a T4 object.
+   */
   public T4 getT4() {
     return t4;
   }
 
+  /**
+   * <p>Getter for the field <code>t5</code>.</p>
+   *
+   * @return a T5 object.
+   */
   public T5 getT5() {
     return t5;
   }
 
+  /**
+   * <p>Getter for the field <code>t6</code>.</p>
+   *
+   * @return a T6 object.
+   */
   public T6 getT6() {
     return t6;
   }
 
+  /**
+   * <p>Getter for the field <code>t7</code>.</p>
+   *
+   * @return a T7 object.
+   */
   public T7 getT7() {
     return t7;
   }
