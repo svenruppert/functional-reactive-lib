@@ -33,7 +33,7 @@
       <repositories>
         <repository>
           <id>build-snapshots-repo</id>
-          <url>${sonatype-nexus-snapshots-url}</url>
+          <url>http://nexus-server:8081/repository/maven-snapshots/</url>
           <releases>
             <enabled>false</enabled>
           </releases>
