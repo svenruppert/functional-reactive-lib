@@ -13,7 +13,7 @@ pipeline:
       - mvn clean
       - mvn test
 
-  deploy-locale:
+  deploy:
     image: ${JDK_VERSION}
     pull: true
     commands:
@@ -23,7 +23,7 @@ pipeline:
       - mvn deploy
     when:
         matrix:
-          JDK_VERSION: "3.5-jdk-8-alpine"
+          JDK_VERSION: maven:3.5-jdk-8-alpine
         branches:
           include: develop, release/*
           exclude: feature/*
