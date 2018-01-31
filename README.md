@@ -5,6 +5,9 @@ This Lib is working with
  * Java 9
  * Java 10 b41
 
+## 0.5.1
+
+
 ## 0.5.0
 * Result added ```void ifFailed(Consumer<String> failed);```
 * switched to jUnit5
