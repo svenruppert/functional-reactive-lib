@@ -786,16 +786,7 @@ public interface StringFunctions {
 
   }
 
-  /**
-   * Returns a new String with the prefix removed, if present.
-   * <p>
-   * param value         The input String
-   * param prefix        String to remove on left
-   * param caseSensitive ensure case sensitivity
-   *
-   * @return The String without prefix
-   * <p>
-   */
+
   static TriFunction<String, String, Boolean, String> removeFromLeftCaseSensitive() {
     return (input, prefix, caseSenstive) ->
         (caseSenstive)
@@ -810,39 +801,17 @@ public interface StringFunctions {
     return String::startsWith;
   }
 
-  /**
-   * Remove all non word characters.
-   * <p>
-   * param value The input String
-   *
-   * @return String without non-word characters
-   */
   static Function<String, String> removeNonWord() {
     return (value) -> value.replaceAll("[^\\w]+", "");
   }
 
-  /**
-   * Returns a new string with the 'suffix' removed, if present. Search is case sensitive.
-   * <p>
-   * param value  The input String
-   * param suffix The suffix to remove
-   *
-   * @return The String without suffix!
-   */
+
 
   static BiFunction<String, String, String> removeRight() {
     return (value, suffix) -> removeRightCaseSensitive().apply(value, suffix, true);
   }
 
-  /**
-   * Returns a new string with the 'suffix' removed, if present.
-   * <p>
-   * param value         The input String
-   * param suffix        The suffix to remove
-   * param caseSensitive whether search should be case sensitive or not
-   *
-   * @return The String without suffix!
-   */
+
   static TriFunction<String, String, Boolean, String> removeRightCaseSensitive() {
     return (value, suffix, caseSensitive) ->
         endsWithCaseSensitive().apply(value, suffix, caseSensitive)
