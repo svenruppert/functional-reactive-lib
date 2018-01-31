@@ -26,7 +26,6 @@ pipeline:
       branches:
         include: develop, release/*
         exclude: feature/*
-      status: success
 
   maven-3.5-ibmjava-8:
     image: maven:3.5-ibmjava-8
@@ -40,7 +39,6 @@ pipeline:
       branches:
         include: develop, release/*
         exclude: feature/*
-      status: success
 
   maven-3.5-ibmjava-9:
     image: maven:3.5-ibmjava-9
@@ -54,7 +52,6 @@ pipeline:
       branches:
         include: develop, release/*
         exclude: feature/*
-      status: success
 
   maven-3.5-jdk-10:
     image: svenruppert/maven-3.5-jdk-10
@@ -68,7 +65,6 @@ pipeline:
       branches:
         include: develop, release/*
         exclude: feature/*
-      status: success
 
 
 
