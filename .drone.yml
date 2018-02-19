@@ -40,14 +40,3 @@ matrix:
   - maven:3.5-ibmjava-8-alpine
   - maven:3.5-ibmjava-9-alpine
 
-
-#  - maven:latest
-#  - maven:3.5-jdk-8-alpine
-#  - maven:3.5-jdk-9
-#  - svenruppert/maven-3.5-jdk-10
-##  - maven:3.5-ibmjava-8
-##  - maven:3.5-ibmjava-9
-##  - 3.5-jdk-8
-##  - 3.5-jdk-8-slim
-##  - 3.5-ibmjava-8-alpine
-##  - 3.5-ibmjava-9-alpine

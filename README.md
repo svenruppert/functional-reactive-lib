@@ -11,7 +11,7 @@ This Lib is working with
  * Java 10 RC1
 
 ## 0.5.1-SNAPSHOT
-
+* renamed Tripel (german) to Triple (en)
 
 ## 0.5.0
 * Result added ```void ifFailed(Consumer<String> failed);```

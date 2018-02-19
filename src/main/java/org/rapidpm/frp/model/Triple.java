@@ -17,19 +17,19 @@ package org.rapidpm.frp.model;
  * @author svenruppert
  * @version $Id: $Id
  */
-public class Tripel<T1, T2, T3> {
+public class Triple<T1, T2, T3> {
   private T1 t1;
   private T2 t2;
   private T3 t3;
 
   /**
-   * <p>Constructor for Tripel.</p>
+   * <p>Constructor for Triple.</p>
    *
    * @param t1 a T1 object.
    * @param t2 a T2 object.
    * @param t3 a T3 object.
    */
-  public Tripel(final T1 t1, final T2 t2, final T3 t3) {
+  public Triple(final T1 t1, final T2 t2, final T3 t3) {
     this.t1 = t1;
     this.t2 = t2;
     this.t3 = t3;
@@ -66,13 +66,13 @@ public class Tripel<T1, T2, T3> {
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
-    if (! (o instanceof Tripel)) return false;
+    if (! (o instanceof Triple)) return false;
 
-    Tripel<?, ?, ?> tripel = (Tripel<?, ?, ?>) o;
+    Triple<?, ?, ?> triple = (Triple<?, ?, ?>) o;
 
-    if (t1 != null ? ! t1.equals(tripel.t1) : tripel.t1 != null) return false;
-    if (t2 != null ? ! t2.equals(tripel.t2) : tripel.t2 != null) return false;
-    return t3 != null ? t3.equals(tripel.t3) : tripel.t3 == null;
+    if (t1 != null ? ! t1.equals(triple.t1) : triple.t1 != null) return false;
+    if (t2 != null ? ! t2.equals(triple.t2) : triple.t2 != null) return false;
+    return t3 != null ? t3.equals(triple.t3) : triple.t3 == null;
   }
 
   /** {@inheritDoc} */
@@ -87,7 +87,7 @@ public class Tripel<T1, T2, T3> {
   /** {@inheritDoc} */
   @Override
   public String toString() {
-    return "Tripel{" +
+    return "Triple{" +
         "t1=" + t1 +
         ", t2=" + t2 +
         ", t3=" + t3 +
@@ -103,9 +103,9 @@ public class Tripel<T1, T2, T3> {
    * @param <T1> a T1 object.
    * @param <T2> a T2 object.
    * @param <T3> a T3 object.
-   * @return a {@link org.rapidpm.frp.model.Tripel} object.
+   * @return a {@link Triple} object.
    */
-  public static <T1, T2, T3> Tripel<T1, T2, T3> next(final T1 t1, final T2 t2, final T3 t3) {
-    return new Tripel<>(t1, t2, t3);
+  public static <T1, T2, T3> Triple<T1, T2, T3> next(final T1 t1, final T2 t2, final T3 t3) {
+    return new Triple<>(t1, t2, t3);
   }
 }
