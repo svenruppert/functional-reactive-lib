@@ -9,6 +9,7 @@ import static org.rapidpm.frp.Transformations.not;
 import static org.rapidpm.frp.matcher.Case.match;
 import static org.rapidpm.frp.matcher.Case.matchCase;
 
+import java.nio.charset.Charset;
 import java.util.Arrays;
 import java.util.Base64;
 import java.util.Collection;
@@ -302,7 +303,7 @@ public interface StringFunctions {
    * @return a {@link java.util.function.Function} object.
    */
   static Function<String, String> base64Decode() {
-    return (input) -> new String(Base64.getDecoder().decode(input)).intern();
+    return (input) -> new String(Base64.getDecoder().decode(input.getBytes(Charset.forName("UTF-8")))).intern();
   }
 
 
@@ -312,7 +313,7 @@ public interface StringFunctions {
    * @return a {@link java.util.function.Function} object.
    */
   static Function<String, String> base64Encode() {
-    return (input) -> Base64.getEncoder().encodeToString(input.getBytes());
+    return (input) -> Base64.getEncoder().encodeToString(input.getBytes(Charset.forName("UTF-8")));
   }
 
 
