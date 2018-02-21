@@ -10,6 +10,8 @@ This Lib is working with
  * Java 9
  * Java 10 RC1
 
+## 0.5.2-SNAPSHOT
+
 ## 0.5.1
 * renamed Tripel (german) to Triple (en)
 * pitest is working with junit5 now
