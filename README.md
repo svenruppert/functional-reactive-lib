@@ -11,7 +11,13 @@ This Lib is working with
  * Java 10 RC1
 
 ## 0.5.2-SNAPSHOT
-
+* extend Result<T> with a fluent API
+    * void ifFailed -> Result<T> ifFailed
+    * void ifPresent -> Result<T> ifPresent
+    * void ifAbsent -> Result<T> ifAbsent
+    
+    
+    
 ## 0.5.1
 * renamed Tripel (german) to Triple (en)
 * pitest is working with junit5 now

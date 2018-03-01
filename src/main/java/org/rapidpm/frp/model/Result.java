@@ -50,8 +50,8 @@ public interface Result<T> {
 
   static <T> Result<T> ofNullable(T value , String failedMessage) {
     return (Objects.nonNull(value))
-        ? Result.success(value)
-        : Result.failure(failedMessage);
+        ? success(value)
+        : failure(failedMessage);
   }
 
   T get();
@@ -62,11 +62,11 @@ public interface Result<T> {
 
   Boolean isAbsent();
 
-  void ifPresent(Consumer<T> consumer);
+  Result<T> ifPresent(Consumer<T> consumer);
 
-  void ifAbsent(Runnable action);
+  Result<T> ifAbsent(Runnable action);
 
-  void ifFailed(Consumer<String> failed);
+  Result<T> ifFailed(Consumer<String> failed);
 
   default Stream<T> stream() {
     if (! isPresent()) {
@@ -122,8 +122,8 @@ public interface Result<T> {
 
   default <U> Result<U> asFailure() {
     return (isAbsent())
-        ? (Result<U>) this
-        : Result.failure("converted to Failure orig was " + this);
+        ? ofNullable(null)
+        : failure("converted to Failure orig was " + this);
   }
 
 
@@ -135,15 +135,21 @@ public interface Result<T> {
     }
 
     @Override
-    public void ifPresent(Consumer<T> consumer) {
+    public Result<T> ifPresent(Consumer<T> consumer) {
       Objects.requireNonNull(consumer);
       if (value != null) consumer.accept(value);
+      return (this instanceof Failure)
+          ? this
+          : ofNullable(value);
     }
 
     @Override
-    public void ifAbsent(Runnable action) {
+    public Result<T> ifAbsent(Runnable action) {
       Objects.requireNonNull(action);
       if (value == null) action.run();
+      return (this instanceof Failure)
+          ? this
+          : ofNullable(value);
     }
 
     public Boolean isPresent() {
@@ -193,8 +199,10 @@ public interface Result<T> {
       CompletableFuture.runAsync(() -> success.accept(value));
     }
 
-    public void ifFailed(Consumer<String> failed) {
+    public Result<T> ifFailed(Consumer<String> failed) {
       Objects.requireNonNull(failed);
+      //nothing do do , I am a Success
+      return ofNullable(value);
     }
 
   }
@@ -228,9 +236,11 @@ public interface Result<T> {
       CompletableFuture.runAsync(() -> failure.accept(errorMessage));
     }
 
-    public void ifFailed(Consumer<String> failed) {
+    public Result<T> ifFailed(Consumer<String> failed) {
       Objects.requireNonNull(failed);
       failed.accept(errorMessage);
+      // I am a Failure - hold errorMessage, value already null;
+      return this;
     }
   }
 }
