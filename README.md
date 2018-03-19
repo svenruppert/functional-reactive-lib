@@ -10,13 +10,13 @@ This Lib is working with
  * Java 9
  * Java 10 RC1
 
-## 0.5.2-SNAPSHOT
+## 0.5.3-SNAPSHOT
+
+## 0.5.2
 * extend Result<T> with a fluent API
     * void ifFailed -> Result<T> ifFailed
     * void ifPresent -> Result<T> ifPresent
     * void ifAbsent -> Result<T> ifAbsent
-    
-    
     
 ## 0.5.1
 * renamed Tripel (german) to Triple (en)
