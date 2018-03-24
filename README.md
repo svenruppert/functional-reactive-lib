@@ -6,9 +6,10 @@
 # Release Notes
 
 This Lib is working with
- * Java 8
- * Java 9
- * Java 10 RC1
+ * Java 08 (open/oracle/ibm/zulu)
+ * Java 09 (open/oracle/ibm/zulu)
+ * Java 10 (open/oracle/)
+ * Java 11 (open/)
 
 ## 0.5.3-SNAPSHOT
 
