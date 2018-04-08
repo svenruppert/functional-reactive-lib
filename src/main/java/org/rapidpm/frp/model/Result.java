@@ -27,13 +27,13 @@ import org.rapidpm.frp.functions.CheckedFunction;
  */
 public interface Result<T> {
 
-  void ifPresentOrElse(Consumer<? super T> action , Runnable emptyAction);
+  void ifPresentOrElse(Consumer<? super T> action, Runnable emptyAction);
 
-  void ifPresentOrElse(Consumer<T> success , Consumer<String> failure);
+  void ifPresentOrElse(Consumer<T> success, Consumer<String> failure);
 
-  void ifPresentOrElseAsync(Consumer<? super T> action , Runnable emptyAction);
+  void ifPresentOrElseAsync(Consumer<? super T> action, Runnable emptyAction);
 
-  void ifPresentOrElseAsync(Consumer<T> success , Consumer<String> failure);
+  void ifPresentOrElseAsync(Consumer<T> success, Consumer<String> failure);
 
   static <T> Result<T> failure(String errorMessage) {
     Objects.requireNonNull(errorMessage);
@@ -45,13 +45,13 @@ public interface Result<T> {
   }
 
   static <T> Result<T> ofNullable(T value) {
-    return ofNullable(value , "Object was null");
+    return ofNullable(value, "Object was null");
   }
 
-  static <T> Result<T> ofNullable(T value , String failedMessage) {
+  static <T> Result<T> ofNullable(T value, String failedMessage) {
     return (Objects.nonNull(value))
-        ? success(value)
-        : failure(failedMessage);
+           ? success(value)
+           : failure(failedMessage);
   }
 
   T get();
@@ -69,7 +69,7 @@ public interface Result<T> {
   Result<T> ifFailed(Consumer<String> failed);
 
   default Stream<T> stream() {
-    if (! isPresent()) {
+    if (!isPresent()) {
       return Stream.empty();
     } else {
       return Stream.of(get());
@@ -94,36 +94,38 @@ public interface Result<T> {
 
   static <T> Result<T> fromOptional(Optional<T> optional) {
     Objects.requireNonNull(optional);
-    return ofNullable(optional.get() , "Optional hold a null value");
+    return optional
+        .map(Result::success)
+        .orElseGet(() -> failure("Optional hold a null value"));
   }
 
-  default <V, R> Result<R> thenCombine(V value , BiFunction<T, V, Result<R>> func) {
-    return func.apply(get() , value);
+  default <V, R> Result<R> thenCombine(V value, BiFunction<T, V, Result<R>> func) {
+    return func.apply(get(), value);
   }
 
-  default <V, R> CompletableFuture<Result<R>> thenCombineAsync(V value , BiFunction<T, V, Result<R>> func) {
-    return CompletableFuture.supplyAsync(() -> func.apply(get() , value));
+  default <V, R> CompletableFuture<Result<R>> thenCombineAsync(V value, BiFunction<T, V, Result<R>> func) {
+    return CompletableFuture.supplyAsync(() -> func.apply(get(), value));
   }
 
   default <U> Result<U> map(Function<? super T, ? extends U> mapper) {
     Objects.requireNonNull(mapper);
     return isPresent()
-        ? ((CheckedFunction<T, U>) mapper::apply).apply(get())
-        : this.asFailure();
+           ? ((CheckedFunction<T, U>) mapper::apply).apply(get())
+           : this.asFailure();
   }
 
   default <U> Result<U> flatMap(Function<? super T, Result<U>> mapper) {
     Objects.requireNonNull(mapper);
     return this.isPresent()
-        ? mapper.apply(get())
-        : this.asFailure();
+           ? mapper.apply(get())
+           : this.asFailure();
   }
 
 
   default <U> Result<U> asFailure() {
     return (isAbsent())
-        ? ofNullable(null)
-        : failure("converted to Failure orig was " + this);
+           ? ofNullable(null)
+           : failure("converted to Failure orig was " + this);
   }
 
 
@@ -139,8 +141,8 @@ public interface Result<T> {
       Objects.requireNonNull(consumer);
       if (value != null) consumer.accept(value);
       return (this instanceof Failure)
-          ? this
-          : ofNullable(value);
+             ? this
+             : ofNullable(value);
     }
 
     @Override
@@ -148,8 +150,8 @@ public interface Result<T> {
       Objects.requireNonNull(action);
       if (value == null) action.run();
       return (this instanceof Failure)
-          ? this
-          : ofNullable(value);
+             ? this
+             : ofNullable(value);
     }
 
     public Boolean isPresent() {
@@ -179,23 +181,23 @@ public interface Result<T> {
     }
 
     @Override
-    public void ifPresentOrElse(Consumer<? super T> action , Runnable emptyAction) {
+    public void ifPresentOrElse(Consumer<? super T> action, Runnable emptyAction) {
       action.accept(value);
     }
 
     @Override
-    public void ifPresentOrElse(final Consumer<T> success , final Consumer<String> failure) {
+    public void ifPresentOrElse(final Consumer<T> success, final Consumer<String> failure) {
       // TODO check if usefull -> Objects.requireNonNull(value);
       success.accept(value);
     }
 
     @Override
-    public void ifPresentOrElseAsync(Consumer<? super T> action , Runnable emptyAction) {
+    public void ifPresentOrElseAsync(Consumer<? super T> action, Runnable emptyAction) {
       CompletableFuture.runAsync(() -> action.accept(value));
     }
 
     @Override
-    public void ifPresentOrElseAsync(Consumer<T> success , Consumer<String> failure) {
+    public void ifPresentOrElseAsync(Consumer<T> success, Consumer<String> failure) {
       CompletableFuture.runAsync(() -> success.accept(value));
     }
 
@@ -217,22 +219,22 @@ public interface Result<T> {
     }
 
     @Override
-    public void ifPresentOrElse(Consumer<? super T> action , Runnable emptyAction) {
+    public void ifPresentOrElse(Consumer<? super T> action, Runnable emptyAction) {
       emptyAction.run();
     }
 
     @Override
-    public void ifPresentOrElse(final Consumer<T> success , final Consumer<String> failure) {
+    public void ifPresentOrElse(final Consumer<T> success, final Consumer<String> failure) {
       failure.accept(errorMessage);
     }
 
     @Override
-    public void ifPresentOrElseAsync(Consumer<? super T> action , Runnable emptyAction) {
+    public void ifPresentOrElseAsync(Consumer<? super T> action, Runnable emptyAction) {
       CompletableFuture.runAsync(emptyAction);
     }
 
     @Override
-    public void ifPresentOrElseAsync(Consumer<T> success , Consumer<String> failure) {
+    public void ifPresentOrElseAsync(Consumer<T> success, Consumer<String> failure) {
       CompletableFuture.runAsync(() -> failure.accept(errorMessage));
     }
 
