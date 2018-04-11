@@ -64,7 +64,7 @@ public class Case<T> extends Pair<Supplier<Boolean>, Supplier<Result<T>>> {
    *
    * @return a boolean.
    */
-  public boolean isMatching() {
+  private boolean isMatching() {
     return getT1().get();
   }
 
