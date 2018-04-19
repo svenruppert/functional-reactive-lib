@@ -36,6 +36,7 @@ matrix:
   - svenruppert/maven-3.5-jdk-09
   - svenruppert/maven-3.5-jdk-10
   - svenruppert/maven-3.5-jdk-11
+  - svenruppert/maven-3.5-jdk-graalvm-ce-01
   - svenruppert/maven-3.5-jdk-oracle-08
   - svenruppert/maven-3.5-jdk-oracle-09
   - svenruppert/maven-3.5-jdk-oracle-10
