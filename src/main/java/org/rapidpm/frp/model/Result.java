@@ -1,5 +1,7 @@
 package org.rapidpm.frp.model;
 
+import org.rapidpm.frp.functions.CheckedFunction;
+
 import java.util.Objects;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
@@ -8,8 +10,6 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.stream.Stream;
-
-import org.rapidpm.frp.functions.CheckedFunction;
 
 /**
  * Copyright (C) 2017 RapidPM - Sven Ruppert

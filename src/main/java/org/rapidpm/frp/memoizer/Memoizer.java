@@ -82,7 +82,7 @@ public class Memoizer<T, U> {
   public static <T1, T2, R> BiFunction<T1, T2, R> memoize(final BiFunction<T1, T2, R> biFunc) {
     final Function<T1, Function<T2, R>> transformed = Memoizer.memoize(x -> Memoizer.memoize(y -> biFunc.apply(x, y)));
     return Transformations
-        .<T1, T2, R>unCurryBifunction()
+        .<T1, T2, R>unCurryBiFunction()
         .apply(transformed);
   }
 
@@ -105,7 +105,7 @@ public class Memoizer<T, U> {
     final Function<T1, Function<T2, Function<T3, R>>> transformed
         = Memoizer.memoize(x -> Memoizer.memoize(y -> Memoizer.memoize(z -> threeFunc.apply(x, y, z))));
     return Transformations
-        .<T1, T2, T3, R>unCurryTrifunction()
+        .<T1, T2, T3, R>unCurryTriFunction()
         .apply(transformed);
 //    return (x, y, z) -> transformed.apply(x).apply(y).apply(z);
   }

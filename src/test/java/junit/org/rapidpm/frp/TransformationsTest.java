@@ -25,7 +25,7 @@ public class TransformationsTest {
   @Test
   public void test002() throws Exception {
     String helloWorld = Transformations
-        .<String, String, String>unCurryBifunction()
+        .<String, String, String>unCurryBiFunction()
         .apply(inputA -> inputB -> inputA + " " + inputB)
         .apply("Hello" , "World");
     assertEquals("Hello World" , helloWorld);
@@ -45,7 +45,7 @@ public class TransformationsTest {
   @Test
   public void test004() throws Exception {
     String helloWorld = Transformations
-        .<String, String, String, String>unCurryTrifunction()
+        .<String, String, String, String>unCurryTriFunction()
         .apply(inputA -> inputB -> inputC -> inputA + " " + inputB + " " + inputC)
         .apply("Hello" , "World" , "!");
     assertEquals("Hello World !" , helloWorld);

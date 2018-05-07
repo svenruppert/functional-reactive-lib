@@ -1,18 +1,17 @@
 package org.rapidpm.frp;
 
+import org.rapidpm.frp.functions.CheckedBiFunction;
+import org.rapidpm.frp.functions.CheckedFunction;
+import org.rapidpm.frp.functions.CheckedTriFunction;
+import org.rapidpm.frp.functions.TriFunction;
+
 import java.util.Enumeration;
 import java.util.Iterator;
 import java.util.Spliterator;
 import java.util.Spliterators;
-import java.util.function.BiFunction;
-import java.util.function.Consumer;
-import java.util.function.Function;
-import java.util.function.Predicate;
-import java.util.function.Supplier;
+import java.util.function.*;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
-
-import org.rapidpm.frp.functions.TriFunction;
 
 /**
  * Created by svenruppert on 24.04.17.
@@ -29,7 +28,7 @@ public interface Transformations {
    * @return a {@link java.util.function.Function} object.
    */
   static Function<Boolean, Boolean> not() {
-    return (input) -> ! input;
+    return (input) -> !input;
   }
 
 
@@ -79,6 +78,18 @@ public interface Transformations {
   }
 
   /**
+   * <p>curryCheckedBiFunction.</p>
+   *
+   * @param <A> a A object.
+   * @param <B> a B object.
+   * @param <R> a R object.
+   * @return a {@link java.util.function.Function} object.
+   */
+  static <A, B, R> Function<CheckedBiFunction<A, B, R>, Function<A, CheckedFunction<B, R>>> curryCheckedBiFunction() {
+    return (func) -> a -> b -> func.applyWithException(a, b);
+  }
+
+  /**
    * <p>unCurryBifunction.</p>
    *
    * @param <A> a A object.
@@ -86,8 +97,20 @@ public interface Transformations {
    * @param <R> a R object.
    * @return a {@link java.util.function.Function} object.
    */
-  static <A, B, R> Function<Function<A, Function<B, R>>, BiFunction<A, B, R>> unCurryBifunction() {
+  static <A, B, R> Function<Function<A, Function<B, R>>, BiFunction<A, B, R>> unCurryBiFunction() {
     return (func) -> (a, b) -> func.apply(a).apply(b);
+  }
+
+  /**
+   * <p>unCurryCheckedBifunction.</p>
+   *
+   * @param <A> a A object.
+   * @param <B> a B object.
+   * @param <R> a R object.
+   * @return a {@link java.util.function.Function} object.
+   */
+  static <A, B, R> Function<Function<A, CheckedFunction<B, R>>, CheckedBiFunction<A, B, R>> unCurryCheckedBiFunction() {
+    return (func) -> (a, b) -> func.apply(a).applyWithException(b);
   }
 
   /**
@@ -106,6 +129,21 @@ public interface Transformations {
   }
 
   /**
+   * <p>curryCheckedTriFunction.</p>
+   *
+   * @param <A> a A object.
+   * @param <B> a B object.
+   * @param <C> a C object.
+   * @param <R> a R object.
+   * @return a {@link java.util.function.Function} object.
+   */
+  static <A, B, C, R> Function<
+      CheckedTriFunction<A, B, C, R>,
+      Function<A, Function<B, CheckedFunction<C, R>>>> curryCheckedTriFunction() {
+    return (func) -> a -> b -> c -> func.applyWithException(a, b, c);
+  }
+
+  /**
    * <p>unCurryTrifunction.</p>
    *
    * @param <A> a A object.
@@ -116,30 +154,45 @@ public interface Transformations {
    */
   static <A, B, C, R> Function<
       Function<A, Function<B, Function<C, R>>>,
-      TriFunction<A, B, C, R>> unCurryTrifunction() {
+      TriFunction<A, B, C, R>> unCurryTriFunction() {
     return (func) -> (a, b, c) -> func.apply(a).apply(b).apply(c);
   }
 
 
+  /**
+   * <p>unCurryTrifunction.</p>
+   *
+   * @param <A> a A object.
+   * @param <B> a B object.
+   * @param <C> a C object.
+   * @param <R> a R object.
+   * @return a {@link java.util.function.Function} object.
+   */
+  static <A, B, C, R> Function<
+      Function<A, Function<B, CheckedFunction<C, R>>>,
+      CheckedTriFunction<A, B, C, R>> unCurryCheckedTriFunction() {
+    return (func) -> (a, b, c) -> func.apply(a).apply(b).applyWithException(c);
+  }
 
 
   //Function Casts
+
   /**
    * <p>not.</p>
    *
-   * @param p a {@link java.util.function.Predicate} object.
+   * @param p   a {@link java.util.function.Predicate} object.
    * @param <T> a T object.
    * @return a {@link java.util.function.Predicate} object.
    */
   static <T> Predicate<T> not(Predicate<T> p) {
-    return t -> ! p.test(t);
+    return t -> !p.test(t);
   }
 
   /**
    * <p>asPredicate.</p>
    *
    * @param predicate a {@link java.util.function.Predicate} object.
-   * @param <T> a T object.
+   * @param <T>       a T object.
    * @return a {@link java.util.function.Predicate} object.
    */
   static <T> Predicate<T> asPredicate(Predicate<T> predicate) {
@@ -150,7 +203,7 @@ public interface Transformations {
    * <p>asConsumer.</p>
    *
    * @param consumer a {@link java.util.function.Consumer} object.
-   * @param <T> a T object.
+   * @param <T>      a T object.
    * @return a {@link java.util.function.Consumer} object.
    */
   static <T> Consumer<T> asConsumer(Consumer<T> consumer) {
@@ -161,7 +214,7 @@ public interface Transformations {
    * <p>asSupplier.</p>
    *
    * @param supplier a {@link java.util.function.Supplier} object.
-   * @param <T> a T object.
+   * @param <T>      a T object.
    * @return a {@link java.util.function.Supplier} object.
    */
   static <T> Supplier<T> asSupplier(Supplier<T> supplier) {
@@ -172,8 +225,8 @@ public interface Transformations {
    * <p>asFunc.</p>
    *
    * @param function a {@link java.util.function.Function} object.
-   * @param <T> a T object.
-   * @param <R> a R object.
+   * @param <T>      a T object.
+   * @param <R>      a R object.
    * @return a {@link java.util.function.Function} object.
    */
   static <T, R> Function<T, R> asFunc(Function<T, R> function) {
