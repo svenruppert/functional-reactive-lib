@@ -12,7 +12,19 @@ This Lib is working with
  * Java 11 (open/)
 
 ## 0.5.3-SNAPSHOT
-
+* added ```CheckedTriFunction<T1, T2, T3, R> extends TriFunction<T1, T2, T3, Result<R>>```
+* typo unCurryBifunction -> unCurryBiFunction
+* typo unCurryTrifunction -> unCurryTriFunction
+* curry / un-curry Checked Functions ```Transformations```
+    * curryCheckedBiFunction() - ```Function<CheckedBiFunction<A, B, R>, Function<A, CheckedFunction<B, R>>>```
+    * unCurryCheckedBiFunction() - ```Function<Function<A, CheckedFunction<B, R>>, CheckedBiFunction<A, B, R>>```
+    * curryCheckedTriFunction() - ```Function<
+            CheckedTriFunction<A, B, C, R>,
+            Function<A, Function<B, CheckedFunction<C, R>>>>```
+    * unCurryCheckedTriFunction() - ```Function<
+            Function<A, Function<B, CheckedFunction<C, R>>>,
+            CheckedTriFunction<A, B, C, R>>``` 
+    
 ## 0.5.2
 * extend Result<T> with a fluent API
     * void ifFailed -> Result<T> ifFailed
