@@ -20,7 +20,7 @@
     <mirror>
       <id>central</id>
       <name>central</name>
-      <url>http://nexus.rapidpm.org:8081/repository/maven-public/</url>
+      <url>http://nexus.rapidpm.org/repository/maven-public/</url>
       <mirrorOf>*</mirrorOf>
     </mirror>
   </mirrors>
@@ -32,13 +32,13 @@
         <activeByDefault>true</activeByDefault>
       </activation>
       <properties>
-        <sonatype-nexus-url>http://nexus.rapidpm.org:8081/repository/maven-releases/</sonatype-nexus-url>
-        <sonatype-nexus-snapshots-url>http://nexus.rapidpm.org:8081/repository/maven-snapshots/</sonatype-nexus-snapshots-url>
+        <sonatype-nexus-url>http://nexus.rapidpm.org/repository/maven-releases/</sonatype-nexus-url>
+        <sonatype-nexus-snapshots-url>http://nexus.rapidpm.org/repository/maven-snapshots/</sonatype-nexus-snapshots-url>
       </properties>
       <repositories>
         <repository>
           <id>build-snapshots-repo</id>
-          <url>http://nexus.rapidpm.org:8081/repository/maven-snapshots/</url>
+          <url>http://nexus.rapidpm.org/repository/maven-snapshots/</url>
           <releases>
             <enabled>false</enabled>
           </releases>
