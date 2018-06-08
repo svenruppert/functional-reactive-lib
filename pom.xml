@@ -11,10 +11,7 @@
   </parent>
 
   <artifactId>rapidpm-functional-reactive</artifactId>
-  <version>0.5.3-SNAPSHOT</version>
-
-
-
+  <version>0.5.3</version>
 
   <inceptionYear>2017</inceptionYear>
   <organization>
@@ -47,8 +44,8 @@
     <url>https://github.com/functional-reactive/functional-reactive-lib/issues</url>
   </issueManagement>
   <ciManagement>
-    <system>Travis</system>
-    <!--<url>https://build.rapidpm.org/project.html?projectId=RapidPM_RapidPMDependencies</url>-->
+    <system>Drone</system>
+    <url>http://drone.rapidpm.org/RapidPM/functional-reactive-lib</url>
   </ciManagement>
   <licenses>
     <license>
@@ -73,7 +70,6 @@
       <scope>test</scope>
     </dependency>
   </dependencies>
-
 
   <build>
     <plugins>
@@ -102,8 +98,6 @@
           </execution>
         </executions>
       </plugin>
-
     </plugins>
   </build>
-
 </project>

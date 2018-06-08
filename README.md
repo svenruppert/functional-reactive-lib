@@ -1,15 +1,15 @@
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.rapidpm/rapidpm-functional-reactive/badge.svg)](https://maven-badges.herokuapp.com/maven-central/org.rapidpm/rapidpm-functional-reactive)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/a0b7d530374d400fa9a79d270cf95c1a)](https://www.codacy.com/app/sven-ruppert/functional-reactive-lib?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=functional-reactive/functional-reactive-lib&amp;utm_campaign=Badge_Grade)
-[![](http://drone.rapidpm.org:8000/api/badges/RapidPM/functional-reactive-lib/status.svg?branch=develop)](http://drone.rapidpm.org:8000/api/badges/RapidPM/functional-reactive-lib/status.svg?branch=develop)
+[![](http://drone.rapidpm.org/api/badges/RapidPM/functional-reactive-lib/status.svg?branch=develop)](http://drone.rapidpm.org/api/badges/RapidPM/functional-reactive-lib/status.svg?branch=develop)
 
 
 # Release Notes
 
 This Lib is working with
- * Java 08 (open/oracle/ibm/zulu)
- * Java 09 (open/oracle/ibm/zulu)
- * Java 10 (open/oracle/)
- * Java 11 (open/)
+ * Java 08 (open/oracle/ibm/zulu/graalvm/shenandoah)
+ * Java 09 (open/oracle/ibm/zulu/shenandoah)
+ * Java 10 (open/oracle/shenandoah)
+ * Java 11 (open/oracle)
 
 ## 0.5.3-SNAPSHOT
 * added ```CheckedTriFunction<T1, T2, T3, R> extends TriFunction<T1, T2, T3, Result<R>>```
