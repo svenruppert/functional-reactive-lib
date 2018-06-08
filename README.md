@@ -11,8 +11,9 @@ This Lib is working with
  * Java 10 (open/oracle/shenandoah)
  * Java 11 (open/oracle)
  
-## 0.5.4-SNAPSHOT
-
+## 0.8.0-SNAPSHOT
+This release we will increase test coverage and documentation.
+The basic structures and functions are in production used since longer time.
 
 
 
