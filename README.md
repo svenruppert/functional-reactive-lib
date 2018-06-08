@@ -11,7 +11,7 @@ This Lib is working with
  * Java 10 (open/oracle/shenandoah)
  * Java 11 (open/oracle)
 
-## 0.5.3-SNAPSHOT
+## 0.5.3
 * added ```CheckedTriFunction<T1, T2, T3, R> extends TriFunction<T1, T2, T3, Result<R>>```
 * typo unCurryBifunction -> unCurryBiFunction
 * typo unCurryTrifunction -> unCurryTriFunction
