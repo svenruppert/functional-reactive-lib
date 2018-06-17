@@ -14,7 +14,7 @@ This Lib is working with
 ## 0.8.0-SNAPSHOT
 This release we will increase test coverage and documentation.
 The basic structures and functions are in production used since longer time.
-
+Adding Apache Lic header to all files
 
 
 ## 0.5.3
