@@ -16,6 +16,14 @@ This release we will increase test coverage and documentation.
 The basic structures and functions are in production used since longer time.
 Adding Apache Lic header to all files
 
+## 0.6.0
+This release is a maintenance release only, no new functionality 
+* switched to new dependencies version 0.6.3
+    * this includes the lic header plugin
+    * version updates
+    * minimized profiles
+    * removed indirect dependency to old nexus
+* updated all file headers
 
 ## 0.5.3
 * added ```CheckedTriFunction<T1, T2, T3, R> extends TriFunction<T1, T2, T3, Result<R>>```
