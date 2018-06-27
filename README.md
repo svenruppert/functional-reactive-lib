@@ -16,6 +16,9 @@ This release we will increase test coverage and documentation.
 The basic structures and functions are in production used since longer time.
 Adding Apache Lic header to all files
 
+## 0.6.1-SNAPSHOT
+
+
 ## 0.6.0
 This release is a maintenance release only, no new functionality 
 * switched to new dependencies version 0.6.3
