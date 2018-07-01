@@ -17,7 +17,10 @@ The basic structures and functions are in production used since longer time.
 Adding Apache Lic header to all files
 
 ## 0.6.1-SNAPSHOT
-Added docker scripts for cross JDK compiles
+* Added docker scripts for cross JDK compiles
+* updates parent versions
+* deactivated nexus mirror for drone
+
 
 ## 0.6.0
 This release is a maintenance release only, no new functionality 
