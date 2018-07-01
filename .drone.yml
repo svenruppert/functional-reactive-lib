@@ -41,7 +41,7 @@ pipeline:
         matrix:
           JDK_VERSION: svenruppert/maven-3.5-jdk-08
         branches:
-          include: develop, release/*
+          include: develop, master
           exclude: feature/*
 
 
@@ -63,6 +63,6 @@ matrix:
   - svenruppert/maven-3.5-jdk-zulu-09
   - svenruppert/maven-3.5-jdk-zulu-10
   - svenruppert/maven-3.5-jdk-ibm-08
-  - maven:3.5-ibmjava-8-alpine
-  - maven:3.5-ibmjava-9-alpine
+#  - maven:3.5-ibmjava-8-alpine
+#  - maven:3.5-ibmjava-9-alpine
 

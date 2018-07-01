@@ -20,7 +20,7 @@ Adding Apache Lic header to all files
 * Added docker scripts for cross JDK compiles
 * updates parent versions
 * deactivated nexus mirror for drone
-
+* deactived orig IBM JDK 8/9 Docker images
 
 ## 0.6.0
 This release is a maintenance release only, no new functionality 
