@@ -25,10 +25,11 @@ This release we will increase test coverage and documentation.
 The basic structures and functions are in production used since longer time.
 Adding Apache Lic header to all files
 
-## 0.7.0-SNAPSHOT && 0.7.0-JDK8-SNAPSHOT
+## 0.7.1-SNAPSHOT
+
+## 0.7.0 && 0.7.0-JDK8-SNAPSHOT
 * started with JDK10/11 support
 * using JDK11 for development and JDK10 for deployment
-
 
 ## 0.6.2
 * latest JDK8 only version! - switching to JDK10/11 -- JDK8 model
