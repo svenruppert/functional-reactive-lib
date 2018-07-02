@@ -27,6 +27,7 @@ Adding Apache Lic header to all files
 
 ## 0.7.0-SNAPSHOT && 0.7.0-JDK8-SNAPSHOT
 * started with JDK10/11 support
+* using JDK11 for development and JDK10 for deployment
 
 
 ## 0.6.2
