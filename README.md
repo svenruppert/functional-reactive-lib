@@ -11,18 +11,32 @@ This Lib is working with
  * Java 10 (open/oracle/shenandoah)
  * Java 11 (open/oracle)
  
+With the beginning of the version 0.7.0
+the lib will be shipped as a JDK10/11 version and 
+a JDK8 version (marked with -jdk8 in the version tag)
+
+I am not sure how long I will support JDK8 parallel to the JDK11 version.
+As long, as there are not big changes, this should be available.
+
+
+ 
 ## 0.8.0-SNAPSHOT
 This release we will increase test coverage and documentation.
 The basic structures and functions are in production used since longer time.
 Adding Apache Lic header to all files
 
-## 0.6.2-SNAPSHOT
+## 0.7.0-SNAPSHOT && 0.7.0-JDK8-SNAPSHOT
+* started with JDK10/11 support
+
+
+## 0.6.2
+* latest JDK8 only version! - switching to JDK10/11 -- JDK8 model
 
 ## 0.6.1
 * Added docker scripts for cross JDK compiles
 * updates parent versions
 * deactivated nexus mirror for drone
-* deactived orig IBM JDK 8/9 Docker images
+* deactivated orig IBM JDK 8/9 Docker images
 
 ## 0.6.0
 This release is a maintenance release only, no new functionality 
