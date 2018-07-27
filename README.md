@@ -25,6 +25,9 @@ This release we will increase test coverage and documentation.
 The basic structures and functions are in production used since longer time.
 Adding Apache Lic header to all files
 
+## 0.7.3 - SNAPSHOT
+
+
 ## 0.7.2
 * bug fix for **modules-info.java**
 
