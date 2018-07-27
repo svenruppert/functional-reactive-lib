@@ -25,7 +25,10 @@ This release we will increase test coverage and documentation.
 The basic structures and functions are in production used since longer time.
 Adding Apache Lic header to all files
 
-## 0.7.1
+## 0.7.2
+* bug fix for **modules-info.java**
+
+## 0.7.1 - DONT USED THIS VERSION !! broken module-info.java
 * activated JIGSAW
 * updated to rapidpm-dependencies 4.0.2
 
