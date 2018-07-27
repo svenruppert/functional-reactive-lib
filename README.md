@@ -25,7 +25,9 @@ This release we will increase test coverage and documentation.
 The basic structures and functions are in production used since longer time.
 Adding Apache Lic header to all files
 
-## 0.7.1-SNAPSHOT
+## 0.7.1
+* activated JIGSAW
+* updated to rapidpm-dependencies 4.0.2
 
 ## 0.7.0 && 0.7.0-JDK8-SNAPSHOT
 * started with JDK10/11 support
