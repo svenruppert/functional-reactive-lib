@@ -20,12 +20,14 @@ As long, as there are not big changes, this should be available.
 
 
  
-## 0.8.0-SNAPSHOT
+## 00.08.00-RPM-SNAPSHOT
 This release we will increase test coverage and documentation.
 The basic structures and functions are in production used since longer time.
 Adding Apache Lic header to all files
 
-## 0.7.4-SNAPSHOT
+## 00.07.04-RPM-SNAPSHOT
+* switched to new version numbers format
+
 
 ## 0.7.3
 * dependency updates

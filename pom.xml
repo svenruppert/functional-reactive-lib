@@ -24,11 +24,11 @@
   <parent>
     <groupId>org.rapidpm</groupId>
     <artifactId>rapidpm-dependencies</artifactId>
-    <version>4.0.4</version>
+    <version>04.00.05-RPM-SNAPSHOT</version>
   </parent>
 
   <artifactId>rapidpm-functional-reactive</artifactId>
-  <version>0.7.3</version>
+  <version>00.07.04-RPM-SNAPSHOT</version>
 
   <inceptionYear>2017</inceptionYear>
   <organization>
