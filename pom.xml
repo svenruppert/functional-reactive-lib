@@ -28,7 +28,7 @@
   </parent>
 
   <artifactId>rapidpm-functional-reactive</artifactId>
-  <version>00.07.04-RPM-SNAPSHOT</version>
+  <version>00.07.04-RPM</version>
 
   <inceptionYear>2017</inceptionYear>
   <organization>
