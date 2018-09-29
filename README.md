@@ -9,7 +9,7 @@ This Lib is working with
  * Java 08 (open/oracle/ibm/zulu/graalvm/shenandoah)
  * Java 09 (open/oracle/ibm/zulu/shenandoah)
  * Java 10 (open/oracle/shenandoah)
- * Java 11 (open/oracle)
+ * Java 11 (open/oracle/zulu)
  
 With the beginning of the version 0.7.0
 the lib will be shipped as a JDK10/11 version and 
@@ -18,12 +18,15 @@ a JDK8 version (marked with -jdk8 in the version tag)
 I am not sure how long I will support JDK8 parallel to the JDK11 version.
 As long, as there are not big changes, this should be available.
 
-
  
 ## 00.08.00-RPM-SNAPSHOT
 This release we will increase test coverage and documentation.
 The basic structures and functions are in production used since longer time.
 Adding Apache Lic header to all files
+
+## 00.07.05-RPM
+* parent pom update - version updates
+* added docker based deploy scripts
 
 ## 00.07.04-RPM
 * switched to new version numbers format

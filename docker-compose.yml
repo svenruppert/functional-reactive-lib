@@ -1,0 +1,37 @@
+#
+# Copyright © 2013 Sven Ruppert (sven.ruppert@gmail.com)
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+
+version: '3.5'
+
+services:
+  deploy:
+    image: svenruppert/maven-3.5-jdk-oracle-10
+    container_name: deploy
+    hostname: deploy
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+      - $PWD/:/usr/src/mymaven
+      - ~/.m2/settings.xml:/root/.m2/settings.xml
+      - ~/.gnupg/:/root/.gnupg/
+    working_dir: /usr/src/mymaven
+    #    command: 'mvn help:active-profiles
+    command: 'mvn clean deploy
+                    -Psys-nexus-deploy
+                    -Psys-nexus-deploy-gpg
+                    -Pqm-qs-lic-header-check
+                    -Pqm-qs-no-snapshots
+                    -Pgen-javadoc
+                    -Dmaven.test.skip=true '

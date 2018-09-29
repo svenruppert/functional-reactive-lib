@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# Copyright © 2017 Sven Ruppert (sven.ruppert@gmail.com)
+# Copyright © 2013 Sven Ruppert (sven.ruppert@gmail.com)
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,11 +15,5 @@
 # limitations under the License.
 #
 
-
-docker run \
-       --rm \
-       --name compile \
-       -v "$(pwd)":/usr/src/mymaven \
-       -w /usr/src/mymaven \
-       svenruppert/maven-3.5-jdk-openjdk-11 \
-       mvn clean install
+docker rm deploy
+docker-compose up
