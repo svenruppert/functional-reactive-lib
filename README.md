@@ -24,6 +24,9 @@ This release we will increase test coverage and documentation.
 The basic structures and functions are in production used since longer time.
 Adding Apache Lic header to all files
 
+## 00.07.07-RPM
+
+
 ## 00.07.06-RPM
 * parent pom update - version updates
 
