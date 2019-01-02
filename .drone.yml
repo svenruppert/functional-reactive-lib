@@ -29,20 +29,38 @@ pipeline:
       - mvn clean
       - mvn test
 
-  deploy:
+  sonar-cloud:
     image: ${JDK_VERSION}
     pull: true
     commands:
       - mkdir /root/.m2
       - cp /drone/src/rapidpm-functional-reactive/_data/nexus/settings.xml /root/.m2/settings.xml
-      - mvn clean
-      - mvn deploy
+      - mvn sonar:sonar \
+        -Dsonar.projectKey=functional-reactive_functional-reactive-lib \
+        -Dsonar.organization=functional-reactive \
+        -Dsonar.host.url=https://sonarcloud.io \
+        -Dsonar.login=8fb900bc6ebf2434f25303a356aaf4784bb5f2bf
     when:
         matrix:
           JDK_VERSION: svenruppert/maven-3.5-jdk-08
         branches:
           include: develop, master
           exclude: feature/*
+
+#  deploy:
+#    image: ${JDK_VERSION}
+#    pull: true
+#    commands:
+#      - mkdir /root/.m2
+#      - cp /drone/src/rapidpm-functional-reactive/_data/nexus/settings.xml /root/.m2/settings.xml
+#      - mvn clean
+#      - mvn deploy
+#    when:
+#        matrix:
+#          JDK_VERSION: svenruppert/maven-3.5-jdk-08
+#        branches:
+#          include: develop, master
+#          exclude: feature/*
 
 
 matrix:
