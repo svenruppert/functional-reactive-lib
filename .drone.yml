@@ -35,11 +35,7 @@ pipeline:
     commands:
       - mkdir /root/.m2
       - cp /drone/src/rapidpm-functional-reactive/_data/nexus/settings.xml /root/.m2/settings.xml
-      - mvn sonar:sonar \
-        -Dsonar.projectKey=functional-reactive_functional-reactive-lib \
-        -Dsonar.organization=functional-reactive \
-        -Dsonar.host.url=https://sonarcloud.io \
-        -Dsonar.login=8fb900bc6ebf2434f25303a356aaf4784bb5f2bf
+      - mvn sonar:sonar -Dsonar.projectKey=functional-reactive_functional-reactive-lib -Dsonar.organization=functional-reactive -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=8fb900bc6ebf2434f25303a356aaf4784bb5f2bf
     when:
         matrix:
           JDK_VERSION: svenruppert/maven-3.5-jdk-08
