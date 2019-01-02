@@ -29,7 +29,7 @@ import org.rapidpm.frp.model.Result;
 public class CheckedBiFunctionTest {
 
   @Test
-  public void test001() throws Exception {
+  public void test001() {
 
     final Result<String> result = ((CheckedBiFunction<String, String, String>) (s1 , s2) -> "ok")
         .apply("Hello" , "World");

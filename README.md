@@ -3,29 +3,60 @@
 [![](http://drone.rapidpm.org/api/badges/RapidPM/functional-reactive-lib/status.svg?branch=develop)](http://drone.rapidpm.org/api/badges/RapidPM/functional-reactive-lib/status.svg?branch=develop)
 
 
+
+# Functional Reactive Lib with Core Java
+This is a nano lib, based on a few classes that will give you 
+a handful of functional elements that you can use in your core Java project.
+If you want to know more about it, have a look at the slides 
+you can find here:
+
+[Oracle Code Singapore 2018 - Slides](https://static.rainfocus.com/oracle/oraclecode18/sess/1522992070570001OQQN/PF/Functional-Reactive-Talk%20-%2020180517%20-%20001_1526659376602001iu2q.pdf)
+
+or if you like to have it as a talk/video, have a look at youtube
+
+[Youtube - Oracle Code Singapore 2018](https://www.youtube.com/watch?v=kOeBs1sTd8g)
+
+## JDK8 or JDK9 and above
+I compiled this with the Open JDK8.
+Previous versions at maven central are build ith JDK10.
+I went away from the JDK10, because most projects I know, are using JDK8 in production right know.
+But, if you want to use this with JDK9/10/11/... you can use it.. it is working perfect!
+Only if you start using the JMS, it could be helpful to add a **module-info.java**
+Add the following lines, switch inside the pom.xml to the JDK version you prefer,
+start a **mvn clean install** and be happy ;-)
+
+
+```java
+module rapidpm.functional.reactive {
+ exports org.rapidpm.frp;
+ exports org.rapidpm.frp.functions;
+ exports org.rapidpm.frp.matcher;
+ exports org.rapidpm.frp.memoizer;
+ exports org.rapidpm.frp.model;
+ exports org.rapidpm.frp.model.serial;
+ exports org.rapidpm.frp.reactive;
+}
+```
+
+
 # Release Notes
-
 This Lib is working with
- * Java 08 (open/oracle/ibm/zulu/graalvm/shenandoah)
- * Java 09 (open/oracle/ibm/zulu/shenandoah)
- * Java 10 (open/oracle/shenandoah)
+ * Java 08 (open/oracle/ibm/zulu/graalvm)
+ * Java 09 (open/oracle/ibm/zulu)
+ * Java 10 (open/oracle/zulu)
  * Java 11 (open/oracle/zulu)
- 
-With the beginning of the version 0.7.0
-the lib will be shipped as a JDK10/11 version and 
-a JDK8 version (marked with -jdk8 in the version tag)
+ * Java 12 (open/oracle/zulu)
 
-I am not sure how long I will support JDK8 parallel to the JDK11 version.
-As long, as there are not big changes, this should be available.
 
- 
-## 00.08.00-RPM-SNAPSHOT
+## 01.08.01-RPM-SNAPSHOT
 This release we will increase test coverage and documentation.
 The basic structures and functions are in production used since longer time.
 Adding Apache Lic header to all files
 
-## 00.07.07-RPM
-
+## 01.00.00-RPM
+* defined it as final, as there was no big change since a long time using it in a bunch of projects
+* JDK8 is used to create the jar
+* module-info.java is available inside the folder **_data**
 
 ## 00.07.06-RPM
 * parent pom update - version updates

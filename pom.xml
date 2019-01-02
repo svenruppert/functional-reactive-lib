@@ -21,14 +21,9 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <parent>
-    <groupId>org.rapidpm</groupId>
-    <artifactId>rapidpm-dependencies</artifactId>
-    <version>04.00.08-RPM</version>
-  </parent>
-
+  <groupId>org.rapidpm</groupId>
   <artifactId>rapidpm-functional-reactive</artifactId>
-  <version>00.07.07-RPM</version>
+  <version>01.00.00-RPM</version>
 
   <inceptionYear>2017</inceptionYear>
   <organization>
@@ -74,14 +69,85 @@
   </licenses>
 
   <properties>
+    <!--<maven.compiler.release>11</maven.compiler.release> &lt;!&ndash;release makes source and target&ndash;&gt;-->
+    <maven.compiler.source>8</maven.compiler.source> <!--redundant, but IntelliJ doesn't-->
+    <maven.compiler.target>8</maven.compiler.target> <!--use release when importing-->
+
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+    <slf4j.version>1.7.25</slf4j.version>
+    <log4j-api.version>2.11.1</log4j-api.version>
+
+    <!--<jacoco.version>0.8.2</jacoco.version>-->
+    <pitest.version>1.4.3</pitest.version>
+    <pitest-junit5-plugin.version>0.8</pitest-junit5-plugin.version>
+    <pitest-prod-classes>org.rapidpm.*</pitest-prod-classes>
+    <pitest-test-classes>junit.org.rapidpm*</pitest-test-classes>
+
+    <jmh.version>1.21</jmh.version>
+
+    <!--TDD jUnit5-->
+    <!--<junit.jupiter.version>5.1.1</junit.jupiter.version>-->
+    <!--<junit.platform.version>1.1.1</junit.platform.version>-->
+    <junit.jupiter.version>5.3.2</junit.jupiter.version>
+    <junit.platform.version>1.3.2</junit.platform.version>
+
+    <!--<maven-failsafe-plugin.version>2.19.1</maven-failsafe-plugin.version>-->
+    <!--<maven-surefire-plugin.version>2.19.1</maven-surefire-plugin.version>-->
   </properties>
 
   <dependencies>
+
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+      <version>${slf4j.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-simple</artifactId>
+      <version>${slf4j.version}</version>
+      <scope>test</scope>
+    </dependency>
+
+    <!--jUnit5-->
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-api</artifactId>
+      <version>${junit.jupiter.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-params</artifactId>
+      <version>${junit.jupiter.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.junit.platform</groupId>
+      <artifactId>junit-platform-launcher</artifactId>
+      <scope>test</scope>
+      <version>${junit.platform.version}</version>
+    </dependency>
+    <!-- Only required to run tests in an IDE that bundles an older version -->
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-engine</artifactId>
+      <scope>test</scope>
+      <version>${junit.jupiter.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.pitest</groupId>
+      <artifactId>pitest</artifactId>
+      <version>${pitest.version}</version>
+      <scope>test</scope>
+    </dependency>
     <dependency>
       <groupId>org.hamcrest</groupId>
       <artifactId>hamcrest-all</artifactId>
+      <version>1.3</version>
       <scope>test</scope>
     </dependency>
   </dependencies>
@@ -91,6 +157,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-jar-plugin</artifactId>
+        <version>3.1.1</version>
         <executions>
           <execution>
             <phase>package</phase>
@@ -104,6 +171,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-source-plugin</artifactId>
+        <version>3.0.1</version>
         <executions>
           <execution>
             <goals>
@@ -113,6 +181,156 @@
           </execution>
         </executions>
       </plugin>
+      <!--Enable mutation testing-->
+      <plugin>
+        <groupId>org.pitest</groupId>
+        <artifactId>pitest-maven</artifactId>
+        <version>1.4.3</version>
+        <dependencies>
+          <dependency>
+            <groupId>org.pitest</groupId>
+            <artifactId>pitest-junit5-plugin</artifactId>
+            <version>${pitest-junit5-plugin.version}</version>
+          </dependency>
+        </dependencies>
+        <configuration>
+          <threads>2</threads>
+          <outputFormats>
+            <outputFormat>XML</outputFormat>
+            <outputFormat>HTML</outputFormat>
+          </outputFormats>
+          <targetClasses>
+            <param>${pitest-prod-classes}</param>
+            <param>org.reflections.*</param>
+          </targetClasses>
+          <targetTests>
+            <param>${pitest-test-classes}</param>
+          </targetTests>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-enforcer-plugin</artifactId>
+        <version>3.0.0-M2</version>
+        <executions>
+          <execution>
+            <id>enforce-no-snapshots</id>
+            <goals>
+              <goal>enforce</goal>
+            </goals>
+            <configuration>
+              <rules>
+                <requireReleaseDeps>
+                  <message>No Snapshots Allowed!</message>
+                </requireReleaseDeps>
+              </rules>
+              <fail>true</fail>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>com.mycila</groupId>
+        <artifactId>license-maven-plugin</artifactId>
+        <version>3.0</version>
+        <configuration>
+          <header>com/mycila/maven/plugin/license/templates/APACHE-2.txt</header>
+          <properties>
+            <owner>Sven Ruppert</owner>
+            <email>sven.ruppert@gmail.com</email>
+          </properties>
+          <excludes>
+            <exclude>**/*.iml</exclude>
+            <exclude>**/README*</exclude>
+            <exclude>**/jacoco.exec*</exclude>
+            <exclude>**/LICENSE.txt</exclude>
+            <exclude>target/**</exclude>
+          </excludes>
+        </configuration>
+        <executions>
+          <execution>
+            <goals>
+              <goal>check</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
     </plugins>
   </build>
+
+  <reporting>
+    <plugins>
+      <plugin>
+        <groupId>org.pitest</groupId>
+        <artifactId>pitest-maven</artifactId>
+        <reportSets>
+          <reportSet>
+            <reports>
+              <report>report</report>
+            </reports>
+          </reportSet>
+        </reportSets>
+      </plugin>
+    </plugins>
+  </reporting>
+
+  <profiles>
+    <profile>
+      <id>_release</id>
+      <activation>
+        <activeByDefault>false</activeByDefault>
+      </activation>
+
+      <distributionManagement>
+        <repository>
+          <id>sonatype-nexus</id>
+          <url>${sonatype-nexus-url}</url>
+        </repository>
+        <snapshotRepository>
+          <id>sonatype-nexus-snapshots</id>
+          <url>${sonatype-nexus-snapshots-url}</url>
+        </snapshotRepository>
+      </distributionManagement>
+
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-javadoc-plugin</artifactId>
+            <version>3.0.1</version>
+            <executions>
+              <execution>
+                <id>attach-javadocs</id>
+                <goals>
+                  <goal>jar</goal>
+                </goals>
+              </execution>
+            </executions>
+            <configuration>
+              <additionalOptions>
+                <additionalOption>-Xdoclint:none</additionalOption>
+              </additionalOptions>
+              <destDir>target/doc/apidoc/</destDir>
+            </configuration>
+          </plugin>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-gpg-plugin</artifactId>
+            <version>1.6</version>
+            <executions>
+              <execution>
+                <id>sign-artifacts</id>
+                <phase>verify</phase>
+                <goals>
+                  <goal>sign</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
+
+
 </project>

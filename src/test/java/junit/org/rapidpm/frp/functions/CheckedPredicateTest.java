@@ -29,7 +29,7 @@ import org.rapidpm.frp.functions.CheckedPredicate;
 public class CheckedPredicateTest {
 
   @Test
-  public void test001() throws Exception {
+  public void test001() {
     CheckedPredicate<String> p = s -> {
       throw new RuntimeException("foo");
     };
@@ -37,7 +37,7 @@ public class CheckedPredicateTest {
   }
 
   @Test
-  public void test002() throws Exception {
+  public void test002()  {
     CheckedPredicate<String> p = s -> {
       throw new IOException("foo");
     };
@@ -45,7 +45,7 @@ public class CheckedPredicateTest {
   }
 
   @Test
-  public void test003() throws Exception {
+  public void test003() {
     CheckedPredicate<String> p = s -> s.equals("foo");
     assertFalse(p.test(""));
     assertTrue(p.test("foo"));
