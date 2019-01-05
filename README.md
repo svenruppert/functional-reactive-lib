@@ -52,10 +52,13 @@ This Lib is working with
  * Java 12 (open/oracle/zulu)
 
 
-## 01.08.01-RPM-SNAPSHOT
+## 01.01.00-RPM-SNAPSHOT
 This release we will increase test coverage and documentation.
 The basic structures and functions are in production used since longer time.
 Adding Apache Lic header to all files
+
+## 01.00.01-RPM
+* BUGFIX in case, the result was calculated two times.
 
 ## 01.00.00-RPM
 * defined it as final, as there was no big change since a long time using it in a bunch of projects

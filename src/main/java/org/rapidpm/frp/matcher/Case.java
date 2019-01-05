@@ -85,14 +85,6 @@ public class Case<T> extends Pair<Supplier<Boolean>, Supplier<Result<T>>> {
    */
   @SafeVarargs
   public static <T> Result<T> match(DefaultCase<T> defaultCase , Case<T>... matchers) {
-
-    for (Case<T> matcher : matchers) {
-      if (matcher.isMatching()) {
-        Result<T> result = matcher.result();
-      }
-    }
-
-
     return Stream
         .of(matchers)
         .filter(Case::isMatching)
