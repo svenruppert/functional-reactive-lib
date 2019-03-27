@@ -67,6 +67,7 @@ Adding Apache Lic header to all files
 * Converting.convertToInteger
 * Converting.convertToDouble
 * SystemProperties Util Functions
+* Single<T>
    
    
    
