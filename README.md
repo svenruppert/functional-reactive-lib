@@ -60,6 +60,8 @@ This release we will increase test coverage and documentation.
 The basic structures and functions are in production used since longer time.
 Adding Apache Lic header to all files
 
+## 01.00.03-RPM
+
 
 ## 01.00.02-RPM
 *  static <T, R> CheckedFunction<T, R> asCheckedFunc(Function<T, R> f)
