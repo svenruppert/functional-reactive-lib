@@ -54,8 +54,24 @@ This Lib is working with
  * Java 11 (open/oracle/zulu)
  * Java 12 (open/oracle/zulu)
 
+With the release 01.00.03-RPM I started to use JitCI to make my life easier.
 
+```xml
+	<repositories>
+		<repository>
+		    <id>jitpack.io</id>
+		    <url>https://jitpack.io</url>
+		</repository>
+	</repositories>
+```
 
+```xml
+    <dependency>
+	    <groupId>com.github.functional-reactive</groupId>
+	    <artifactId>functional-reactive-lib</artifactId>
+	    <version>--version--</version>
+	</dependency>
+```
 
 
 ## 01.01.00-RPM-SNAPSHOT
@@ -64,7 +80,8 @@ The basic structures and functions are in production used since longer time.
 Adding Apache Lic header to all files
 
 ## 01.00.03-RPM
-
+* added JitCI for deployment as well
+* version updates
 
 ## 01.00.02-RPM
 *  static <T, R> CheckedFunction<T, R> asCheckedFunc(Function<T, R> f)
