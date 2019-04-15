@@ -1,6 +1,9 @@
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.rapidpm/rapidpm-functional-reactive/badge.svg)](https://maven-badges.herokuapp.com/maven-central/org.rapidpm/rapidpm-functional-reactive)
+[![](https://jitpack.io/v/functional-reactive/functional-reactive-lib.svg)](https://jitpack.io/#functional-reactive/functional-reactive-lib)
 
-[![](http://drone.rapidpm.org/api/badges/RapidPM/functional-reactive-lib/status.svg?branch=develop)](http://drone.rapidpm.org/api/badges/RapidPM/functional-reactive-lib/status.svg?branch=develop)
+[![](https://jitci.com/gh/functional-reactive/functional-reactive-lib/svg)](https://jitci.com/gh/functional-reactive/functional-reactive-lib)
+
+
 
 ![Sonarcloud Status](https://sonarcloud.io/api/project_badges/measure?project=functional-reactive_functional-reactive-lib&metric=security_rating)
 ![Sonarcloud Status](https://sonarcloud.io/api/project_badges/measure?project=functional-reactive_functional-reactive-lib&metric=sqale_rating)

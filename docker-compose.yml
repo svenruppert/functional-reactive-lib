@@ -18,7 +18,7 @@ version: '3.5'
 
 services:
   deploy:
-    image: svenruppert/maven-3.5-jdk-oracle-10
+    image: svenruppert/maven-3.6-jdk-08
     container_name: deploy
     hostname: deploy
     volumes:

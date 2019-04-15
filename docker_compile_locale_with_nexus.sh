@@ -22,5 +22,5 @@ docker run \
        -v "$(pwd)/_data/nexus/settings.xml":/root/.m2/settings.xml \
        -v "$(pwd)":/usr/src/mymaven \
        -w /usr/src/mymaven \
-       svenruppert/maven-3.5-jdk-openjdk-11 \
+       svenruppert/maven-3.6-jdk-08 \
        mvn clean install
