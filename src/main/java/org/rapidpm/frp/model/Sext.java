@@ -136,12 +136,13 @@ public class Sext<T1, T2, T3, T4, T5, T6> {
   /** {@inheritDoc} */
   @Override
   public String toString() {
-    return "Quint{" +
+    return "Sext{" +
         "t1=" + t1 +
         ", t2=" + t2 +
         ", t3=" + t3 +
         ", t4=" + t4 +
         ", t5=" + t5 +
+        ", t6=" + t6 +
         '}';
   }
 
