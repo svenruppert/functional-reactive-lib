@@ -23,7 +23,7 @@
 
   <groupId>org.rapidpm</groupId>
   <artifactId>rapidpm-functional-reactive</artifactId>
-  <version>01.00.04-RPM</version>
+  <version>01.00.05-RPM-SNAPSHOT</version>
 
   <inceptionYear>2017</inceptionYear>
   <organization>
