@@ -14,7 +14,8 @@ public class QuintTest {
   public void testEquals() {
     final Quint quint = new Quint(0, 1, 2, 3, 4);
 
-    assertTrue(quint.equals(quint));
+//    assertTrue(quint.equals(quint));
+    assertEquals(quint, quint);
     assertFalse(quint.equals(null));
     assertFalse(quint.equals(new Quint(null, 1, 2, 3, 4)));
     assertFalse(quint.equals(new Quint(0, null, 2, 3, 4)));

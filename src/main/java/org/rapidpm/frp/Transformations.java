@@ -1,12 +1,12 @@
 /**
  * Copyright © 2017 Sven Ruppert (sven.ruppert@gmail.com)
- *
+ * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -59,6 +59,7 @@ public interface Transformations {
     return (Function<U, V> f) -> (Function<T, U> g) -> (T x) -> f.apply(g.apply(x));
   }
 
+
   /**
    * <p>enumToStream.</p>
    *
@@ -66,19 +67,28 @@ public interface Transformations {
    * @return a {@link java.util.function.Function} object.
    */
   static <T> Function<Enumeration<T>, Stream<T>> enumToStream() {
-    return (e) ->
-        StreamSupport
-            .stream(Spliterators.spliteratorUnknownSize(new Iterator<T>() {
-              public T next() {
-                return e.nextElement();
-              }
+    return (e) -> StreamSupport.stream(Spliterators.spliteratorUnknownSize(new Iterator<T>() {
+      public T next() {
+        return e.nextElement();
+      }
 
-              public boolean hasNext() {
-                return e.hasMoreElements();
-              }
-            }, Spliterator.ORDERED), false);
+      public boolean hasNext() {
+        return e.hasMoreElements();
+      }
+    }, Spliterator.ORDERED), false);
   }
 
+  static <T> Function<Iterator<T>, Stream<T>> iteratorToStream() {
+    return (e) -> StreamSupport.stream(Spliterators.spliteratorUnknownSize(new Iterator<T>() {
+      public T next() {
+        return e.next();
+      }
+
+      public boolean hasNext() {
+        return e.hasNext();
+      }
+    }, Spliterator.ORDERED), false);
+  }
 
   /**
    * <p>curryBiFunction.</p>
@@ -113,7 +123,8 @@ public interface Transformations {
    * @return a {@link java.util.function.Function} object.
    */
   static <A, B, R> Function<Function<A, Function<B, R>>, BiFunction<A, B, R>> unCurryBiFunction() {
-    return (func) -> (a, b) -> func.apply(a).apply(b);
+    return (func) -> (a, b) -> func.apply(a)
+                                   .apply(b);
   }
 
   /**
@@ -125,7 +136,8 @@ public interface Transformations {
    * @return a {@link java.util.function.Function} object.
    */
   static <A, B, R> Function<Function<A, CheckedFunction<B, R>>, CheckedBiFunction<A, B, R>> unCurryCheckedBiFunction() {
-    return (func) -> (a, b) -> func.apply(a).applyWithException(b);
+    return (func) -> (a, b) -> func.apply(a)
+                                   .applyWithException(b);
   }
 
   /**
@@ -137,9 +149,7 @@ public interface Transformations {
    * @param <R> a R object.
    * @return a {@link java.util.function.Function} object.
    */
-  static <A, B, C, R> Function<
-      TriFunction<A, B, C, R>,
-      Function<A, Function<B, Function<C, R>>>> curryTriFunction() {
+  static <A, B, C, R> Function<TriFunction<A, B, C, R>, Function<A, Function<B, Function<C, R>>>> curryTriFunction() {
     return (func) -> a -> b -> c -> func.apply(a, b, c);
   }
 
@@ -152,9 +162,7 @@ public interface Transformations {
    * @param <R> a R object.
    * @return a {@link java.util.function.Function} object.
    */
-  static <A, B, C, R> Function<
-      CheckedTriFunction<A, B, C, R>,
-      Function<A, Function<B, CheckedFunction<C, R>>>> curryCheckedTriFunction() {
+  static <A, B, C, R> Function<CheckedTriFunction<A, B, C, R>, Function<A, Function<B, CheckedFunction<C, R>>>> curryCheckedTriFunction() {
     return (func) -> a -> b -> c -> func.applyWithException(a, b, c);
   }
 
@@ -167,10 +175,10 @@ public interface Transformations {
    * @param <R> a R object.
    * @return a {@link java.util.function.Function} object.
    */
-  static <A, B, C, R> Function<
-      Function<A, Function<B, Function<C, R>>>,
-      TriFunction<A, B, C, R>> unCurryTriFunction() {
-    return (func) -> (a, b, c) -> func.apply(a).apply(b).apply(c);
+  static <A, B, C, R> Function<Function<A, Function<B, Function<C, R>>>, TriFunction<A, B, C, R>> unCurryTriFunction() {
+    return (func) -> (a, b, c) -> func.apply(a)
+                                      .apply(b)
+                                      .apply(c);
   }
 
 
@@ -183,10 +191,10 @@ public interface Transformations {
    * @param <R> a R object.
    * @return a {@link java.util.function.Function} object.
    */
-  static <A, B, C, R> Function<
-      Function<A, Function<B, CheckedFunction<C, R>>>,
-      CheckedTriFunction<A, B, C, R>> unCurryCheckedTriFunction() {
-    return (func) -> (a, b, c) -> func.apply(a).apply(b).applyWithException(c);
+  static <A, B, C, R> Function<Function<A, Function<B, CheckedFunction<C, R>>>, CheckedTriFunction<A, B, C, R>> unCurryCheckedTriFunction() {
+    return (func) -> (a, b, c) -> func.apply(a)
+                                      .apply(b)
+                                      .applyWithException(c);
   }
 
 

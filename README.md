@@ -79,6 +79,10 @@ This release we will increase test coverage and documentation.
 The basic structures and functions are in production used since longer time.
 Adding Apache Lic header to all files
 
+* Transformations
+    * static <T> Function<Iterator<T>, Stream<T>> iteratorToStream() 
+
+
 ## 01.00.03-RPM
 * added JitCI for deployment as well
 * version updates

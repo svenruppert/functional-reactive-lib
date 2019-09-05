@@ -21,5 +21,5 @@ docker run \
        --name compile \
        -v "$(pwd)":/usr/src/mymaven \
        -w /usr/src/mymaven \
-       svenruppert/maven-3.6-jdk-08 \
+       svenruppert/maven-3.6.1-adopt:1.8.212-04 \
        mvn clean install
