@@ -69,6 +69,9 @@
   </licenses>
 
   <properties>
+    <deploy-repo-url>http://repo.sven-ruppert.de/repository/maven-releases/</deploy-repo-url>
+    <deploy-repo-snapshots-url>http://repo.sven-ruppert.de/repository/maven-snapshots/</deploy-repo-snapshots-url>
+
     <!--<maven.compiler.release>11</maven.compiler.release> &lt;!&ndash;release makes source and target&ndash;&gt;-->
     <maven.compiler.source>8</maven.compiler.source> <!--redundant, but IntelliJ doesn't-->
     <maven.compiler.target>8</maven.compiler.target> <!--use release when importing-->
@@ -92,15 +95,21 @@
     <junit.platform.version>1.5.1</junit.platform.version>
   </properties>
 
-  <repositories>
+
+  <distributionManagement>
     <repository>
-      <id>jitpack.io</id>
-      <url>https://jitpack.io</url>
+      <id>deploy-repo-maven</id>
+      <name>deploy-repo-maven</name>
+      <url>${deploy-repo-url}</url>
     </repository>
-  </repositories>
+    <snapshotRepository>
+      <id>deploy-repo-maven-snapshots</id>
+      <name>deploy-repo-maven-snapshots</name>
+      <url>${deploy-repo-snapshots-url}</url>
+    </snapshotRepository>
+  </distributionManagement>
 
   <dependencies>
-
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-api</artifactId>
@@ -225,74 +234,24 @@
 
   <profiles>
     <profile>
-      <id>_release</id>
+      <id>_release_prepare</id>
       <activation>
         <activeByDefault>false</activeByDefault>
       </activation>
-
-      <distributionManagement>
-        <repository>
-          <id>sonatype-nexus</id>
-          <url>${sonatype-nexus-url}</url>
-        </repository>
-        <snapshotRepository>
-          <id>sonatype-nexus-snapshots</id>
-          <url>${sonatype-nexus-snapshots-url}</url>
-        </snapshotRepository>
-      </distributionManagement>
-
       <build>
         <plugins>
           <plugin>
             <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-javadoc-plugin</artifactId>
-            <version>3.0.1</version>
-            <executions>
-              <execution>
-                <id>attach-javadocs</id>
-                <goals>
-                  <goal>jar</goal>
-                </goals>
-              </execution>
-            </executions>
+            <artifactId>maven-release-plugin</artifactId>
             <configuration>
-              <additionalOptions>
-                <additionalOption>-Xdoclint:none</additionalOption>
-              </additionalOptions>
-              <destDir>target/doc/apidoc/</destDir>
+              <useReleaseProfile>false</useReleaseProfile>
+              <releaseProfiles>extras</releaseProfiles>
+              <autoVersionSubmodules>true</autoVersionSubmodules>
             </configuration>
           </plugin>
           <plugin>
             <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-source-plugin</artifactId>
-            <version>3.0.1</version>
-            <executions>
-              <execution>
-                <goals>
-                  <goal>jar</goal>
-                  <goal>test-jar</goal>
-                </goals>
-              </execution>
-            </executions>
-          </plugin>
-          <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-gpg-plugin</artifactId>
-            <version>1.6</version>
-            <executions>
-              <execution>
-                <id>sign-artifacts</id>
-                <phase>verify</phase>
-                <goals>
-                  <goal>sign</goal>
-                </goals>
-              </execution>
-            </executions>
-          </plugin>
-          <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-enforcer-plugin</artifactId>
-            <version>3.0.0-M2</version>
             <executions>
               <execution>
                 <id>enforce-no-snapshots</id>
@@ -310,10 +269,10 @@
               </execution>
             </executions>
           </plugin>
+
           <plugin>
             <groupId>com.mycila</groupId>
             <artifactId>license-maven-plugin</artifactId>
-            <version>3.0</version>
             <configuration>
               <header>com/mycila/maven/plugin/license/templates/APACHE-2.txt</header>
               <properties>
@@ -321,12 +280,110 @@
                 <email>sven.ruppert@gmail.com</email>
               </properties>
               <excludes>
+                <excludes>**/webpack.generated.js</excludes>
+                <excludes>**/webpack.config.js</excludes>
+                <excludes>**/package.json</excludes>
+                <excludes>**/package-lock.json</excludes>
+                <excludes>**/node/**</excludes>
+                <excludes>**/node_modules/**</excludes>
                 <exclude>**/*.iml</exclude>
                 <exclude>**/README*</exclude>
                 <exclude>**/jacoco.exec*</exclude>
                 <exclude>**/LICENSE.txt</exclude>
-                <exclude>target/**</exclude>
+                <exclude>**/_data/webdrivers/*</exclude>
+                <!--<exclude>src/test/resources/**</exclude>-->
+                <!--<exclude>src/main/resources/**</exclude>-->
+                <exclude>**/target/**</exclude>
               </excludes>
+            </configuration>
+            <executions>
+              <execution>
+                <goals>
+                  <goal>check</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-javadoc-plugin</artifactId>
+            <dependencies>
+              <dependency>
+                <groupId>org.ow2.asm</groupId>
+                <artifactId>asm</artifactId>
+                <version>7.1</version> <!-- Use newer version of ASM -->
+              </dependency>
+            </dependencies>
+            <executions>
+              <execution>
+                <id>attach-javadocs</id>
+                <goals>
+                  <goal>jar</goal>
+                </goals>
+              </execution>
+            </executions>
+            <configuration>
+              <additionalOptions>
+                <failOnError>false</failOnError>
+                <!--                <additionalOption>-Xdoclint:none</additionalOption>-->
+                <!--                <additionalOption>-html5</additionalOption>-->
+                <!--                <javadocExecutable>${java.home}/bin/javadoc</javadocExecutable>-->
+              </additionalOptions>
+              <destDir>target/doc/apidoc/</destDir>
+            </configuration>
+          </plugin>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-source-plugin</artifactId>
+            <executions>
+              <execution>
+                <goals>
+                  <goal>jar</goal>
+                  <goal>test-jar</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+    <profile>
+      <id>_release_sign-artifacts</id>
+      <activation>
+        <activeByDefault>false</activeByDefault>
+      </activation>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-gpg-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>sign-artifacts</id>
+                <phase>verify</phase>
+                <goals>
+                  <goal>sign</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+    <profile>
+      <id>_release_scan_dependencies</id>
+      <activation>
+        <activeByDefault>false</activeByDefault>
+      </activation>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.owasp</groupId>
+            <artifactId>dependency-check-maven</artifactId>
+            <configuration>
+              <failBuildOnCVSS>8</failBuildOnCVSS>
+              <skipProvidedScope>true</skipProvidedScope>
+              <skipRuntimeScope>true</skipRuntimeScope>
             </configuration>
             <executions>
               <execution>
@@ -339,6 +396,121 @@
         </plugins>
       </build>
     </profile>
+<!--    <profile>-->
+<!--      <id>_release</id>-->
+<!--      <activation>-->
+<!--        <activeByDefault>false</activeByDefault>-->
+<!--      </activation>-->
+
+<!--      <distributionManagement>-->
+<!--        <repository>-->
+<!--          <id>sonatype-nexus</id>-->
+<!--          <url>${sonatype-nexus-url}</url>-->
+<!--        </repository>-->
+<!--        <snapshotRepository>-->
+<!--          <id>sonatype-nexus-snapshots</id>-->
+<!--          <url>${sonatype-nexus-snapshots-url}</url>-->
+<!--        </snapshotRepository>-->
+<!--      </distributionManagement>-->
+
+<!--      <build>-->
+<!--        <plugins>-->
+<!--          <plugin>-->
+<!--            <groupId>org.apache.maven.plugins</groupId>-->
+<!--            <artifactId>maven-javadoc-plugin</artifactId>-->
+<!--            <version>3.0.1</version>-->
+<!--            <executions>-->
+<!--              <execution>-->
+<!--                <id>attach-javadocs</id>-->
+<!--                <goals>-->
+<!--                  <goal>jar</goal>-->
+<!--                </goals>-->
+<!--              </execution>-->
+<!--            </executions>-->
+<!--            <configuration>-->
+<!--              <additionalOptions>-->
+<!--                <additionalOption>-Xdoclint:none</additionalOption>-->
+<!--              </additionalOptions>-->
+<!--              <destDir>target/doc/apidoc/</destDir>-->
+<!--            </configuration>-->
+<!--          </plugin>-->
+<!--          <plugin>-->
+<!--            <groupId>org.apache.maven.plugins</groupId>-->
+<!--            <artifactId>maven-source-plugin</artifactId>-->
+<!--            <version>3.0.1</version>-->
+<!--            <executions>-->
+<!--              <execution>-->
+<!--                <goals>-->
+<!--                  <goal>jar</goal>-->
+<!--                  <goal>test-jar</goal>-->
+<!--                </goals>-->
+<!--              </execution>-->
+<!--            </executions>-->
+<!--          </plugin>-->
+<!--          <plugin>-->
+<!--            <groupId>org.apache.maven.plugins</groupId>-->
+<!--            <artifactId>maven-gpg-plugin</artifactId>-->
+<!--            <version>1.6</version>-->
+<!--            <executions>-->
+<!--              <execution>-->
+<!--                <id>sign-artifacts</id>-->
+<!--                <phase>verify</phase>-->
+<!--                <goals>-->
+<!--                  <goal>sign</goal>-->
+<!--                </goals>-->
+<!--              </execution>-->
+<!--            </executions>-->
+<!--          </plugin>-->
+<!--          <plugin>-->
+<!--            <groupId>org.apache.maven.plugins</groupId>-->
+<!--            <artifactId>maven-enforcer-plugin</artifactId>-->
+<!--            <version>3.0.0-M2</version>-->
+<!--            <executions>-->
+<!--              <execution>-->
+<!--                <id>enforce-no-snapshots</id>-->
+<!--                <goals>-->
+<!--                  <goal>enforce</goal>-->
+<!--                </goals>-->
+<!--                <configuration>-->
+<!--                  <rules>-->
+<!--                    <requireReleaseDeps>-->
+<!--                      <message>No Snapshots Allowed!</message>-->
+<!--                    </requireReleaseDeps>-->
+<!--                  </rules>-->
+<!--                  <fail>true</fail>-->
+<!--                </configuration>-->
+<!--              </execution>-->
+<!--            </executions>-->
+<!--          </plugin>-->
+<!--          <plugin>-->
+<!--            <groupId>com.mycila</groupId>-->
+<!--            <artifactId>license-maven-plugin</artifactId>-->
+<!--            <version>3.0</version>-->
+<!--            <configuration>-->
+<!--              <header>com/mycila/maven/plugin/license/templates/APACHE-2.txt</header>-->
+<!--              <properties>-->
+<!--                <owner>Sven Ruppert</owner>-->
+<!--                <email>sven.ruppert@gmail.com</email>-->
+<!--              </properties>-->
+<!--              <excludes>-->
+<!--                <exclude>**/*.iml</exclude>-->
+<!--                <exclude>**/README*</exclude>-->
+<!--                <exclude>**/jacoco.exec*</exclude>-->
+<!--                <exclude>**/LICENSE.txt</exclude>-->
+<!--                <exclude>target/**</exclude>-->
+<!--              </excludes>-->
+<!--            </configuration>-->
+<!--            <executions>-->
+<!--              <execution>-->
+<!--                <goals>-->
+<!--                  <goal>check</goal>-->
+<!--                </goals>-->
+<!--              </execution>-->
+<!--            </executions>-->
+<!--          </plugin>-->
+<!--        </plugins>-->
+<!--      </build>-->
+<!--    </profile>-->
   </profiles>
 
 
