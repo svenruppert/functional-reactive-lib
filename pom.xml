@@ -99,39 +99,37 @@
   </properties>
 
   <repositories>
-    <!--    sven-ruppert-->
     <repository>
-      <id>sven-ruppert</id>
-      <name>sven-ruppert</name>
-      <url>http://repo.sven-ruppert.de/repository/maven-public/</url>
-      <snapshots>
-        <enabled>true</enabled>
-      </snapshots>
-      <releases>
-        <enabled>true</enabled>
-      </releases>
-    </repository>
-    <!--    JCenter-->
-    <repository>
-      <id>jcenter</id>
-      <name>bintray</name>
-      <url>https://jcenter.bintray.com</url>
       <snapshots>
         <enabled>false</enabled>
       </snapshots>
-    </repository>
-    <!--        <repository>-->
-    <!--          <id>bintray-rapidpm</id>-->
-    <!--          <url>https://dl.bintray.com/rapidpm/maven</url>-->
-    <!--        </repository>-->
-    <repository>
       <id>central</id>
-      <url>https://repo1.maven.org/maven2/</url>
-      <snapshots>
-        <enabled>false</enabled>
-      </snapshots>
+      <name>libs-release</name>
+      <url>${deploy-repo-url}</url>
+    </repository>
+    <repository>
+      <snapshots />
+      <id>snapshots</id>
+      <name>libs-snapshot</name>
+      <url>${deploy-repo-snapshots-url}</url>
     </repository>
   </repositories>
+  <pluginRepositories>
+    <pluginRepository>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+      <id>central</id>
+      <name>libs-release</name>
+      <url>${deploy-repo-url}</url>
+    </pluginRepository>
+    <pluginRepository>
+      <snapshots />
+      <id>snapshots</id>
+      <name>libs-snapshot</name>
+      <url>${deploy-repo-snapshots-url}</url>
+    </pluginRepository>
+  </pluginRepositories>
 
 
   <distributionManagement>
