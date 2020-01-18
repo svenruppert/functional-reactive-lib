@@ -69,8 +69,11 @@
   </licenses>
 
   <properties>
-    <deploy-repo-url>http://repo.sven-ruppert.de/repository/maven-releases/</deploy-repo-url>
-    <deploy-repo-snapshots-url>http://repo.sven-ruppert.de/repository/maven-snapshots/</deploy-repo-snapshots-url>
+    <deploy-repo-url>http://jfrog-repo.sven-ruppert.de:8081/artifactory/libs-release</deploy-repo-url>
+    <deploy-repo-snapshots-url>http://jfrog-repo.sven-ruppert.de:8081/artifactory/libs-snapshot</deploy-repo-snapshots-url>
+
+<!--    <deploy-repo-url>http://repo.sven-ruppert.de/repository/maven-releases/</deploy-repo-url>-->
+<!--    <deploy-repo-snapshots-url>http://repo.sven-ruppert.de/repository/maven-snapshots/</deploy-repo-snapshots-url>-->
 
     <!--<maven.compiler.release>11</maven.compiler.release> &lt;!&ndash;release makes source and target&ndash;&gt;-->
     <maven.compiler.source>8</maven.compiler.source> <!--redundant, but IntelliJ doesn't-->
