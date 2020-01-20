@@ -24,6 +24,7 @@
   <groupId>org.rapidpm</groupId>
   <artifactId>rapidpm-functional-reactive</artifactId>
   <version>01.00.05-RPM-SNAPSHOT</version>
+  <packaging>jar</packaging>
 
   <inceptionYear>2017</inceptionYear>
   <organization>
@@ -56,8 +57,8 @@
     <url>https://github.com/functional-reactive/functional-reactive-lib/issues</url>
   </issueManagement>
   <ciManagement>
-    <system>Drone</system>
-    <url>http://drone.rapidpm.org/RapidPM/functional-reactive-lib</url>
+    <system>TeamCity</system>
+    <url>http://build.sven-ruppert.de:8111/</url>
   </ciManagement>
   <licenses>
     <license>
@@ -75,9 +76,8 @@
 <!--    <deploy-repo-url>http://repo.sven-ruppert.de/repository/maven-releases/</deploy-repo-url>-->
 <!--    <deploy-repo-snapshots-url>http://repo.sven-ruppert.de/repository/maven-snapshots/</deploy-repo-snapshots-url>-->
 
-    <!--<maven.compiler.release>11</maven.compiler.release> &lt;!&ndash;release makes source and target&ndash;&gt;-->
-    <maven.compiler.source>8</maven.compiler.source> <!--redundant, but IntelliJ doesn't-->
-    <maven.compiler.target>8</maven.compiler.target> <!--use release when importing-->
+    <maven.compiler.source>1.8</maven.compiler.source> <!--redundant, but IntelliJ doesn't-->
+    <maven.compiler.target>1.8</maven.compiler.target> <!--use release when importing-->
 
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -97,6 +97,19 @@
     <junit.jupiter.version>5.5.1</junit.jupiter.version>
     <junit.platform.version>1.5.1</junit.platform.version>
   </properties>
+
+  <distributionManagement>
+    <repository>
+      <id>deploy-repo-maven</id>
+      <name>deploy-repo-maven</name>
+      <url>${deploy-repo-url}</url>
+    </repository>
+    <snapshotRepository>
+      <id>deploy-repo-maven-snapshots</id>
+      <name>deploy-repo-maven-snapshots</name>
+      <url>${deploy-repo-snapshots-url}</url>
+    </snapshotRepository>
+  </distributionManagement>
 
   <repositories>
     <repository>
@@ -130,20 +143,6 @@
       <url>${deploy-repo-snapshots-url}</url>
     </pluginRepository>
   </pluginRepositories>
-
-
-  <distributionManagement>
-    <repository>
-      <id>deploy-repo-maven</id>
-      <name>deploy-repo-maven</name>
-      <url>${deploy-repo-url}</url>
-    </repository>
-    <snapshotRepository>
-      <id>deploy-repo-maven-snapshots</id>
-      <name>deploy-repo-maven-snapshots</name>
-      <url>${deploy-repo-snapshots-url}</url>
-    </snapshotRepository>
-  </distributionManagement>
 
   <dependencies>
     <dependency>
@@ -279,6 +278,7 @@
           <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-release-plugin</artifactId>
+            <version>3.0.0-M1</version>
             <configuration>
               <useReleaseProfile>false</useReleaseProfile>
               <releaseProfiles>extras</releaseProfiles>
@@ -288,6 +288,7 @@
           <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-enforcer-plugin</artifactId>
+            <version>3.0.0-M3</version>
             <executions>
               <execution>
                 <id>enforce-no-snapshots</id>
@@ -309,6 +310,7 @@
           <plugin>
             <groupId>com.mycila</groupId>
             <artifactId>license-maven-plugin</artifactId>
+            <version>3.0</version>
             <configuration>
               <header>com/mycila/maven/plugin/license/templates/APACHE-2.txt</header>
               <properties>
@@ -343,6 +345,7 @@
           <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-javadoc-plugin</artifactId>
+            <version>3.1.1</version>
             <dependencies>
               <dependency>
                 <groupId>org.ow2.asm</groupId>
@@ -361,9 +364,6 @@
             <configuration>
               <additionalOptions>
                 <failOnError>false</failOnError>
-                <!--                <additionalOption>-Xdoclint:none</additionalOption>-->
-                <!--                <additionalOption>-html5</additionalOption>-->
-                <!--                <javadocExecutable>${java.home}/bin/javadoc</javadocExecutable>-->
               </additionalOptions>
               <destDir>target/doc/apidoc/</destDir>
             </configuration>
@@ -371,6 +371,7 @@
           <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-source-plugin</artifactId>
+            <version>3.2.1</version>
             <executions>
               <execution>
                 <goals>
@@ -393,6 +394,7 @@
           <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-gpg-plugin</artifactId>
+            <version>1.6</version>
             <executions>
               <execution>
                 <id>sign-artifacts</id>
@@ -416,6 +418,7 @@
           <plugin>
             <groupId>org.owasp</groupId>
             <artifactId>dependency-check-maven</artifactId>
+            <version>5.2.4</version>
             <configuration>
               <failBuildOnCVSS>8</failBuildOnCVSS>
               <skipProvidedScope>true</skipProvidedScope>
@@ -432,121 +435,6 @@
         </plugins>
       </build>
     </profile>
-    <!--    <profile>-->
-    <!--      <id>_release</id>-->
-    <!--      <activation>-->
-    <!--        <activeByDefault>false</activeByDefault>-->
-    <!--      </activation>-->
-
-    <!--      <distributionManagement>-->
-    <!--        <repository>-->
-    <!--          <id>sonatype-nexus</id>-->
-    <!--          <url>${sonatype-nexus-url}</url>-->
-    <!--        </repository>-->
-    <!--        <snapshotRepository>-->
-    <!--          <id>sonatype-nexus-snapshots</id>-->
-    <!--          <url>${sonatype-nexus-snapshots-url}</url>-->
-    <!--        </snapshotRepository>-->
-    <!--      </distributionManagement>-->
-
-    <!--      <build>-->
-    <!--        <plugins>-->
-    <!--          <plugin>-->
-    <!--            <groupId>org.apache.maven.plugins</groupId>-->
-    <!--            <artifactId>maven-javadoc-plugin</artifactId>-->
-    <!--            <version>3.0.1</version>-->
-    <!--            <executions>-->
-    <!--              <execution>-->
-    <!--                <id>attach-javadocs</id>-->
-    <!--                <goals>-->
-    <!--                  <goal>jar</goal>-->
-    <!--                </goals>-->
-    <!--              </execution>-->
-    <!--            </executions>-->
-    <!--            <configuration>-->
-    <!--              <additionalOptions>-->
-    <!--                <additionalOption>-Xdoclint:none</additionalOption>-->
-    <!--              </additionalOptions>-->
-    <!--              <destDir>target/doc/apidoc/</destDir>-->
-    <!--            </configuration>-->
-    <!--          </plugin>-->
-    <!--          <plugin>-->
-    <!--            <groupId>org.apache.maven.plugins</groupId>-->
-    <!--            <artifactId>maven-source-plugin</artifactId>-->
-    <!--            <version>3.0.1</version>-->
-    <!--            <executions>-->
-    <!--              <execution>-->
-    <!--                <goals>-->
-    <!--                  <goal>jar</goal>-->
-    <!--                  <goal>test-jar</goal>-->
-    <!--                </goals>-->
-    <!--              </execution>-->
-    <!--            </executions>-->
-    <!--          </plugin>-->
-    <!--          <plugin>-->
-    <!--            <groupId>org.apache.maven.plugins</groupId>-->
-    <!--            <artifactId>maven-gpg-plugin</artifactId>-->
-    <!--            <version>1.6</version>-->
-    <!--            <executions>-->
-    <!--              <execution>-->
-    <!--                <id>sign-artifacts</id>-->
-    <!--                <phase>verify</phase>-->
-    <!--                <goals>-->
-    <!--                  <goal>sign</goal>-->
-    <!--                </goals>-->
-    <!--              </execution>-->
-    <!--            </executions>-->
-    <!--          </plugin>-->
-    <!--          <plugin>-->
-    <!--            <groupId>org.apache.maven.plugins</groupId>-->
-    <!--            <artifactId>maven-enforcer-plugin</artifactId>-->
-    <!--            <version>3.0.0-M2</version>-->
-    <!--            <executions>-->
-    <!--              <execution>-->
-    <!--                <id>enforce-no-snapshots</id>-->
-    <!--                <goals>-->
-    <!--                  <goal>enforce</goal>-->
-    <!--                </goals>-->
-    <!--                <configuration>-->
-    <!--                  <rules>-->
-    <!--                    <requireReleaseDeps>-->
-    <!--                      <message>No Snapshots Allowed!</message>-->
-    <!--                    </requireReleaseDeps>-->
-    <!--                  </rules>-->
-    <!--                  <fail>true</fail>-->
-    <!--                </configuration>-->
-    <!--              </execution>-->
-    <!--            </executions>-->
-    <!--          </plugin>-->
-    <!--          <plugin>-->
-    <!--            <groupId>com.mycila</groupId>-->
-    <!--            <artifactId>license-maven-plugin</artifactId>-->
-    <!--            <version>3.0</version>-->
-    <!--            <configuration>-->
-    <!--              <header>com/mycila/maven/plugin/license/templates/APACHE-2.txt</header>-->
-    <!--              <properties>-->
-    <!--                <owner>Sven Ruppert</owner>-->
-    <!--                <email>sven.ruppert@gmail.com</email>-->
-    <!--              </properties>-->
-    <!--              <excludes>-->
-    <!--                <exclude>**/*.iml</exclude>-->
-    <!--                <exclude>**/README*</exclude>-->
-    <!--                <exclude>**/jacoco.exec*</exclude>-->
-    <!--                <exclude>**/LICENSE.txt</exclude>-->
-    <!--                <exclude>target/**</exclude>-->
-    <!--              </excludes>-->
-    <!--            </configuration>-->
-    <!--            <executions>-->
-    <!--              <execution>-->
-    <!--                <goals>-->
-    <!--                  <goal>check</goal>-->
-    <!--                </goals>-->
-    <!--              </execution>-->
-    <!--            </executions>-->
-    <!--          </plugin>-->
-    <!--        </plugins>-->
-    <!--      </build>-->
-    <!--    </profile>-->
   </profiles>
 
 
