@@ -86,16 +86,16 @@
     <log4j-api.version>2.11.1</log4j-api.version>
 
     <!--<jacoco.version>0.8.2</jacoco.version>-->
-    <pitest.version>1.4.10</pitest.version>
-    <pitest-junit5-plugin.version>0.9</pitest-junit5-plugin.version>
+    <pitest.version>1.4.11</pitest.version>
+    <pitest-junit5-plugin.version>0.11</pitest-junit5-plugin.version>
     <pitest-prod-classes>org.rapidpm.*</pitest-prod-classes>
     <pitest-test-classes>junit.org.rapidpm*</pitest-test-classes>
 
     <jmh.version>1.21</jmh.version>
 
     <!--TDD jUnit5-->
-    <junit.jupiter.version>5.5.1</junit.jupiter.version>
-    <junit.platform.version>1.5.1</junit.platform.version>
+    <junit.jupiter.version>5.6.0</junit.jupiter.version>
+    <junit.platform.version>1.6.0</junit.platform.version>
   </properties>
 
   <distributionManagement>
@@ -121,7 +121,10 @@
       <url>${deploy-repo-url}</url>
     </repository>
     <repository>
-      <snapshots />
+      <snapshots>
+        <enabled>true</enabled>
+        <updatePolicy>always</updatePolicy>
+      </snapshots>
       <id>snapshots</id>
       <name>libs-snapshot</name>
       <url>${deploy-repo-snapshots-url}</url>
@@ -137,7 +140,10 @@
       <url>${deploy-repo-url}</url>
     </pluginRepository>
     <pluginRepository>
-      <snapshots />
+      <snapshots>
+        <enabled>true</enabled>
+        <updatePolicy>always</updatePolicy>
+      </snapshots>
       <id>snapshots</id>
       <name>libs-snapshot</name>
       <url>${deploy-repo-snapshots-url}</url>
@@ -350,7 +356,7 @@
               <dependency>
                 <groupId>org.ow2.asm</groupId>
                 <artifactId>asm</artifactId>
-                <version>7.1</version> <!-- Use newer version of ASM -->
+                <version>7.3.1</version> <!-- Use newer version of ASM -->
               </dependency>
             </dependencies>
             <executions>
