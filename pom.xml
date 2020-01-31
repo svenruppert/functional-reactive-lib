@@ -23,7 +23,7 @@
 
   <groupId>org.rapidpm</groupId>
   <artifactId>rapidpm-functional-reactive</artifactId>
-  <version>01.00.05-RPM-SNAPSHOT</version>
+  <version>01.00.05</version>
   <packaging>jar</packaging>
 
   <inceptionYear>2017</inceptionYear>
@@ -72,9 +72,6 @@
   <properties>
     <deploy-repo-url>http://jfrog-repo.sven-ruppert.de:8081/artifactory/libs-release</deploy-repo-url>
     <deploy-repo-snapshots-url>http://jfrog-repo.sven-ruppert.de:8081/artifactory/libs-snapshot</deploy-repo-snapshots-url>
-
-<!--    <deploy-repo-url>http://repo.sven-ruppert.de/repository/maven-releases/</deploy-repo-url>-->
-<!--    <deploy-repo-snapshots-url>http://repo.sven-ruppert.de/repository/maven-snapshots/</deploy-repo-snapshots-url>-->
 
     <maven.compiler.source>1.8</maven.compiler.source> <!--redundant, but IntelliJ doesn't-->
     <maven.compiler.target>1.8</maven.compiler.target> <!--use release when importing-->
@@ -210,6 +207,9 @@
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>versions-maven-plugin</artifactId>
         <version>2.7</version>
+        <configuration>
+          <rulesUri>file://${basedir}/version-number-rules.xml</rulesUri>
+        </configuration>
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -224,6 +224,12 @@
             </goals>
           </execution>
         </executions>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-scm-plugin</artifactId>
+        <version>1.11.2</version>
       </plugin>
 
       <!--Enable mutation testing-->
