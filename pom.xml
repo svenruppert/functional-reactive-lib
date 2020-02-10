@@ -23,7 +23,7 @@
 
   <groupId>org.rapidpm</groupId>
   <artifactId>rapidpm-functional-reactive</artifactId>
-  <version>01.00.05</version>
+  <version>01.00.06-alpha</version>
   <packaging>jar</packaging>
 
   <inceptionYear>2017</inceptionYear>
