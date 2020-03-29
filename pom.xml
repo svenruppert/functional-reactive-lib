@@ -24,7 +24,7 @@
   <parent>
     <groupId>org.rapidpm</groupId>
     <artifactId>rapidpm-dependencies</artifactId>
-    <version>04.07.01-110</version>
+    <version>04.07.01-107</version>
   </parent>
 
   <groupId>org.rapidpm</groupId>
