@@ -24,12 +24,12 @@
   <parent>
     <groupId>org.rapidpm</groupId>
     <artifactId>rapidpm-dependencies</artifactId>
-    <version>04.07.01-117</version>
+    <version>04.07.01-118-119-120-121-122-123-124-125-126-127</version>
   </parent>
 
   <groupId>org.rapidpm</groupId>
   <artifactId>rapidpm-functional-reactive</artifactId>
-  <version>01.00.07</version>
+  <version>01.00.07-133</version>
   <packaging>jar</packaging>
 
   <inceptionYear>2017</inceptionYear>
