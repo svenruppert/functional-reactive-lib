@@ -117,6 +117,9 @@ public interface Result<T> {
   default <V, R> Result<R> thenCombine(V value, BiFunction<T, V, Result<R>> func) {
     return func.apply(get(), value);
   }
+  default <V, R> Result<R> thenCombineFlat(V value, BiFunction<T, V, R> func) {
+    return Result.ofNullable(func.apply(get(), value));
+  }
 
   default <V, R> CompletableFuture<Result<R>> thenCombineAsync(V value, BiFunction<T, V, Result<R>> func) {
     return CompletableFuture.supplyAsync(() -> func.apply(get(), value));
