@@ -38,13 +38,13 @@
     <url>http://www.functional-reactive.org</url>
   </organization>
 
-  <url>https://github.com/functional-reactive/functional-reactive-lib</url>
+  <url>https://github.com/svenruppert/functional-reactive-lib</url>
   <name>RapidPM Functional Reactive Lib</name>
   <description>Functional Reactive with Core Java</description>
   <scm>
-    <url>https://github.com/functional-reactive/functional-reactive-lib</url>
-    <connection>scm:git:https://github.com/functional-reactive/functional-reactive-lib.git</connection>
-    <developerConnection>scm:git:https://github.com/functional-reactive/functional-reactive-lib.git
+    <url>https://github.com/svenruppert/functional-reactive-lib</url>
+    <connection>scm:git:https://github.com/svenruppert/functional-reactive-lib.git</connection>
+    <developerConnection>scm:git:https://github.com/svenruppert/functional-reactive-lib.git
     </developerConnection>
     <tag>HEAD</tag>
   </scm>
@@ -60,7 +60,7 @@
   </developers>
   <issueManagement>
     <system>Github</system>
-    <url>https://github.com/functional-reactive/functional-reactive-lib/issues</url>
+    <url>https://github.com/svenruppert/functional-reactive-lib/issues</url>
   </issueManagement>
   <ciManagement>
     <system>TeamCity</system>
