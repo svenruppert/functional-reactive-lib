@@ -52,13 +52,13 @@ public class DemoResult {
         Function<Integer, Integer>> rF
         = Function::andThen;
 
-    var transform = rF.andThen(Result::ofNullable);
+//    var transform = rF.andThen(Result::ofNullable);
 
-    Result.success(f1)
-          .thenCombineAsync(f2, transform)
-          .join()
-          .map(f -> f.apply(10))
-          .get();
+//    Result.success(f1)
+//          .thenCombineAsync(f2, transform)
+//          .join()
+//          .map(f -> f.apply(10))
+//          .get();
 
 
   }

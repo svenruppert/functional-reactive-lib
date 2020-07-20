@@ -28,10 +28,10 @@ public class DemoFunctionalInterfaces {
     default String doMoreWork() {
       return "useless";
     }
-
-    private String doHiddenWork() {
-      return "useless";
-    }
+//with JDK9++
+//    private String doHiddenWork() {
+//      return "useless";
+//    }
   }
 
 

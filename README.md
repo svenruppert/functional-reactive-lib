@@ -1,7 +1,6 @@
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.rapidpm/rapidpm-functional-reactive/badge.svg)](https://maven-badges.herokuapp.com/maven-central/org.rapidpm/rapidpm-functional-reactive)
 
 
-
 ![Sonarcloud Status](https://sonarcloud.io/api/project_badges/measure?project=functional-reactive_functional-reactive-lib&metric=security_rating)
 ![Sonarcloud Status](https://sonarcloud.io/api/project_badges/measure?project=functional-reactive_functional-reactive-lib&metric=sqale_rating)
 
@@ -20,7 +19,7 @@ If you want to know more about it, have a look at my Youtube Series about this t
 * Youtube: [DE] - [bit.ly/Youtube-Sven](https://bit.ly/Youtube-Sven)
 * Youtube: [EN] - [bit.ly/Outdoor-Nerd](https://bit.ly/Outdoor-Nerd)
 
-and/or register for my Newsletter: 
+### and/or register for my Newsletter: 
 This newsletter gives you access to the slides of my videos, 
 and you are the first to be informed about my new videos, 
 articles and blog posts.
@@ -79,6 +78,8 @@ This Lib is working with
 This release we will increase test coverage and documentation.
 The basic structures and functions are in production used since longer time.
 Adding Apache Lic header to all files
+
+## 01.00.07-RPM
 
 * Transformations
     * static <T> Function<Iterator<T>, Stream<T>> iteratorToStream() 

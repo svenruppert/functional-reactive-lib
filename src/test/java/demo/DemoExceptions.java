@@ -42,7 +42,7 @@ public class DemoExceptions {
             }
           })
           .filter(Optional::isPresent)
-          .flatMap(Optional::stream)
+//          .flatMap(Optional::stream)
           .count();
 
 

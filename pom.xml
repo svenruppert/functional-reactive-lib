@@ -24,7 +24,7 @@
   <parent>
     <groupId>org.rapidpm</groupId>
     <artifactId>rapidpm-dependencies</artifactId>
-    <version>04.07.01-130</version>
+    <version>04.07.04-RPM</version>
   </parent>
 
   <groupId>org.rapidpm</groupId>
@@ -79,10 +79,10 @@
     <deploy-repo-url>http://jfrog-repo.sven-ruppert.de:8081/artifactory/libs-release</deploy-repo-url>
     <deploy-repo-snapshots-url>http://jfrog-repo.sven-ruppert.de:8081/artifactory/libs-snapshot</deploy-repo-snapshots-url>
 
-    <jdk.version>14</jdk.version>
+    <jdk.version>1.8</jdk.version>
     <maven.compiler.source>${jdk.version}</maven.compiler.source> <!--redundant, but IntelliJ doesn't-->
     <maven.compiler.target>${jdk.version}</maven.compiler.target> <!--use release when importing-->
-    <maven.compiler.release>${jdk.version}</maven.compiler.release>
+<!--    <maven.compiler.release>${jdk.version}</maven.compiler.release>-->
 
 
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
