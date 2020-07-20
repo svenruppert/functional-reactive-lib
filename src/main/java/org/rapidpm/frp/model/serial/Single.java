@@ -1,12 +1,12 @@
 /**
  * Copyright © 2017 Sven Ruppert (sven.ruppert@gmail.com)
- *
+ * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -45,17 +45,15 @@ public class Single<T1 extends Serializable> {
    */
   @Override
   public String toString() {
-    return "Single{" +
-           "t1=" + t1 +
-           '}';
+    return "Single{" + "t1=" + t1 + '}';
   }
 
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
-    if (! (o instanceof Single)) return false;
+    if (!(o instanceof Single)) return false;
     Single<?> single = (Single<?>) o;
-    return Objects.equals(t1 , single.t1);
+    return Objects.equals(t1, single.t1);
   }
 
   @Override
@@ -70,7 +68,7 @@ public class Single<T1 extends Serializable> {
    * @param <T1> a T1 object.
    * @return a {@link org.rapidpm.frp.model.serial.Single} object.
    */
-  public static <T1 extends Serializable > Single<T1> next(T1 a) {
+  public static <T1 extends Serializable> Single<T1> next(T1 a) {
     return new Single<>(a);
   }
 }

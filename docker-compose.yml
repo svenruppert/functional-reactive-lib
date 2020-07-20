@@ -18,16 +18,16 @@ version: '3.5'
 
 services:
   deploy:
-    image: svenruppert/maven-3.6-jdk-08
-    container_name: deploy
-    hostname: deploy
+#    image: svenruppert/maven-3.6.1-adopt:1.8.212-04
+    image: svenruppert/deploy:1.8.0-222
+    container_name: deploy-functioanl-reactive
+    hostname: deploy-functioanl-reactive
     volumes:
       - /var/run/docker.sock:/tmp/docker.sock:ro
       - $PWD/:/usr/src/mymaven
-      - ~/.m2/settings.xml:/root/.m2/settings.xml
-      - ~/.gnupg/:/root/.gnupg/
     working_dir: /usr/src/mymaven
     #    command: 'mvn help:active-profiles
-    command: 'mvn clean deploy
-                    -P_release
+    command: 'mvn license:format clean deploy
+                    -P_release_prepare
+                    -P_release_sign-artifacts
                     -Dmaven.test.skip=true '

@@ -1,8 +1,4 @@
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.rapidpm/rapidpm-functional-reactive/badge.svg)](https://maven-badges.herokuapp.com/maven-central/org.rapidpm/rapidpm-functional-reactive)
-[![](https://jitpack.io/v/functional-reactive/functional-reactive-lib.svg)](https://jitpack.io/#functional-reactive/functional-reactive-lib)
-
-[![](https://jitci.com/gh/functional-reactive/functional-reactive-lib/svg)](https://jitci.com/gh/functional-reactive/functional-reactive-lib)
-
 
 
 ![Sonarcloud Status](https://sonarcloud.io/api/project_badges/measure?project=functional-reactive_functional-reactive-lib&metric=security_rating)
@@ -14,14 +10,26 @@
 # Functional Reactive Lib with Core Java
 This is a nano lib, based on a few classes that will give you 
 a handful of functional elements that you can use in your core Java project.
-If you want to know more about it, have a look at the slides 
-you can find here:
+If you want to know more about it, have a look at my Youtube Series about this topic.
 
-[Oracle Code Singapore 2018 - Slides](https://static.rainfocus.com/oracle/oraclecode18/sess/1522992070570001OQQN/PF/Functional-Reactive-Talk%20-%2020180517%20-%20001_1526659376602001iu2q.pdf)
+* (EN): [https://youtu.be/jMP9r5_bi5c](https://youtu.be/jMP9r5_bi5c)
+* (DE): [https://youtu.be/S5ysVvritIg](https://youtu.be/S5ysVvritIg)
 
-or if you like to have it as a talk/video, have a look at youtube
+## Please, subscribe my **Youtube channel**
+* Youtube: [DE] - [bit.ly/Youtube-Sven](https://bit.ly/Youtube-Sven)
+* Youtube: [EN] - [bit.ly/Outdoor-Nerd](https://bit.ly/Outdoor-Nerd)
 
-[Youtube - Oracle Code Singapore 2018](https://www.youtube.com/watch?v=kOeBs1sTd8g)
+### and/or register for my Newsletter: 
+This newsletter gives you access to the slides of my videos, 
+and you are the first to be informed about my new videos, 
+articles and blog posts.
+Besides, you will always receive the latest information about 
+where and when I will soon be giving online lectures, meetups and 
+free webinars. So that you are among the first 
+that will have the change to register and to grab your spot. 
+
+Newsletter: [https://mailings.sven-ruppert.de](https://mailings.sven-ruppert.de)
+
 
 ## JDK8 or JDK9 and above
 I compiled this with the Open JDK8.
@@ -53,24 +61,16 @@ This Lib is working with
  * Java 10 (open/oracle/zulu)
  * Java 11 (open/oracle/zulu)
  * Java 12 (open/oracle/zulu)
+ * Java 13 (open/oracle/zulu)
+ * Java 14 (open/oracle/zulu)
 
-With the release 01.00.03-RPM I started to use JitCI to make my life easier.
-
-```xml
-	<repositories>
-		<repository>
-		    <id>jitpack.io</id>
-		    <url>https://jitpack.io</url>
-		</repository>
-	</repositories>
-```
 
 ```xml
-    <dependency>
-	    <groupId>com.github.functional-reactive</groupId>
-	    <artifactId>functional-reactive-lib</artifactId>
-	    <version>--version--</version>
-	</dependency>
+<dependency>
+    <groupId>org.rapidpm</groupId>
+    <artifactId>rapidpm-functional-reactive</artifactId>
+	<version>--version--</version>
+</dependency>
 ```
 
 
@@ -79,9 +79,13 @@ This release we will increase test coverage and documentation.
 The basic structures and functions are in production used since longer time.
 Adding Apache Lic header to all files
 
+## 01.00.07-RPM
+
 * Transformations
     * static <T> Function<Iterator<T>, Stream<T>> iteratorToStream() 
-
+* <V, R> Result<R> thenCombineFlat(V value, BiFunction<T, V, R> func)
+* started Youtube Series about this lib.
+* removed JitCI from production pipeline
 
 ## 01.00.03-RPM
 * added JitCI for deployment as well
@@ -94,9 +98,6 @@ Adding Apache Lic header to all files
 * Converting.convertToDouble
 * SystemProperties Util Functions
 * Single<T>
-   
-   
-   
    
 ## 01.00.01-RPM
 * BUGFIX in case, the result was calculated two times.
