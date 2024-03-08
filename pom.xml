@@ -22,14 +22,17 @@
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
-    <groupId>org.rapidpm</groupId>
-    <artifactId>rapidpm-dependencies</artifactId>
-    <version>04.07.04-RPM</version>
+<!--    <groupId>com.svenruppert</groupId>-->
+<!--    <artifactId>dependencies</artifactId>-->
+<!--    <version>05.00.01-SRU</version>-->
+    <groupId>com.github.svenruppert</groupId>
+    <artifactId>dependencies</artifactId>
+    <version>05.00.01-SRU-20240309-00-15</version>
   </parent>
 
-  <groupId>org.rapidpm</groupId>
-  <artifactId>rapidpm-functional-reactive</artifactId>
-  <version>01.00.07</version>
+  <groupId>com.svenruppert</groupId>
+  <artifactId>functional-reactive</artifactId>
+  <version>02.00.00-SRU</version>
   <packaging>jar</packaging>
 
   <inceptionYear>2017</inceptionYear>
@@ -62,10 +65,10 @@
     <system>Github</system>
     <url>https://github.com/svenruppert/functional-reactive-lib/issues</url>
   </issueManagement>
-  <ciManagement>
-    <system>TeamCity</system>
-    <url>http://build.sven-ruppert.de:8111/</url>
-  </ciManagement>
+<!--  <ciManagement>-->
+<!--    <system>TeamCity</system>-->
+<!--    <url>http://build.sven-ruppert.de:8111/</url>-->
+<!--  </ciManagement>-->
   <licenses>
     <license>
       <name>The Apache Software License, Version 2.0</name>
@@ -76,17 +79,20 @@
   </licenses>
 
   <properties>
-    <deploy-repo-url>http://jfrog-repo.sven-ruppert.de:8081/artifactory/libs-release</deploy-repo-url>
-    <deploy-repo-snapshots-url>http://jfrog-repo.sven-ruppert.de:8081/artifactory/libs-snapshot</deploy-repo-snapshots-url>
+<!--    <deploy-repo-url>https://repo.maven.apache.org/maven2/</deploy-repo-url>-->
+    <deploy-repo-url>https://maven.pkg.github.com/svenruppert/functional-reactive-lib/</deploy-repo-url>
+<!--    <deploy-repo-snapshots-url>https://repo.maven.apache.org/maven2/</deploy-repo-snapshots-url>-->
+    <deploy-repo-snapshots-url>https://maven.pkg.github.com/svenruppert/functional-reactive-lib/</deploy-repo-snapshots-url>
 
-    <jdk.version>1.8</jdk.version>
+    <jdk.version>21</jdk.version>
     <maven.compiler.source>${jdk.version}</maven.compiler.source> <!--redundant, but IntelliJ doesn't-->
     <maven.compiler.target>${jdk.version}</maven.compiler.target> <!--use release when importing-->
 <!--    <maven.compiler.release>${jdk.version}</maven.compiler.release>-->
 
-
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    <pitest-prod-classes>com.svenruppert.*</pitest-prod-classes>
+    <pitest-test-classes>junit.com.svenruppert.*</pitest-test-classes>
 
   </properties>
 
@@ -110,7 +116,23 @@
       </snapshots>
       <id>central</id>
       <name>libs-release</name>
-      <url>http://jfrog-repo.sven-ruppert.de:8081/artifactory/libs-release</url>
+      <url>https://repo.maven.apache.org/maven2/</url>
+    </repository>
+    <repository>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+      <id>jitpack</id>
+      <name>libs-release</name>
+      <url>https://jitpack.io/</url>
+    </repository>
+    <repository>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+      <id>GITHUB</id>
+      <name>libs-release</name>
+      <url>https://maven.pkg.github.com/svenruppert/*</url>
     </repository>
     <repository>
       <snapshots>
@@ -119,7 +141,7 @@
       </snapshots>
       <id>snapshots</id>
       <name>libs-snapshot</name>
-      <url>http://jfrog-repo.sven-ruppert.de:8081/artifactory/libs-snapshot</url>
+      <url>https://repo.maven.apache.org/maven2/</url>
     </repository>
   </repositories>
   <pluginRepositories>
@@ -129,7 +151,7 @@
       </snapshots>
       <id>central</id>
       <name>libs-release</name>
-      <url>http://jfrog-repo.sven-ruppert.de:8081/artifactory/libs-release</url>
+      <url>https://repo.maven.apache.org/maven2/</url>
     </pluginRepository>
     <pluginRepository>
       <snapshots>
@@ -138,7 +160,7 @@
       </snapshots>
       <id>snapshots</id>
       <name>libs-snapshot</name>
-      <url>http://jfrog-repo.sven-ruppert.de:8081/artifactory/libs-snapshot</url>
+      <url>https://repo.maven.apache.org/maven2/</url>
     </pluginRepository>
   </pluginRepositories>
 

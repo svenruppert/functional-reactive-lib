@@ -13,12 +13,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-module rapidpm.functional.reactive {
- exports org.rapidpm.frp;
- exports com.svenruppert.functional.functions;
- exports com.svenruppert.functional.matcher;
- exports com.svenruppert.functional.memoizer;
- exports com.svenruppert.functional.model;
- exports com.svenruppert.functional.model.serial;
- exports com.svenruppert.functional.reactive;
+package com.svenruppert.functional;
+
+import java.util.function.Function;
+import java.util.function.Predicate;
+import java.util.stream.Stream;
+
+/**
+ * <p>StreamFunctions interface.</p>
+ *
+ * @author svenruppert
+ * @version $Id: $Id
+ */
+public interface StreamFunctions {
+
+  /**
+   * <p>streamFilter.</p>
+   *
+   * @param <T> a T object.
+   * @return a {@link java.util.function.Function} object.
+   */
+  static <T> Function<Predicate<T>, Function<Stream<T>, Stream<T>>> streamFilter() {
+    return (filter) -> (Function<Stream<T>, Stream<T>>) inputStream -> inputStream.filter(filter);
+  }
 }

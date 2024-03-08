@@ -13,12 +13,26 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-module rapidpm.functional.reactive {
- exports org.rapidpm.frp;
- exports com.svenruppert.functional.functions;
- exports com.svenruppert.functional.matcher;
- exports com.svenruppert.functional.memoizer;
- exports com.svenruppert.functional.model;
- exports com.svenruppert.functional.model.serial;
- exports com.svenruppert.functional.reactive;
+package com.svenruppert.functional.functions;
+
+import static com.svenruppert.functional.ExceptionFunctions.message;
+
+import java.util.function.Function;
+
+import com.svenruppert.functional.model.Result;
+
+/**
+ * Created by svenruppert on 25.04.17.
+ */
+@FunctionalInterface
+public interface CheckedFunction<T, R> extends Function<T, Result<R>> {
+  @Override
+  default Result<R> apply(T t) {
+    try {
+      return Result.success(applyWithException(t));
+    } catch (Exception e) {
+      return Result.failure(message().apply(e));
+    }
+  }
+  R applyWithException(T t) throws Exception;
 }

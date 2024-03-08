@@ -1,0 +1,4 @@
+jdk:
+  - 21.0.2-open
+before_install:
+  - sdk install maven 3.9.1

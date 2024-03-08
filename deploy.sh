@@ -15,5 +15,5 @@
 # limitations under the License.
 #
 
-docker rm deploy-functioanl-reactive
+docker rm deploy-functional-reactive
 docker-compose up

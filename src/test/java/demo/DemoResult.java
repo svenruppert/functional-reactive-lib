@@ -16,7 +16,7 @@
 package demo;
 
 import org.junit.jupiter.api.Test;
-import org.rapidpm.frp.model.Result;
+import com.svenruppert.functional.model.Result;
 
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;

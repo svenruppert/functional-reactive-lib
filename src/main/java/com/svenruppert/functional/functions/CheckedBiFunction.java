@@ -13,12 +13,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-module rapidpm.functional.reactive {
- exports org.rapidpm.frp;
- exports com.svenruppert.functional.functions;
- exports com.svenruppert.functional.matcher;
- exports com.svenruppert.functional.memoizer;
- exports com.svenruppert.functional.model;
- exports com.svenruppert.functional.model.serial;
- exports com.svenruppert.functional.reactive;
+package com.svenruppert.functional.functions;
+
+import static com.svenruppert.functional.ExceptionFunctions.message;
+
+import java.util.function.BiFunction;
+
+import com.svenruppert.functional.model.Result;
+
+/**
+ *
+ */
+public interface CheckedBiFunction<T1, T2, R> extends BiFunction<T1, T2, Result<R>> {
+  @Override
+  default Result<R> apply(T1 t1, T2 t2) {
+    try {
+      return Result.success(applyWithException(t1, t2));
+    } catch (Exception e) {
+      return Result.failure(message().apply(e));
+    }
+  }
+
+  R applyWithException(T1 t1, T2 t2) throws Exception;
+
 }
