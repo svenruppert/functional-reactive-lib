@@ -13,12 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-module rapidpm.functional.reactive {
- exports org.rapidpm.frp;
- exports com.svenruppert.functional.functions;
- exports com.svenruppert.functional.matcher;
- exports com.svenruppert.functional.memoizer;
- exports com.svenruppert.functional.model;
- exports com.svenruppert.functional.model.serial;
- exports com.svenruppert.functional.reactive;
+package com.svenruppert.functional.functions;
+
+/**
+ * Created by svenruppert on 25.04.17.
+ *
+ * @author svenruppert
+ * @version $Id: $Id
+ */
+@FunctionalInterface
+public interface CheckedConsumer<T> extends CheckedFunction<T, Void> {
+
+
 }

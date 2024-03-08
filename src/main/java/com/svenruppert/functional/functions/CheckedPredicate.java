@@ -13,12 +13,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-module rapidpm.functional.reactive {
- exports org.rapidpm.frp;
- exports com.svenruppert.functional.functions;
- exports com.svenruppert.functional.matcher;
- exports com.svenruppert.functional.memoizer;
- exports com.svenruppert.functional.model;
- exports com.svenruppert.functional.model.serial;
- exports com.svenruppert.functional.reactive;
+package com.svenruppert.functional.functions;
+
+import java.util.function.Predicate;
+
+/**
+ * if an exception is thrown, the predicate will give back false;
+ */
+public interface CheckedPredicate<T> extends Predicate<T> {
+  @Override
+  default boolean test(T t) {
+    try {
+      return testWithExceptions(t);
+    } catch (Exception e) {
+      e.printStackTrace();
+      return false;
+    }
+  }
+
+  boolean testWithExceptions(T t) throws Exception;
 }

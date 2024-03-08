@@ -3,7 +3,7 @@ package demo;
 import org.junit.Assert;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.rapidpm.frp.memoizer.Memoizer;
+import com.svenruppert.functional.memoizer.Memoizer;
 
 import java.util.function.Function;
 

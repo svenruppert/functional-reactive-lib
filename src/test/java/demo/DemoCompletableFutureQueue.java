@@ -1,7 +1,7 @@
 package demo;
 
 import org.junit.jupiter.api.Test;
-import org.rapidpm.frp.reactive.CompletableFutureQueue;
+import com.svenruppert.functional.reactive.CompletableFutureQueue;
 
 import java.util.concurrent.CompletableFuture;
 import java.util.function.Function;

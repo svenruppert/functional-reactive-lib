@@ -1,10 +1,10 @@
 package demo;
 
 import org.junit.jupiter.api.Test;
-import org.rapidpm.frp.matcher.Case;
-import org.rapidpm.frp.model.Result;
+import com.svenruppert.functional.matcher.Case;
+import com.svenruppert.functional.model.Result;
 
-import static org.rapidpm.frp.matcher.Case.matchCase;
+import static com.svenruppert.functional.matcher.Case.matchCase;
 
 public class DemoCase {
 

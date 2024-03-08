@@ -40,16 +40,15 @@ Only if you start using the JMS, it could be helpful to add a **module-info.java
 Add the following lines, switch inside the pom.xml to the JDK version you prefer,
 start a **mvn clean install** and be happy ;-)
 
-
 ```java
 module rapidpm.functional.reactive {
  exports org.rapidpm.frp;
- exports org.rapidpm.frp.functions;
- exports org.rapidpm.frp.matcher;
- exports org.rapidpm.frp.memoizer;
- exports org.rapidpm.frp.model;
- exports org.rapidpm.frp.model.serial;
- exports org.rapidpm.frp.reactive;
+ exports com.svenruppert.functional.functions;
+ exports com.svenruppert.functional.matcher;
+ exports com.svenruppert.functional.memoizer;
+ exports com.svenruppert.functional.model;
+ exports com.svenruppert.functional.model.serial;
+ exports com.svenruppert.functional.reactive;
 }
 ```
 
@@ -72,6 +71,9 @@ This Lib is working with
 	<version>--version--</version>
 </dependency>
 ```
+## 02.00.00-SRU
+Changing to new namespace. The package will be under 
+com.svenruppert:functional-reactive now
 
 
 ## 01.01.00-RPM-SNAPSHOT
