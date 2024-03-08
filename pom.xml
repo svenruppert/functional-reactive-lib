@@ -80,9 +80,9 @@
 
   <properties>
 <!--    <deploy-repo-url>https://repo.maven.apache.org/maven2/</deploy-repo-url>-->
-    <deploy-repo-url>https://maven.pkg.github.com/svenruppert/functional-reactive-lib/</deploy-repo-url>
+<!--    <deploy-repo-url>https://maven.pkg.github.com/svenruppert/functional-reactive-lib/</deploy-repo-url>-->
 <!--    <deploy-repo-snapshots-url>https://repo.maven.apache.org/maven2/</deploy-repo-snapshots-url>-->
-    <deploy-repo-snapshots-url>https://maven.pkg.github.com/svenruppert/functional-reactive-lib/</deploy-repo-snapshots-url>
+<!--    <deploy-repo-snapshots-url>https://maven.pkg.github.com/svenruppert/functional-reactive-lib/</deploy-repo-snapshots-url>-->
 
     <jdk.version>21</jdk.version>
     <maven.compiler.source>${jdk.version}</maven.compiler.source> <!--redundant, but IntelliJ doesn't-->
@@ -96,18 +96,18 @@
 
   </properties>
 
-  <distributionManagement>
-    <repository>
-      <id>deploy-repo-maven</id>
-      <name>deploy-repo-maven</name>
-      <url>${deploy-repo-url}</url>
-    </repository>
-    <snapshotRepository>
-      <id>deploy-repo-maven-snapshots</id>
-      <name>deploy-repo-maven-snapshots</name>
-      <url>${deploy-repo-snapshots-url}</url>
-    </snapshotRepository>
-  </distributionManagement>
+<!--  <distributionManagement>-->
+<!--    <repository>-->
+<!--      <id>deploy-repo-maven</id>-->
+<!--      <name>deploy-repo-maven</name>-->
+<!--      <url>${deploy-repo-url}</url>-->
+<!--    </repository>-->
+<!--    <snapshotRepository>-->
+<!--      <id>deploy-repo-maven-snapshots</id>-->
+<!--      <name>deploy-repo-maven-snapshots</name>-->
+<!--      <url>${deploy-repo-snapshots-url}</url>-->
+<!--    </snapshotRepository>-->
+<!--  </distributionManagement>-->
 
   <repositories>
     <repository>
