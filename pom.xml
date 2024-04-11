@@ -29,12 +29,12 @@
 <!--    <artifactId>dependencies</artifactId>-->
     <groupId>com.github.svenruppert</groupId>
     <artifactId>dependencies</artifactId>
-    <version>05.00.02-SRU</version>
+    <version>05.00.03-SRU</version>
   </parent>
 
-  <groupId>com.svenruppert</groupId>
+  <groupId>com.github.svenruppert</groupId>
   <artifactId>functional-reactive</artifactId>
-  <version>02.00.01-SRU</version>
+  <version>02.00.02-SRU</version>
   <packaging>jar</packaging>
 
   <inceptionYear>2017</inceptionYear>

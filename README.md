@@ -54,23 +54,12 @@ module rapidpm.functional.reactive {
 
 
 # Release Notes
-This Lib is working with
- * Java 08 (open/oracle/ibm/zulu/graalvm)
- * Java 09 (open/oracle/ibm/zulu)
- * Java 10 (open/oracle/zulu)
- * Java 11 (open/oracle/zulu)
- * Java 12 (open/oracle/zulu)
- * Java 13 (open/oracle/zulu)
- * Java 14 (open/oracle/zulu)
+This Lib is working with JDK 8 up to 21
 
+## 02.00.02-SRU
+Switched groupid to 02.00.02-SRU - jitpack custom domain name is not working properly
+updated to parent version 05.00.03-SRU
 
-```xml
-<dependency>
-    <groupId>org.rapidpm</groupId>
-    <artifactId>rapidpm-functional-reactive</artifactId>
-	<version>--version--</version>
-</dependency>
-```
 ## 02.00.00-SRU
 Changing to new namespace. The package will be under 
 com.svenruppert:functional-reactive now
@@ -84,7 +73,7 @@ Adding Apache Lic header to all files
 ## 01.00.07-RPM
 
 * Transformations
-    * static <T> Function<Iterator<T>, Stream<T>> iteratorToStream() 
+* static <T> Function<Iterator<T>, Stream<T>> iteratorToStream() 
 * <V, R> Result<R> thenCombineFlat(V value, BiFunction<T, V, R> func)
 * started Youtube Series about this lib.
 * removed JitCI from production pipeline
