@@ -25,14 +25,16 @@
 <!--    <groupId>com.svenruppert</groupId>-->
 <!--    <artifactId>dependencies</artifactId>-->
 <!--    <version>05.00.01-SRU</version>-->
+<!--    <groupId>com.svenruppert</groupId>-->
+<!--    <artifactId>dependencies</artifactId>-->
     <groupId>com.github.svenruppert</groupId>
     <artifactId>dependencies</artifactId>
-    <version>05.00.01-SRU-20240309-00-15</version>
+    <version>05.00.02-SRU</version>
   </parent>
 
   <groupId>com.svenruppert</groupId>
   <artifactId>functional-reactive</artifactId>
-  <version>02.00.00-SRU</version>
+  <version>02.00.01-SRU</version>
   <packaging>jar</packaging>
 
   <inceptionYear>2017</inceptionYear>
@@ -125,14 +127,6 @@
       <id>jitpack</id>
       <name>libs-release</name>
       <url>https://jitpack.io/</url>
-    </repository>
-    <repository>
-      <snapshots>
-        <enabled>false</enabled>
-      </snapshots>
-      <id>GITHUB</id>
-      <name>libs-release</name>
-      <url>https://maven.pkg.github.com/svenruppert/*</url>
     </repository>
     <repository>
       <snapshots>
