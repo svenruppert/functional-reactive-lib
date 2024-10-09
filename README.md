@@ -55,6 +55,7 @@ module rapidpm.functional.reactive {
 
 # Release Notes
 This Lib is working with JDK 8 up to 21
+
 ## 02.00.04-SRU
 fixed jdk in jitpack yml
 

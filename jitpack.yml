@@ -1,3 +1,0 @@
-before_install:
-  - sdk install java 21.0.2-open
-  - sdk install maven 3.9.6
