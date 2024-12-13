@@ -24,11 +24,11 @@
     <parent>
         <groupId>com.svenruppert</groupId>
         <artifactId>dependencies</artifactId>
-        <version>06.00.00-SNAPSHOT</version>
+        <version>06.00.00</version>
     </parent>
 
     <artifactId>functional-reactive</artifactId>
-    <version>03.00.00-SNAPSHOT</version>
+    <version>03.00.00</version>
     <packaging>jar</packaging>
 
     <inceptionYear>2017</inceptionYear>
