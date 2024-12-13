@@ -19,18 +19,6 @@ If you want to know more about it, have a look at my Youtube Series about this t
 * Youtube: [DE] - [bit.ly/Youtube-Sven](https://bit.ly/Youtube-Sven)
 * Youtube: [EN] - [bit.ly/Outdoor-Nerd](https://bit.ly/Outdoor-Nerd)
 
-### and/or register for my Newsletter: 
-This newsletter gives you access to the slides of my videos, 
-and you are the first to be informed about my new videos, 
-articles and blog posts.
-Besides, you will always receive the latest information about 
-where and when I will soon be giving online lectures, meetups and 
-free webinars. So that you are among the first 
-that will have the change to register and to grab your spot. 
-
-Newsletter: [https://mailings.sven-ruppert.de](https://mailings.sven-ruppert.de)
-
-
 ## JDK8 or JDK9 and above
 I compiled this with the Open JDK8.
 Previous versions at maven central are build ith JDK10.
@@ -41,8 +29,8 @@ Add the following lines, switch inside the pom.xml to the JDK version you prefer
 start a **mvn clean install** and be happy ;-)
 
 ```java
-module rapidpm.functional.reactive {
- exports org.rapidpm.frp;
+module com.svenruppert.functional.reactive {
+ exports com.svenruppert.frp;
  exports com.svenruppert.functional.functions;
  exports com.svenruppert.functional.matcher;
  exports com.svenruppert.functional.memoizer;
@@ -54,23 +42,23 @@ module rapidpm.functional.reactive {
 
 
 # Release Notes
-This Lib is working with
- * Java 08 (open/oracle/ibm/zulu/graalvm)
- * Java 09 (open/oracle/ibm/zulu)
- * Java 10 (open/oracle/zulu)
- * Java 11 (open/oracle/zulu)
- * Java 12 (open/oracle/zulu)
- * Java 13 (open/oracle/zulu)
- * Java 14 (open/oracle/zulu)
 
+## 03.00.00 - BREAKING CHANGES
+I switched to dependencies com.svenruppert with version 06.00.00
+This is the same as rapidpm dependencies, but in a new namespace and smaller updates.
+This project is switching to the namespace com.svenruppert as well.
+no new features are included.
 
-```xml
-<dependency>
-    <groupId>org.rapidpm</groupId>
-    <artifactId>rapidpm-functional-reactive</artifactId>
-	<version>--version--</version>
-</dependency>
-```
+## 02.00.04-SRU
+fixed jdk in jitpack yml
+
+## 02.00.03-SRU
+updated parent, and maven minimum version to 3.9.6
+
+## 02.00.02-SRU
+Switched groupid to 02.00.02-SRU - jitpack custom domain name is not working properly
+updated to parent version 05.00.03-SRU
+
 ## 02.00.00-SRU
 Changing to new namespace. The package will be under 
 com.svenruppert:functional-reactive now
@@ -84,7 +72,7 @@ Adding Apache Lic header to all files
 ## 01.00.07-RPM
 
 * Transformations
-    * static <T> Function<Iterator<T>, Stream<T>> iteratorToStream() 
+* static <T> Function<Iterator<T>, Stream<T>> iteratorToStream() 
 * <V, R> Result<R> thenCombineFlat(V value, BiFunction<T, V, R> func)
 * started Youtube Series about this lib.
 * removed JitCI from production pipeline

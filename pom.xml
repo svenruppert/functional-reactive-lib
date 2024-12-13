@@ -19,180 +19,147 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
+    <modelVersion>4.0.0</modelVersion>
 
-  <parent>
-<!--    <groupId>com.svenruppert</groupId>-->
-<!--    <artifactId>dependencies</artifactId>-->
-<!--    <version>05.00.01-SRU</version>-->
-    <groupId>com.github.svenruppert</groupId>
-    <artifactId>dependencies</artifactId>
-    <version>05.00.01-SRU-20240309-00-15</version>
-  </parent>
+    <parent>
+        <groupId>com.svenruppert</groupId>
+        <artifactId>dependencies</artifactId>
+        <version>06.00.00</version>
+    </parent>
 
-  <groupId>com.svenruppert</groupId>
-  <artifactId>functional-reactive</artifactId>
-  <version>02.00.00-SRU</version>
-  <packaging>jar</packaging>
+    <artifactId>functional-reactive</artifactId>
+    <version>03.00.00</version>
+    <packaging>jar</packaging>
 
-  <inceptionYear>2017</inceptionYear>
-  <organization>
-    <name>Functional Reactive</name>
-    <url>http://www.functional-reactive.org</url>
-  </organization>
+    <inceptionYear>2017</inceptionYear>
+    <organization>
+        <name>Functional Reactive</name>
+        <url>http://www.functional-reactive.org</url>
+    </organization>
 
-  <url>https://github.com/svenruppert/functional-reactive-lib</url>
-  <name>RapidPM Functional Reactive Lib</name>
-  <description>Functional Reactive with Core Java</description>
-  <scm>
     <url>https://github.com/svenruppert/functional-reactive-lib</url>
-    <connection>scm:git:https://github.com/svenruppert/functional-reactive-lib.git</connection>
-    <developerConnection>scm:git:https://github.com/svenruppert/functional-reactive-lib.git
-    </developerConnection>
-    <tag>HEAD</tag>
-  </scm>
-  <developers>
-    <developer>
-      <name>Sven Ruppert</name>
-      <email>sven.ruppert@gmail.com</email>
-      <roles>
-        <role>Developer</role>
-      </roles>
-      <timezone>+1</timezone>
-    </developer>
-  </developers>
-  <issueManagement>
-    <system>Github</system>
-    <url>https://github.com/svenruppert/functional-reactive-lib/issues</url>
-  </issueManagement>
-<!--  <ciManagement>-->
-<!--    <system>TeamCity</system>-->
-<!--    <url>http://build.sven-ruppert.de:8111/</url>-->
-<!--  </ciManagement>-->
-  <licenses>
-    <license>
-      <name>The Apache Software License, Version 2.0</name>
-      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
-      <distribution>repo</distribution>
-      <comments>A business-friendly OSS license</comments>
-    </license>
-  </licenses>
+    <name>RapidPM Functional Reactive Lib</name>
+    <description>Functional Reactive with Core Java</description>
+    <scm>
+        <url>https://github.com/svenruppert/functional-reactive-lib</url>
+        <connection>scm:git:https://github.com/svenruppert/functional-reactive-lib.git</connection>
+        <developerConnection>scm:git:https://github.com/svenruppert/functional-reactive-lib.git
+        </developerConnection>
+        <tag>HEAD</tag>
+    </scm>
+    <developers>
+        <developer>
+            <name>Sven Ruppert</name>
+            <email>sven.ruppert@gmail.com</email>
+            <roles>
+                <role>Developer</role>
+            </roles>
+            <timezone>+1</timezone>
+        </developer>
+    </developers>
+    <issueManagement>
+        <system>Github</system>
+        <url>https://github.com/svenruppert/functional-reactive-lib/issues</url>
+    </issueManagement>
+    <!--  <ciManagement>-->
+    <!--    <system>TeamCity</system>-->
+    <!--    <url>http://build.sven-ruppert.de:8111/</url>-->
+    <!--  </ciManagement>-->
+    <licenses>
+        <license>
+            <name>The Apache Software License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+            <comments>A business-friendly OSS license</comments>
+        </license>
+    </licenses>
 
-  <properties>
-<!--    <deploy-repo-url>https://repo.maven.apache.org/maven2/</deploy-repo-url>-->
-    <deploy-repo-url>https://maven.pkg.github.com/svenruppert/functional-reactive-lib/</deploy-repo-url>
-<!--    <deploy-repo-snapshots-url>https://repo.maven.apache.org/maven2/</deploy-repo-snapshots-url>-->
-    <deploy-repo-snapshots-url>https://maven.pkg.github.com/svenruppert/functional-reactive-lib/</deploy-repo-snapshots-url>
+    <properties>
+        <jdk.version>21</jdk.version>
+        <maven.compiler.source>${jdk.version}</maven.compiler.source> <!--redundant, but IntelliJ doesn't-->
+        <maven.compiler.target>${jdk.version}</maven.compiler.target> <!--use release when importing-->
+        <!--    <maven.compiler.release>${jdk.version}</maven.compiler.release>-->
 
-    <jdk.version>21</jdk.version>
-    <maven.compiler.source>${jdk.version}</maven.compiler.source> <!--redundant, but IntelliJ doesn't-->
-    <maven.compiler.target>${jdk.version}</maven.compiler.target> <!--use release when importing-->
-<!--    <maven.compiler.release>${jdk.version}</maven.compiler.release>-->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <!--        <pitest-prod-classes>com.svenruppert.*</pitest-prod-classes>-->
+        <!--        <pitest-test-classes>junit.com.svenruppert.*</pitest-test-classes>-->
 
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-    <pitest-prod-classes>com.svenruppert.*</pitest-prod-classes>
-    <pitest-test-classes>junit.com.svenruppert.*</pitest-test-classes>
+    </properties>
 
-  </properties>
+    <repositories>
+        <repository>
+            <snapshots>
+                <enabled>true</enabled>
+                <updatePolicy>always</updatePolicy>
+            </snapshots>
+            <id>reposilite-repository-snapshots</id>
+            <name>Reposilite Repository</name>
+            <url>http://0.0.0.0:8080/snapshots</url>
+        </repository>
+        <repository>
+            <id>reposilite-repository-releases</id>
+            <name>Reposilite Repository</name>
+            <url>http://0.0.0.0:8080/releases</url>
+        </repository>
+        <repository>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+            <id>central</id>
+            <name>libs-release</name>
+            <url>https://repo.maven.apache.org/maven2/</url>
+        </repository>
 
-  <distributionManagement>
-    <repository>
-      <id>deploy-repo-maven</id>
-      <name>deploy-repo-maven</name>
-      <url>${deploy-repo-url}</url>
-    </repository>
-    <snapshotRepository>
-      <id>deploy-repo-maven-snapshots</id>
-      <name>deploy-repo-maven-snapshots</name>
-      <url>${deploy-repo-snapshots-url}</url>
-    </snapshotRepository>
-  </distributionManagement>
-
-  <repositories>
-    <repository>
-      <snapshots>
-        <enabled>false</enabled>
-      </snapshots>
-      <id>central</id>
-      <name>libs-release</name>
-      <url>https://repo.maven.apache.org/maven2/</url>
-    </repository>
-    <repository>
-      <snapshots>
-        <enabled>false</enabled>
-      </snapshots>
-      <id>jitpack</id>
-      <name>libs-release</name>
-      <url>https://jitpack.io/</url>
-    </repository>
-    <repository>
-      <snapshots>
-        <enabled>false</enabled>
-      </snapshots>
-      <id>GITHUB</id>
-      <name>libs-release</name>
-      <url>https://maven.pkg.github.com/svenruppert/*</url>
-    </repository>
-    <repository>
-      <snapshots>
-        <enabled>true</enabled>
-        <updatePolicy>always</updatePolicy>
-      </snapshots>
-      <id>snapshots</id>
-      <name>libs-snapshot</name>
-      <url>https://repo.maven.apache.org/maven2/</url>
-    </repository>
-  </repositories>
-  <pluginRepositories>
-    <pluginRepository>
-      <snapshots>
-        <enabled>false</enabled>
-      </snapshots>
-      <id>central</id>
-      <name>libs-release</name>
-      <url>https://repo.maven.apache.org/maven2/</url>
-    </pluginRepository>
-    <pluginRepository>
-      <snapshots>
-        <enabled>true</enabled>
-        <updatePolicy>always</updatePolicy>
-      </snapshots>
-      <id>snapshots</id>
-      <name>libs-snapshot</name>
-      <url>https://repo.maven.apache.org/maven2/</url>
-    </pluginRepository>
-  </pluginRepositories>
+    </repositories>
+    <pluginRepositories>
+        <pluginRepository>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+            <id>reposilite-repository-releases</id>
+            <name>Reposilite Repository</name>
+            <url>http://0.0.0.0:8080/releases</url>
+        </pluginRepository>
+        <pluginRepository>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+            <id>central</id>
+            <name>libs-release</name>
+            <url>https://repo.maven.apache.org/maven2/</url>
+        </pluginRepository>
+    </pluginRepositories>
 
 
-  <dependencies>
-    <dependency>
-      <groupId>org.slf4j</groupId>
-      <artifactId>slf4j-api</artifactId>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.slf4j</groupId>
-      <artifactId>slf4j-simple</artifactId>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.hamcrest</groupId>
-      <artifactId>hamcrest-all</artifactId>
-      <scope>test</scope>
-    </dependency>
-  </dependencies>
+    <dependencies>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.hamcrest</groupId>
+            <artifactId>hamcrest</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
 
-  <build>
-    <plugins>
-      <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>versions-maven-plugin</artifactId>
-        <configuration>
-          <rulesUri>file://${basedir}/version-number-rules.xml</rulesUri>
-        </configuration>
-      </plugin>
-    </plugins>
-  </build>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>versions-maven-plugin</artifactId>
+                <configuration>
+                    <rulesUri>file://${basedir}/version-number-rules.xml</rulesUri>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>
