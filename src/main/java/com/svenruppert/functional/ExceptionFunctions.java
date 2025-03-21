@@ -50,9 +50,10 @@ public interface ExceptionFunctions {
   static Function<Exception, Stream<StackTraceElement>> toStackTraceStream() {
     return (e) -> {
       final StackTraceElement[] stackTrace = e.getStackTrace();
-      return (stackTrace != null)
-          ? Arrays.stream(stackTrace)
-          : Stream.empty();
+      return Arrays.stream(stackTrace);
+//      return (stackTrace != null)
+//          ? Arrays.stream(stackTrace)
+//          : Stream.empty();
     };
   }
 }

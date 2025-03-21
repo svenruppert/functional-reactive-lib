@@ -15,22 +15,12 @@
  */
 package com.svenruppert.functional;
 
-import static java.lang.Character.toChars;
-import static java.lang.Integer.parseInt;
-import static java.lang.String.valueOf;
-import static java.util.regex.Pattern.CASE_INSENSITIVE;
-import static java.util.stream.Collectors.joining;
-import static com.svenruppert.functional.Transformations.not;
-import static com.svenruppert.functional.matcher.Case.match;
-import static com.svenruppert.functional.matcher.Case.matchCase;
+import com.svenruppert.functional.functions.QuadFunction;
+import com.svenruppert.functional.functions.TriFunction;
+import com.svenruppert.functional.matcher.Case;
+import com.svenruppert.functional.model.Result;
 
-import java.nio.charset.Charset;
-import java.util.Arrays;
-import java.util.Base64;
-import java.util.Collection;
-import java.util.Objects;
-import java.util.Optional;
-import java.util.Random;
+import java.util.*;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 import java.util.function.Predicate;
@@ -38,10 +28,15 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Stream;
 
-import com.svenruppert.functional.functions.QuadFunction;
-import com.svenruppert.functional.functions.TriFunction;
-import com.svenruppert.functional.matcher.Case;
-import com.svenruppert.functional.model.Result;
+import static com.svenruppert.functional.Transformations.not;
+import static com.svenruppert.functional.matcher.Case.match;
+import static com.svenruppert.functional.matcher.Case.matchCase;
+import static java.lang.Character.toChars;
+import static java.lang.Integer.parseInt;
+import static java.lang.String.valueOf;
+import static java.nio.charset.StandardCharsets.UTF_8;
+import static java.util.regex.Pattern.CASE_INSENSITIVE;
+import static java.util.stream.Collectors.joining;
 
 /**
  * Created by svenruppert on 25.04.17.
@@ -51,13 +46,15 @@ import com.svenruppert.functional.model.Result;
  */
 public interface StringFunctions {
 
+  Random RANDOM = new Random();
+
   /**
    * <p>notStartsWith.</p>
    *
    * @return a {@link java.util.function.BiFunction} object.
    */
   static BiFunction<String, String, Boolean> notStartsWith() {
-    return (s, prefix) -> ! s.startsWith(prefix);
+    return (s, prefix) -> !s.startsWith(prefix);
   }
 
   /**
@@ -200,7 +197,6 @@ public interface StringFunctions {
   }
 
 
-
   /**
    * <p>countSubStr.</p>
    *
@@ -234,19 +230,18 @@ public interface StringFunctions {
   static QuadFunction<String, String, Boolean, Long, Long> countSubStrCaseSensitiveOverlapping() {
     return (value, subStr, allowOverlapping, count) -> {
       int position = value.indexOf(subStr);
-      if (position == - 1) {
+      if (position == -1) {
         return count;
       }
       int offset;
-      if (! allowOverlapping) {
+      if (!allowOverlapping) {
         offset = position + subStr.length();
       } else {
         offset = position + 1;
       }
-      return countSubStrCaseSensitiveOverlapping().apply(value.substring(offset), subStr, allowOverlapping, ++ count);
+      return countSubStrCaseSensitiveOverlapping().apply(value.substring(offset), subStr, allowOverlapping, ++count);
     };
   }
-
 
 
   /**
@@ -282,11 +277,10 @@ public interface StringFunctions {
     return (value, search, position, caseSensitive) -> {
       int remainingLength = position - search.length();
       return (caseSensitive)
-          ? value.indexOf(search, remainingLength) > - 1
-          : value.toLowerCase().indexOf(search.toLowerCase(), remainingLength) > - 1;
+          ? value.indexOf(search, remainingLength) > -1
+          : value.toLowerCase().indexOf(search.toLowerCase(), remainingLength) > -1;
     };
   }
-
 
 
   /**
@@ -297,7 +291,6 @@ public interface StringFunctions {
   static BiFunction<String, String, String> ensureLeft() {
     return (input, prefix) -> ensureLeftCaseSensitive().apply(input, prefix, true);
   }
-
 
 
   /**
@@ -317,8 +310,13 @@ public interface StringFunctions {
    *
    * @return a {@link java.util.function.Function} object.
    */
+
   static Function<String, String> base64Decode() {
-    return (input) -> new String(Base64.getDecoder().decode(input.getBytes(Charset.forName("UTF-8")))).intern();
+    return (input) -> {
+      byte[] bytes = input.getBytes(UTF_8);
+      byte[] decode = Base64.getDecoder().decode(bytes);
+      return new String(decode, UTF_8).intern();
+    };
   }
 
 
@@ -328,7 +326,7 @@ public interface StringFunctions {
    * @return a {@link java.util.function.Function} object.
    */
   static Function<String, String> base64Encode() {
-    return (input) -> Base64.getEncoder().encodeToString(input.getBytes(Charset.forName("UTF-8")));
+    return (input) -> Base64.getEncoder().encodeToString(input.getBytes(UTF_8));
   }
 
 
@@ -604,7 +602,7 @@ public interface StringFunctions {
    * @return true if first and second are not equal false otherwise
    */
   static BiFunction<String, String, Boolean> inEqual() {
-    return (first, second) -> ! Objects.equals(first, second);
+    return (first, second) -> !Objects.equals(first, second);
   }
 
   /**
@@ -837,7 +835,6 @@ public interface StringFunctions {
   }
 
 
-
   /**
    * <p>removeRight.</p>
    *
@@ -1004,17 +1001,17 @@ public interface StringFunctions {
    *
    * @return a {@link java.util.function.Function} object.
    */
+
   static Function<String, String> shuffle() {
     return (input) -> {
       final String[] chars = chars().apply(input);
-      Random random = new Random();
       for (int i = 0; i < chars.length; i++) {
-        int r = random.nextInt(chars.length);
+        int r = RANDOM.nextInt(chars.length); //DMI_RANDOM_USED_ONLY_ONCE
         String tmp = chars[i];
         chars[i] = chars[r];
         chars[r] = tmp;
       }
-      return Arrays.stream(chars).collect(joining());
+      return String.join("", chars);
     };
   }
 
@@ -1068,7 +1065,7 @@ public interface StringFunctions {
   static Function<String, String> toStudlyCase() {
     return (value) -> splitStream()
         .apply(collapseWhitespace().apply(value.trim()), "\\s*(_|-|\\s)\\s*")
-        .filter(w -> ! w.trim().isEmpty())
+        .filter(w -> !w.trim().isEmpty())
         .map(w -> head().apply(w).toUpperCase() + tail().apply(w))
         .collect(joining());
   }
@@ -1116,6 +1113,7 @@ public interface StringFunctions {
   }
 
   //TODO refactoring - remove optinal
+
   /**
    * <p>capitalize.</p>
    *
@@ -1137,13 +1135,18 @@ public interface StringFunctions {
 
 
   //TODO refactoring - remove optinal
+
   /**
    * <p>lowerFirst.</p>
    *
    * @return a {@link java.util.function.Function} object.
    */
+//  @SuppressFBWarnings(
+//      value = "RpC_REPEATED_CONDITIONAL_TEST",
+//      justification = "Done on purpose"
+//  )
   static Function<String, String> lowerFirst() {
-    return (input) -> (input.length() == 0)
+    return (input) -> (input.isEmpty())
         ? ""
         : Optional.ofNullable(head().apply(input))
         .map(String::toLowerCase)
@@ -1153,14 +1156,13 @@ public interface StringFunctions {
   }
 
 
-
   /**
    * <p>isEnclosedBetween.</p>
    *
    * @return a {@link java.util.function.BiFunction} object.
    */
   static BiFunction<String, String, Boolean> isEnclosedBetween() {
-    return (input, encloser) -> input.startsWith(encloser) && input.startsWith(encloser);
+    return (input, encloser) -> input.startsWith(encloser) && input.endsWith(encloser);
   }
 
 
